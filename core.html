@@ -1,0 +1,26 @@
+<html>
+<head>
+    <title>circle</title>
+    
+</head>
+<body>
+    <canvas id = "myCanvas" style="left: 0px; top: 0px; position: absolute;" resize = "true"></canvas>
+</body>
+
+<script type= "text/javascript" src="paper-full.js"></script>
+    <script>
+        var win = window,
+        doc = document,
+        docElem = doc.documentElement,
+        body = doc.getElementsByTagName('body')[0],
+        x = win.innerWidth || docElem.clientWidth || body.clientWidth,
+        y = win.innerHeight|| docElem.clientHeight|| body.clientHeight;
+        
+        document.getElementById("myCanvas").width = x;
+        document.getElementById("myCanvas").height = y; 
+    
+    </script>
+        
+    <script type = "text/javascript" src = "Ball&ship.js"> </script>
+
+</html>
