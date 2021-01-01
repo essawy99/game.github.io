@@ -134,27 +134,7 @@ class User {
     }
 }
 
-var ball = new User();
-var cannon = new Cannon(200,200);
-        
-var dir = 0;
-    view.onFrame = function(event) {
-    ball.update(dir);
-    dir = 0;
-    cannon.update();
-}
-       
 
-tool.onKeyDown = function(event) {
-    if(event.key == 'a' || event.key == 'left') {
-        dir = -1;
-                          
-    }
-
-    if(event.key == 'd' || event.key == 'right') {
-        dir = 1;           
-    }       
-}
 
 
 
