@@ -23,10 +23,10 @@ var center =  w/2;
 
 class Cannon {
     constructor(xLoc, yLoc) {
-        this.velocity = 10 * wUnit;
+        this.velocity = 2 * wUnit;
         this.x = xLoc;
         this.y = yLoc;
-        this.direction = Math.PI;
+        this.direction = (1/4)* Math.PI;
         this.cannon = new Path.Circle({
             center: new paper.Point(this.x, this.y),
             radius: 3* wUnit,
@@ -37,8 +37,7 @@ class Cannon {
     update() {
         var x_dir = this.velocity * Math.cos(this.direction);
         var y_dir = this.velocity * Math.sin(this.direction);
-        console.log(x_dir);
-        console.log(y_dir);
+        
         this.x += x_dir;
         this.y += y_dir;
         this.cannon.position.x = this.x;
@@ -51,10 +50,31 @@ class Cannon {
         
 class User {
     constructor() {
+        
+        // y location of user on screen
+        this.userYLoc = 834 * hUnit;
+        
+        // size and speed attributes can be used to change entire User
+        this.size = 40 * wUnit;
+        this.speed = 20 * wUnit;
+        
+        //forcefield properties in terms of size
+        this.forcefieldWidth = this.size;
+        this.forcefieldHeight = this.forcefieldWidth / 2;
+        
+        //ship Body properties in terms of size
+        this.shipTop = this.userYLoc + (this.size /2);
+        this.shipHeight = this.size / 5;
+        this.shipWidth = this.size * (4/5);
+        this.shipCorner = this.size * (3/5);
+
         // points associated with forcefield
-        this.from = new paper.Point(center - width, height);
-        this.through = new paper.Point(center, height -  (30*wUnit) );
-        this.to = new paper.Point(center + width, height);
+        this.from = new paper.Point
+            (center - this.forcefieldWidth, this.userYLoc);   // left
+        this.through = new paper.Point
+            (center, this.userYLoc - this.forcefieldHeight ); // top
+        this.to = new paper.Point
+            (center + this.forcefieldWidth, this.userYLoc);   //right
                 
         // forcefield path consisting of arc and connecting line
         this.arc = new paper.Path.Arc(this.from, this.through, this.to);
@@ -65,23 +85,31 @@ class User {
         // create path associated with the ship
         this.shipBody = new paper.Path()
                 
+        /* Ship points written in terms of properties */
+        //left bound
         this.shipBody.add(new paper.Point
-            (center - 50*wUnit, height + 80*hUnit)); //left bound
+            (center - this.shipWidth, this.shipTop)); 
+        //top left corner
         this.shipBody.add(new paper.Point
-            (center - 40*wUnit, height + 60*hUnit)); //top left corner
+            (center - this.shipCorner, this.shipTop - this.shipHeight)); 
+        //top right corner
         this.shipBody.add(new paper.Point
-            (center + 40*wUnit, height + 60*hUnit)); //top right corner
+            (center + this.shipCorner, this.shipTop - this.shipHeight)); 
+        //right bound
         this.shipBody.add(new paper.Point
-            (center + 50*wUnit, height + 80*hUnit)); //right bound
+            (center + this.shipWidth, this.shipTop)); 
+        // bottom right corner
+            this.shipBody.add(new paper.Point
+            (center + this.shipCorner, this.shipTop + this.shipHeight)); 
+        // bottom left corner
         this.shipBody.add(new paper.Point
-            (center + 40*wUnit, height + 100*hUnit)); //bottom right corner
-        this.shipBody.add(new paper.Point
-            (center - 40*wUnit, height + 100*hUnit)); //bottom left corner
+            (center - this.shipCorner, this.shipTop + this.shipHeight)); 
+        
+        // style the ship body
         this.shipBody.closed = true;
         this.shipBody.fillColor = 'grey';
-
-                
-        // add styles to  forcefield
+      
+        // style the forcefield
         this.arc.fullySelected = true;
         this.arc.strokeColor = 'blue';
         this.connect.strokeColor = 'blue';
@@ -92,14 +120,16 @@ class User {
 
     update(direction) {
         if(direction == 1) {
-            this.arc.position.x += (10 * wUnit);
-            this.connect.position.x += (10 * wUnit);
-            this.shipBody.position.x += (10 * wUnit);
+            this.arc.position.x += this.speed;
+            this.connect.position.x += this.speed;
+            this.shipBody.position.x += this.speed;
+            console.log('h');
             }
         if(direction == -1) {
-            this.arc.position.x -= (10 * wUnit);
-            this.connect.position.x -= (10 * wUnit);
-            this.shipBody.position.x -= (10 * wUnit);
+            this.arc.position.x -= this.speed;
+            this.connect.position.x -= this.speed;
+            this.shipBody.position.x -= this.speed;
+            console.log('h');
         }
     }
 }
@@ -118,7 +148,7 @@ var dir = 0;
 tool.onKeyDown = function(event) {
     if(event.key == 'a' || event.key == 'left') {
         dir = -1;
-        console.log('h');                      
+                          
     }
 
     if(event.key == 'd' || event.key == 'right') {
