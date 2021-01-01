@@ -179,17 +179,6 @@ var total_distance = 0;
 var dir = 0;
 
 
-tool.onKeyDown = function(event) {
-    if(event.key == 'a' || event.key == 'left') {
-        dir = -1;
-        console.log('h');
-    }
-
-    if(event.key == 'd' || event.key == 'right') {
-        dir = 1;
-    }
-}
-
 
 
 
