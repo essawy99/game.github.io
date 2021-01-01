@@ -5,18 +5,18 @@ var canvas = document.getElementById('myCanvas');
 // Create an empty project and a view for the canvas:
 paper.setup(canvas);
 var tool = new Tool();
-        
+
 var win = window,
 doc = document,
 docElem = doc.documentElement,
 body = doc.getElementsByTagName('body')[0],
 w = win.innerWidth || docElem.clientWidth || body.clientWidth,
 h = win.innerHeight|| docElem.clientHeight|| body.clientHeight;
-        
+
 
 var height = h - (h/6);
 var width = w/15;
-        
+
 var wUnit = w/1000;
 var hUnit = h/1000;
 var center =  w/2;
@@ -44,18 +44,18 @@ class Cannon {
         this.cannon.position.x = this.x;
         this.cannon.position.y = this.y;
         if(this.x < 0 || this.x > w) {
-            dir += Math.PI; 
+            dir += Math.PI;
         }
     }
 }
-        
+
 class User {
     constructor() {
         // points associated with forcefield
         this.from = new paper.Point(center - width, height);
         this.through = new paper.Point(center, height -  (30*wUnit) );
         this.to = new paper.Point(center + width, height);
-                
+
         // forcefield path consisting of arc and connecting line
         this.arc = new paper.Path.Arc(this.from, this.through, this.to);
         this.connect = new paper.Path();
@@ -64,7 +64,7 @@ class User {
 
         // create path associated with the ship
         this.shipBody = new paper.Path()
-                
+
         this.shipBody.add(new paper.Point
             (center - 50*wUnit, height + 80*hUnit)); //left bound
         this.shipBody.add(new paper.Point
@@ -80,7 +80,7 @@ class User {
         this.shipBody.closed = true;
         this.shipBody.fillColor = 'grey';
 
-                
+
         // add styles to  forcefield
         this.arc.fullySelected = true;
         this.arc.strokeColor = 'blue';
@@ -112,7 +112,7 @@ class Enemy_Ships {
         //currently makes only one enemy ship will expand to multiple based off
         // of a number put into the constructer
         this.shipBody = new paper.Path()
-                
+
         this.shipBody.add(new paper.Point
             (center + 50*wUnit, height - 80*hUnit)); //left bound
         this.shipBody.add(new paper.Point
@@ -125,6 +125,8 @@ class Enemy_Ships {
             (center - 40*wUnit, height - 100*hUnit)); //bottom right corner
         this.shipBody.add(new paper.Point
             (center + 40*wUnit, height - 100*hUnit)); //bottom left corner
+        this.shipBody.rotate(90)
+        this.shipBody.position.y -= 500;
         this.shipBody.closed = true;
         this.shipBody.fillColor = 'red';
         ship_array.push(this.shipBody)
@@ -155,6 +157,7 @@ class Enemy_Plane {
             (center - 90*wUnit, height - 175*hUnit)); // left wing of plane
         this.planeBody.add(new paper.Point
             (center - 50*wUnit, height - 150*hUnit)); // nose/cockpit of plane
+        this.planeBody.position.y -= 400;
         this.planeBody.closed = true;
         this.planeBody.fillColor = 'blue';
         plane_array.push(this.planeBody)
@@ -169,29 +172,42 @@ var ball = new User();
 var cannon = new Cannon(200,200);
 var ship = new Enemy_Ships();
 var plane = new Enemy_Plane();
-        
+var planeArray = [plane];
+var total_distance = 0;
+
+
 var dir = 0;
     view.onFrame = function(event) {
     ball.update(dir);
     dir = 0;
     cannon.update();
-    plane.update();
+    if(total_distance > 2000){
+      var plane_2 = new Enemy_Plane();
+      planeArray.push(plane_2)
+      total_distance = 0
+    }else{
+      var i;
+      for (i = 0; i < planeArray.length; i++) {
+        planeArray[i].update();
+      }
+    } //Update all current planes
+    total_distance += 20; //total distance goes up by 20 each time even after reset
 }
-       
+
 
 tool.onKeyDown = function(event) {
     if(event.key == 'a' || event.key == 'left') {
         dir = -1;
-        console.log('h');                      
+        console.log('h');
     }
 
     if(event.key == 'd' || event.key == 'right') {
-        dir = 1;           
-    }       
+        dir = 1;
+    }
 }
 
 
 
-        
-       
+
+
 }
