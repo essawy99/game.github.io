@@ -10,9 +10,7 @@ view.onFrame = function(event) {
 ball.update(dir);
 dir = 0;
 cannon.update();
-
-
- if(total_distance > 2000){
+if(total_distance > 2000){
   var plane_2 = new Enemy_Plane();
   planeArray.push(plane_2)
   total_distance = 0

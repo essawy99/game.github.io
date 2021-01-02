@@ -106,30 +106,70 @@ class User {
 
 //class that handles the creation of an enemy ship
 class Enemy_Ships {
-    constructor() {
-        //Array to store all enemy ships
-        var ship_array = [];
+    constructor(num_ships) {
+        var i;
+        // x and y location of ship on screen
+        this.userYLoc = 100 * hUnit;
+        // Array of x locations for each row of generated ships
+        this.xLoc = [0,50,-50,-100]; 
+        
+        // size and speed attributes can be used to change ship size
+        this.size = 40 * wUnit;
+        this.speed = 20 * wUnit;
+        
+        
+        //ship Body properties in terms of size
+        this.shipTop = this.userYLoc + (this.size /4);
+        this.shipHeight = this.size / 5;
+        this.shipWidth = this.size * (4/5);
+        this.shipCorner = this.size * (3/5);
+        //row counter (to know spot in row)
+        var row_counter = 0;
+        for(i=0;i<num_ships;i++){
+        console.log(String(i) + "th ship")
+        if((i % 4) == 0 && i != 0){
+            console.log(String(i) + ": " + i%4)
+            this.userYLoc += 100; //increment y to change row
+            this.shipTop = this.userYLoc + (this.size /4);
+        }
         //currently makes only one enemy ship will expand to multiple based off
         // of a number put into the constructer
+        // create path associated with the ship
         this.shipBody = new paper.Path()
-
+                
+        /* Ship points written in terms of properties */
+        //left bound
         this.shipBody.add(new paper.Point
-            (center + 50*wUnit, height - 80*hUnit)); //left bound
+            (center - this.shipWidth, this.shipTop)); 
+        //top left corner
         this.shipBody.add(new paper.Point
-            (center + 40*wUnit, height - 60*hUnit)); //top left corner
+            (center - this.shipCorner, this.shipTop - this.shipHeight)); 
+        //top right corner
         this.shipBody.add(new paper.Point
-            (center - 40*wUnit, height - 60*hUnit)); //top right corner
+            (center + this.shipCorner, this.shipTop - this.shipHeight)); 
+        //right bound
         this.shipBody.add(new paper.Point
-            (center - 50*wUnit, height - 80*hUnit)); //right bound
+            (center + this.shipWidth, this.shipTop)); 
+        // bottom right corner
+            this.shipBody.add(new paper.Point
+            (center + this.shipCorner, this.shipTop + this.shipHeight)); 
+        // bottom left corner
         this.shipBody.add(new paper.Point
-            (center - 40*wUnit, height - 100*hUnit)); //bottom right corner
-        this.shipBody.add(new paper.Point
-            (center + 40*wUnit, height - 100*hUnit)); //bottom left corner
-        this.shipBody.rotate(90)
-        this.shipBody.position.y -= 500;
+            (center - this.shipCorner, this.shipTop + this.shipHeight)); 
+        //rotate ship 90 degrees
+        this.shipBody.rotate(90);
+        //change x location
+        console.log(String(row_counter) + "ith row")
+        this.shipBody.position.x += this.xLoc[row_counter];
+        // style the ship body
         this.shipBody.closed = true;
         this.shipBody.fillColor = 'red';
         ship_array.push(this.shipBody)
+        row_counter += 1
+        if(row_counter > 3){
+            row_counter = 0;
+        }
+        }
     }
 }
 
@@ -170,10 +210,9 @@ class Enemy_Plane {
 
 var ball = new User();
 var cannon = new Cannon(200,200);
-var ship = new Enemy_Ships();
-var plane = new Enemy_Plane();
-var planeArray = [plane];
-var total_distance = 0;
+var ship_array = []; //array to store ships
+var ship = new Enemy_Ships(16); //spawn one enemy ship
+//Will reimplement enemy planes once ships work
 
 
 var dir = 0;
