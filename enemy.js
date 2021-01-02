@@ -211,7 +211,7 @@ class Enemy_Plane {
 var ball = new User();
 var cannon = new Cannon(200,200);
 var ship_array = []; //array to store ships
-var ship = new Enemy_Ships(16); //spawn one enemy ship
+var ship = new Enemy_Ships(16); //spawn 16 enemy ships
 //Will reimplement enemy planes once ships work
 
 
