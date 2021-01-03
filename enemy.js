@@ -132,9 +132,7 @@ class Enemy_Ships {
             this.userYLoc += 100; //increment y to change row
             this.shipTop = this.userYLoc + (this.size /4);
         }
-        //currently makes only one enemy ship will expand to multiple based off
-        // of a number put into the constructer
-        // create path associated with the ship
+        //start of new ship
         this.shipBody = new paper.Path()
                 
         /* Ship points written in terms of properties */
@@ -173,6 +171,12 @@ class Enemy_Ships {
     }
 }
 
+
+//Credit: https://stackoverflow.com/questions/4959975/generate-random-number-between-two-numbers-in-javascript
+//Random integer selection used in picking what ship to spawn plane from
+function randomIntFromInterval(min, max) { // min and max included 
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }
 //Class to handle enemy planes
 class Enemy_Plane {
     constructor(){
@@ -197,29 +201,62 @@ class Enemy_Plane {
             (center - 90*wUnit, height - 175*hUnit)); // left wing of plane
         this.planeBody.add(new paper.Point
             (center - 50*wUnit, height - 150*hUnit)); // nose/cockpit of plane
-        this.planeBody.position.y -= 400;
+        var spawn_from = randomIntFromInterval(0,ship_array.length-1);
+        //set planes x and y to ships x and y
+        this.planeBody.position.x = ship_array[spawn_from].position.x
+        this.planeBody.position.y = ship_array[spawn_from].position.y
         this.planeBody.closed = true;
         this.planeBody.fillColor = 'blue';
         plane_array.push(this.planeBody)
     }
     update(){
-        this.planeBody.position.y += 20;
+        this.planeBody.position.y += 5;
     }
 
 }
 
+var dir = 0;
 var ball = new User();
 var cannon = new Cannon(200,200);
 var ship_array = []; //array to store ships
-var ship = new Enemy_Ships(16); //spawn 16 enemy ships
-//Will reimplement enemy planes once ships work
+var ship = new Enemy_Ships(8); //spawn 16 enemy ships
+var planeArray = [];
+var plane = new Enemy_Plane();
+var total_distance = 0 //keeps track of total_distance previous plane passed
+var dist_var = 2000 //Can be changed to change speed at which new planes come
 
 
-var dir = 0;
+view.onFrame = function(event) {
+ball.update(dir);
+cannon.update();
+if(total_distance > dist_var){
+  var plane_2 = new Enemy_Plane();
+  planeArray.push(plane_2)
+  total_distance = 0
+}else{
+  var i;
+  for (i = 0; i < planeArray.length; i++) {
+    planeArray[i].update();
+  }
+} //Update all current planes
+total_distance += 20; //total distance goes up by 20 each time even after reset
 
 
 
+}
 
+
+
+tool.onKeyDown = function(event) {
+    if(event.key == 'a' || event.key == 'left') {
+        dir = -1;
+
+    }
+
+    if(event.key == 'd' || event.key == 'right') {
+        dir = 1;
+    }
+}
 
 
 }
