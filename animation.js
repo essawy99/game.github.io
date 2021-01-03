@@ -9,10 +9,14 @@ var tool = new Tool();
 
 var ball = new User();
 var cannon = new Cannon(200,200);
-var ship = new Enemy_Ships();
 var ship_array = [];
+var ship = new Enemy_Ships(4);
+        
+
+
 var plane = new Enemy_Plane();
-var planeArray = [plane];
+ var planeArray = [plane];
+
 var total_distance = 0;
 var build = new Buildings();
         
