@@ -1,10 +1,10 @@
-paper.install(window);
-window.onload = function() {
+//paper.install(window);
+//window.onload = function() {
 // Get a reference to the canvas object
-var canvas = document.getElementById('myCanvas');
+//var canvas = document.getElementById('myCanvas');
 // Create an empty project and a view for the canvas:
-paper.setup(canvas);
-var tool = new Tool();
+//paper.setup(canvas);
+//var tool = new Tool();
 
 var win = window,
 doc = document,
@@ -215,6 +215,8 @@ class Enemy_Plane {
 
 }
 
+/*
+
 var dir = 0;
 var ball = new User();
 var cannon = new Cannon(200,200);
@@ -257,6 +259,6 @@ tool.onKeyDown = function(event) {
         dir = 1;
     }
 }
+*/
 
-
-}
+//}
