@@ -20,6 +20,8 @@ var width = w/15;
 var wUnit = w/1000;
 var hUnit = h/1000;
 var center =  w/2;
+        
+  var dir = 0;
 
 class Cannon {
     constructor(xLoc, yLoc) {
