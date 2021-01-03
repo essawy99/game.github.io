@@ -11,6 +11,7 @@ var ball = new User();
 var cannon = new Cannon(200,200);
 var ship_array = [];
 var ship = new Enemy_Ships(4);
+console.log(ship_array.length);
         
 
 
