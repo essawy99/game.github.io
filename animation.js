@@ -13,6 +13,7 @@ var ship = new Enemy_Ships();
 var plane = new Enemy_Plane();
 var planeArray = [plane];
 var total_distance = 0;
+var build = new Buildings();
         
 var dir = 0;
     view.onFrame = function(event) {
