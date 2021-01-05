@@ -8,13 +8,17 @@ paper.setup(canvas);
 var tool = new Tool();
 
 // initialize all required objects
+var back = new Background();
 var tanks = new Tanks(10);       //buildings
+var health = new Health();
+
 var cannonball = new Cannon(200,200);  // cannonball
 var user1 = new User();            // user
 var ship_array = [];               // ship storage
-var ship = new Enemy_Ships(8);     // ships
+var ship = new Enemy_Ships(7);     // ships
 var plane = new Enemy_Plane();     // plane
 var planeArray = [plane];          // plane storage
+
 
 var total_distance = 0;            // ????
 var point = new paper.Point(200,200);

@@ -44,7 +44,7 @@ class User {
     constructor() {
         
         // y location of user on screen
-        this.userYLoc = 834 * hUnit;
+        this.userYLoc = 814 * hUnit;
         
         // size and speed attributes can be used to change entire User
         this.size = 40 * wUnit;
@@ -103,7 +103,7 @@ class User {
         this.shipBody.fillColor = 'grey';
       
         // style the forcefield
-        this.arc.fullySelected = true;
+        /* this.arc.fullySelected = true; */
         this.arc.strokeColor = 'blue';
         this.connect.strokeColor = 'blue';
         this.arc.strokeWidth = 3;
