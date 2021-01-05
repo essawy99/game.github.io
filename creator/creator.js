@@ -1,22 +1,13 @@
+// next four lines initialize paper.js
 paper.install(window);
 window.onload = function() {
-// Get a reference to the canvas object
 var canvas = document.getElementById('myCanvas');
-
-// Create an empty project and a view for the canvas:
 paper.setup(canvas);
+
+// create tool for animations
 var tool = new Tool();
 
-var win = window,
-doc = document,
-docElem = doc.documentElement,
-body = doc.getElementsByTagName('body')[0],
-w = win.innerWidth || docElem.clientWidth || body.clientWidth,
-h = win.innerHeight|| docElem.clientHeight|| body.clientHeight;
-
-var wUnit = w/1000;
-var hUnit = h/1000;
-var center =  w/2;
+console.log(h);
 
 class drawing {
     constructor() {
@@ -65,6 +56,14 @@ class drawing {
 
     closeCurrentShape() {
         this.shapeOfInterest.closeShape();
+    }
+
+    fillCurrentShape() {
+        var x = prompt('What color do you want?');
+        this.shapeOfInterest.path.fillColor = x;
+        console.log(x);
+        this.shapeOfInterest.fillColor= 'black';
+        console.log(this.shapeOfInterest.fillColor);
     }
 }
 
@@ -202,6 +201,9 @@ tool.onKeyDown = function(event) {
     }
     if(event.key == 'c') {
         currentDrawing.closeCurrentShape();                   
+    }
+    if(event.key == 'f') {
+        currentDrawing.fillCurrentShape();
     }
    
 }
