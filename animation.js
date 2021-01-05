@@ -1,31 +1,30 @@
+// next four lines initialize paper.js
 paper.install(window);
 window.onload = function() {
-// Get a reference to the canvas object
 var canvas = document.getElementById('myCanvas');
-// Create an empty project and a view for the canvas:
 paper.setup(canvas);
+
+// create tool for animations
 var tool = new Tool();
 
+// initialize all required objects
+var tanks = new Tanks(10);       //buildings
+var cannonball = new Cannon(200,200);  // cannonball
+var user1 = new User();            // user
+var ship_array = [];               // ship storage
+var ship = new Enemy_Ships(8);     // ships
+var plane = new Enemy_Plane();     // plane
+var planeArray = [plane];          // plane storage
 
-var ball = new User();
-var cannon = new Cannon(200,200);
-var ship_array = [];
-var ship = new Enemy_Ships(4);
-console.log(ship_array.length);
+var total_distance = 0;            // ????
+var point = new paper.Point(200,200);
         
-
-
-var plane = new Enemy_Plane();
- var planeArray = [plane];
-
-var total_distance = 0;
-var build = new Buildings();
-        
-var dir = 0;
-    view.onFrame = function(event) {
-    ball.update(dir);
-    dir = 0;
-    cannon.update();
+view.onFrame = function(event) {
+    user1.update2(point);
+    cannonball.update();
+    
+    /* a little messy could this functionality
+    be moved to the class */
     if(total_distance > 2000){
         var plane_2 = new Enemy_Plane();
         planeArray.push(plane_2)
@@ -39,8 +38,11 @@ var dir = 0;
       total_distance += 20; //total distance goes up by 20 each time even after reset
 }
        
+tool.onMouseMove = function(event) {
+  point = event.point    
+}
 
-tool.onKeyDown = function(event) {
+/* tool.onKeyDown = function(event) {
     if(event.key == 'a' || event.key == 'left') {
         dir = -1;
                           
@@ -49,5 +51,5 @@ tool.onKeyDown = function(event) {
     if(event.key == 'd' || event.key == 'right') {
         dir = 1;           
     }       
-}
+} */
 }

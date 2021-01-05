@@ -1,11 +1,3 @@
-paper.install(window);
-window.onload = function() {
-// Get a reference to the canvas object
-var canvas = document.getElementById('myCanvas');
-// Create an empty project and a view for the canvas:
-paper.setup(canvas);
-var tool = new Tool();
-        
 var win = window,
 doc = document,
 docElem = doc.documentElement,
@@ -20,8 +12,6 @@ var width = w/15;
 var wUnit = w/1000;
 var hUnit = h/1000;
 var center =  w/2;
-        
-  var dir = 0;
 
 class Cannon {
     constructor(xLoc, yLoc) {
@@ -44,9 +34,9 @@ class Cannon {
         this.y += y_dir;
         this.cannon.position.x = this.x;
         this.cannon.position.y = this.y;
-        if(this.x < 0 || this.x > w) {
+        /* if(this.x < 0 || this.x > w) {
             dir += Math.PI; 
-        }
+        } */
     }
 }
         
@@ -58,6 +48,7 @@ class User {
         
         // size and speed attributes can be used to change entire User
         this.size = 40 * wUnit;
+        
         this.speed = 20 * wUnit;
         
         //forcefield properties in terms of size
@@ -134,12 +125,9 @@ class User {
             console.log('h');
         }
     }
-}
-
-
-
-
-
-        
-       
+    update2(point) {
+        this.arc.position.x = point.x;
+        this.connect.position.x = point.x;
+        this.shipBody.position.x = point.x;
+    }
 }
