@@ -6,7 +6,8 @@ class Cannon {
         this.x = xLoc;
         this.y = yLoc;
         this.direction = (1/4)* Math.PI;
-        this.angle = this.direction;
+        console.log("DIRECTION ->: " + this.direction)
+        this.angle = 90;
         this.cannon = new Path.Circle({
             center: new paper.Point(this.x, this.y),
             radius: 3* wUnit,
@@ -34,12 +35,10 @@ class Cannon {
         var x2 = 300 + length * Math.cos(theta)
         var y2 = 300 + length * Math.sin(theta) 
         var to = new Point(x2,y2);
-        console.log(x2,y2)
         var path = new Path.Line(from, to);
         path.strokeColor = 'black';;
 
-
-
+        //Angle change
         this.direction = 2*(angle)-this.angle //formula to calculate new direction
         this.angle = angle //set new angle as current angle
     }
