@@ -6,42 +6,57 @@ class Cannon {
         this.x = xLoc;
         this.y = yLoc;
         this.direction = (1/4)* Math.PI;
-        console.log("DIRECTION ->: " + this.direction)
-        this.angle = 90;
         this.cannon = new Path.Circle({
             center: new paper.Point(this.x, this.y),
             radius: 3* wUnit,
             fillColor: 'black'
         });
+        this.x_vel = this.velocity * Math.cos(this.direction);
+        this.y_vel = this.velocity * Math.sin(this.direction);
     }
 
     update() {
-        var x_vel = this.velocity * Math.cos(this.direction);
-        var y_vel = this.velocity * Math.sin(this.direction);
+        this.x_vel = this.velocity * Math.cos(this.direction);
+        this.y_vel = this.velocity * Math.sin(this.direction);
         
-        this.x += x_vel;
-        this.y += y_vel;
+        this.x += this.x_vel;
+        this.y += this.y_vel;
         this.cannon.position.x = this.x;
         this.cannon.position.y = this.y;
         /* if(this.x < 0 || this.x > w) {
             dir += Math.PI; 
         } */
     }
-    collision(angle){
-        //Draw representation of angle
-        var from = new Point(300, 300);
-        var theta = angle * 3.14 / 180.0
-        var length = 100
-        var x2 = 300 + length * Math.cos(theta)
-        var y2 = 300 + length * Math.sin(theta) 
-        var to = new Point(x2,y2);
-        var path = new Path.Line(from, to);
-        path.strokeColor = 'black';;
+    collision(angle){ //collision method
+        /*
+        METHOD ONE - No arguments taken
+        var angleNormal = Math.atan2(this.x_vel,this.y_vel);
+        var angleMovement = Math.sqrt((this.x_vel*this.x_vel)+(this.y_vel*this.y_vel));
+        var angleReflection = angleNormal - (angleMovement-angleNormal);
+        this.x_vel = this.velocity * Math.sin(angleReflection);
+        this.y_vel = this.velocity * Math.cos(angleReflection);
+        this.direction = angleReflection;
+        */
 
-        //Angle change
-        this.direction = 2*(angle)-this.angle //formula to calculate new direction
-        this.angle = angle //set new angle as current angle
+        //Method 2 - Takes in angle as argument
+        var n = { //Vector based off of angle 
+            x: Math.sin(angle),
+            y: -Math.cos(angle)
+        }
+        var v = { //Ball vector
+            x: this.x_vel,
+            y: this.y_vel
+        }
+        var d = 2 * this.dot(v, n);
+        this.x_vel -= d * n.x;
+        this.y_vel -= d * n.y;
+        this.x += this.x_vel;
+        this.y += this.y_vel;
+        this.direction = angle //Only changes when I set direction = amg;e
     }
+    dot(v1, v2) {
+        return v1.x * v2.x + v1.y * v2.y
+      }
 }
         
 class User {
