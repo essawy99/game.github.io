@@ -7,11 +7,11 @@ paper.setup(canvas);
 // create tool for animations
 var tool = new Tool();
 
-console.log(h);
-
+// this class contains all the shapes on the screen
 class drawing {
     constructor() {
         this.shapes = [];                // array containing all shapes
+        
         var originalShape = new shape();   
         this.shapes.push(originalShape)  // add first shape to drawing
         
@@ -19,52 +19,66 @@ class drawing {
         this.shapeOfInterest = originalShape;
         // this is the point currently being edited and associated index
         this.pointOfInterest = null;
-        this.index = 0;
-        
+        this.index = 0;     
     }
 
-    // this method iterates throught shapes in drawing and edits
+    // this method iterates throught shapes in drawing and 
     // if the point is found in existing points it edits the properties
     // shapeOfInterest, pointOfInterest, and index 
     // otherwise it creates a new point on the current shape
     findPointBeingEdited(point) {
-        for(var i = 0; i < this.shapes.length; i++) {
+        for(var i = 0; i < this.shapes.length; i++) { //iterate through shapes
             var shape = this.shapes[i]
-            var pointIndex = shape.findPoint(point);
-            if (pointIndex >= 0) {
+            var pointIndex = shape.findPoint(point);  //call findPoint function 
+            //if a point in close proximity select that point and associated shape
+            if (pointIndex >= 0) {                    
                 this.shapeOfInterest = shape;
                 this.pointOfInterest = shape.points[pointIndex];
                 this.index = pointIndex;
-                console.log('we made it');
                 return;
             } 
         }
+        // if no shape is found create a new point on current shape
         this.shapeOfInterest.newPoint(point);
         this.index = this.shapeOfInterest.points.length - 1;
     }
     
+    // this method adds a new shape to the drawing and selects it
     addNewShape() {
         var newShape = new shape();
         this.shapes.push(newShape);
         this.shapeOfInterest = newShape;
     }
 
+    // this method changes the location of a point in the drawing
     updateDrawing(point) {
         this.shapeOfInterest.updatePoint(point, this.index);
         this.pointOfInterest = this.shapeOfInterest.points[this.index];
     }
 
+    // this method closes the currently selected shape
     closeCurrentShape() {
         this.shapeOfInterest.closeShape();
     }
 
+    // this method prompts the user to fill the current shape
     fillCurrentShape() {
-        var x = prompt('What color do you want?');
-        this.shapeOfInterest.path.fillColor = x;
-        console.log(x);
-        this.shapeOfInterest.fillColor= 'black';
-        console.log(this.shapeOfInterest.fillColor);
+        var input = prompt('What color do you want?');
+        this.shapeOfInterest.path.fillColor = input;
+        this.shapeOfInterest.path.strokeColor = input;
     }
+
+    selectedcurrentShape() {
+        this.shapeOfInterest.path.fullySelected = 
+        !this.shapeOfInterest.path.fullySelected;
+    }
+    
+    curveLines() {
+        console.log('sdkfjjdd\nsdsd\nsddddddddssssssssssssssssssssssssssssdkfjjdd\nsdsd\nsddddddddssssssssssssssssssssssssssssdkfjjdd\nsdsd\nsddddddddssssssssssssssssssssssssssssdkfjjdd\nsdsd\nsddddddddssssssssssssssssssssssssssssdkfjjdd\nsdsd\nsddddddddssssssssssssssssssssssssssssdkfjjdd\nsdsd\nsddddddddssssssssssssssssssssssssssssdkfjjdd\nsdsd\nsddddddddssssssssssssssssssssssssssssdkfjjdd\nsdsd\nsddddddddssssssssssssssssssssssssssssdkfjjdd\nsdsd\nsddddddddssssssssssssssssssssssssssssdkfjjdd\nsdsd\nsddddddddssssssssssssssssssssssssssssdkfjjdd\nsdsd\nsddddddddssssssssssssssssssssssssssssdkfjjdd\nsdsd\nsddddddddssssssssssssssssssssssssssssdkfjjdd\nsdsd\nsddddddddssssssssssssssssssssssssssssdkfjjdd\nsdsd\nsddddddddssssssssssssssssssssssssssssdkfjjdd\nsdsd\nsddddddddssssssssssssssssssssssssssssdkfjjdd\nsdsd\nsddddddddssssssssssssssssssssssssssssdkfjjdd\nsdsd\nsddddddddssssssssssssssssssssssssssssdkfjjdd\nsdsd\nsddddddddssssssssssssssssssssssssssssdkfjjdd\nsdsd\nsddddddddssssssssssssssssssssssssssssdkfjjdd\nsdsd\nsddddddddssssssssssssssssssssssssssssdkfjjdd\nsdsd\nsddddddddsssssssssssssssssssssssssss', 'your code is');
+        this.shapeOfInterest.path.smooth();
+    }
+    
+
 }
 
 class shape {
@@ -72,6 +86,9 @@ class shape {
         this.points = []
         this.path = new Path();
         this.path.strokeColor = 'black';
+        this.curve = false;
+        this.fillColor;
+        this.closed;
     }
 
     findPoint(point) {
@@ -92,7 +109,6 @@ class shape {
     newPoint(point) {
         this.points.push(point);
         this.path.add(point);
-        
     }
     
     updatePoint(point,index) {
@@ -104,9 +120,27 @@ class shape {
 
     closeShape() {
         this.path.closed = !this.path.closed
+        this.closed = !this.closed
     }
 
+    fillShape() {
+        var input = prompt('What color do you want?');
+        this.fillColor = input
+        this.path.fillColor = input;
+        this.path.strokeColor = input;
+    }
+
+    selectedShape() {
+        this.path.fullySelected = 
+        !this.path.fullySelected;
+    }
+    
+    curveLines() {
+        this.curve = true
+        this.shapeOfInterest.path.smooth();
+    }
 }
+
 
 class vhLines {
     constructor() {
@@ -154,29 +188,6 @@ class vhLines {
 
 
 
-/* 
-//horizontal line between equal x points 
-var from = new Point(200, -2000);
-var to = new Point(200, 2000);
-var horizontal = new Path.Line(from, to);
-horizontal.strokeColor ='orange';
-
-// vertical line between equal y points 
-var from2 = new Point(-2000, 200);
-var to2 = new Point(2000, 200);
-var vertical = new Path.Line(from2, to2);
-vertical.strokeColor ='orange';
- */
-
-
-
-/* var array = [];
-
-var newPoint = true;
-var index;
-var edit = null; */
-
-
 var currentDrawing = new drawing();
 var currentGrid = new vhLines();
 
@@ -204,6 +215,12 @@ tool.onKeyDown = function(event) {
     }
     if(event.key == 'f') {
         currentDrawing.fillCurrentShape();
+    }
+    if(event.key == 's') {
+        currentDrawing.selectedcurrentShape();
+    }
+    if(event.key == 'w') {
+        currentDrawing.curveLines();
     }
    
 }
