@@ -27,6 +27,9 @@ view.onFrame = function(event) {
     user1.update2(point);
     cannonball.update();
     
+    //Implement top bottom and sided as walls for ball to bounce off
+    cannonball.check(); //function to check collisions
+
     /* a little messy could this functionality
     be moved to the class */
     if(total_distance > 2000){
@@ -52,12 +55,11 @@ tool.onMouseMove = function(event) {
         dir = -1;
                           
     }
-
     if(event.key == 'd' || event.key == 'right') {
         dir = 1;           
     } */
     if(event.key == 'b'){
-      cannonball.collision(90);
+      cannonball.collision(90)
     }
 } 
 }

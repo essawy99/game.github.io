@@ -7,17 +7,15 @@
 //-----------------------------------------------------------------------------
 
 
-//Paper set up
-paper.install(win);
-paper.setup(doc.getElementById("myCanvas"));
+
 
 
 class Background { //DHEVAA TODO: Implement wave animation on shore
 	constructor() {
-		const rect = new Path.Rectangle(new Point(0, 0), new Size(x, y));
+		const rect = new Path.Rectangle(new Point(0, 0), new Size(w, h));
 		rect.fillColor = new Color("#42adf5");
 		
-		const rect2 = new Path.Rectangle(new Point(0, 7 * y / 8), new Size(x, y));
+		const rect2 = new Path.Rectangle(new Point(0, 7 * h / 8), new Size(w, h));
 		rect2.fillColor = new Color("#ebd8a0");
 	}
 }
@@ -33,10 +31,10 @@ class Tanks { //DHEVA TODO: Implement explosion animation on damage
 	get numTanks() { return this._numTanks; }
 	
 	initDraw() {
-		const tankSpacing = x / (this._numTanks + 1);
-		const tankUnit = (2 * y / 64);
+		const tankSpacing = w / (this._numTanks + 1);
+		const tankUnit = (2 * h / 64);
 		for(let i = 1; tankSpacing * i < w; i++) {
-			Tanks.tankArray.push(this.drawTank(new Point((tankSpacing*i)-(tankUnit/2), (57*y/64)), tankUnit));
+			Tanks.tankArray.push(this.drawTank(new Point((tankSpacing*i)-(tankUnit/2), (57*h/64)), tankUnit));
 		}
 	}
 	
@@ -54,7 +52,7 @@ class Health { //DHEVA TODO: Implement bar decrease animation on damage
 	constructor() {
 		this._health = 100;
 		
-		this._healthBar = new Path.Rectangle(new Point (x / 16, 31*y/32), new Size(x*7/8, y/64));
+		this._healthBar = new Path.Rectangle(new Point (w / 16, 31*h/32), new Size(w*7/8, h/64));
 		this._healthBar.fillColor = new Color("#db2316");
 	}
 	
