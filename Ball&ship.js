@@ -16,8 +16,6 @@ class Cannon {
     }
 
     update() {
-        this.x_vel = this.velocity * Math.cos(this.direction);
-        this.y_vel = this.velocity * Math.sin(this.direction);
         
         this.x += this.x_vel;
         this.y += this.y_vel;
@@ -27,18 +25,10 @@ class Cannon {
             dir += Math.PI; 
         } */
     }
-    collision(angle){ //collision method
-        /*
-        METHOD ONE - No arguments taken
-        var angleNormal = Math.atan2(this.x_vel,this.y_vel);
-        var angleMovement = Math.sqrt((this.x_vel*this.x_vel)+(this.y_vel*this.y_vel));
-        var angleReflection = angleNormal - (angleMovement-angleNormal);
-        this.x_vel = this.velocity * Math.sin(angleReflection);
-        this.y_vel = this.velocity * Math.cos(angleReflection);
-        this.direction = angleReflection;
-        */
-
+    collision(ang){ //collision method input degrees
         //Method 2 - Takes in angle as argument
+        var angle = (ang*Math.PI) / 180;
+        console.log(angle)
         var n = { //Vector based off of angle 
             x: Math.sin(angle),
             y: -Math.cos(angle)
@@ -52,11 +42,23 @@ class Cannon {
         this.y_vel -= d * n.y;
         this.x += this.x_vel;
         this.y += this.y_vel;
-        this.direction = angle //Only changes when I set direction = amg;e
+        this.cannon.position.x = this.x;
+        this.cannon.position.y = this.y;
     }
     dot(v1, v2) {
         return v1.x * v2.x + v1.y * v2.y
       }
+    check(){ //function to check collision with top sides and bottom
+        if(this.x <= 0){
+            this.collision(90);
+        }else if(this.x >= document.getElementById("myCanvas").width){
+            this.collision(270);
+        }else if(this.y <= 0){
+            this.collision(360);
+        }else if(this.y >= document.getElementById("myCanvas").height){
+            this.collision(180);
+        }
+    }
 }
         
 class User {
