@@ -5,20 +5,20 @@ body = doc.getElementsByTagName('body')[0],
 w = win.innerWidth || docElem.clientWidth || body.clientWidth,
 h = win.innerHeight|| docElem.clientHeight|| body.clientHeight; */
 
-var w = 0;var h = 0;
-//IE
-if(!window.innerWidth){
-    if(!(document.documentElement.clientWidth == 0)){
-    //strict mode
-    w = document.documentElement.clientWidth;h = document.documentElement.clientHeight;
-    } else{
-    //quirks mode
-    w = document.body.clientWidth;h = document.body.clientHeight;
-    }
-} else {
-    //w3c
-    w = window.innerWidth;h = window.innerHeight;
-}
+ var w = 0;var h = 0;
+        //IE
+        if(!window.innerWidth){
+            if(!(document.documentElement.clientWidth == 0)){
+            //strict mode
+            w = document.documentElement.clientWidth;h = document.documentElement.clientHeight;
+            } else{
+            //quirks mode
+            w = document.body.clientWidth;h = document.body.clientHeight;
+            }
+        } else {
+            //w3c
+            w = window.innerWidth;h = window.innerHeight;
+  }
 
 var height = h - (h/6);
 var width = w/15;

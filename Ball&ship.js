@@ -51,11 +51,11 @@ class Cannon {
     check(){ //function to check collision with top sides and bottom
         if(this.x <= 0){
             this.collision(90);
-        }else if(this.x >= document.getElementById("myCanvas").width){
+        }else if(this.x >= w){
             this.collision(270);
         }else if(this.y <= 0){
             this.collision(360);
-        }else if(this.y >= document.getElementById("myCanvas").height){
+        }else if(this.y >= h){
             this.collision(180);
         }
     }
