@@ -57,7 +57,7 @@ tool.onMouseMove = function(event) {
         dir = 1;           
     } */
     if(event.key == 'b'){
-      cannonball.collision(45)
+      cannonball.collision(90)
     }
 } 
 }
