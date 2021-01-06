@@ -27,10 +27,21 @@ class Cannon {
         } */
     }
     collision(angle){
-        var x1 = this.velocity * Math.cos(this.direction); //x velocity
-        var x2 = this.velocity * Math.sin(this.direction); //y velocity
-        this.direction = 2*(angle)-this.angle
-        this.angle = angle
+        //Draw representation of angle
+        var from = new Point(300, 300);
+        var theta = angle * 3.14 / 180.0
+        var length = 100
+        var x2 = 300 + length * Math.cos(theta)
+        var y2 = 300 + length * Math.sin(theta) 
+        var to = new Point(x2,y2);
+        console.log(x2,y2)
+        var path = new Path.Line(from, to);
+        path.strokeColor = 'black';;
+
+
+
+        this.direction = 2*(angle)-this.angle //formula to calculate new direction
+        this.angle = angle //set new angle as current angle
     }
 }
         
