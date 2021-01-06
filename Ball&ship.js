@@ -6,6 +6,7 @@ class Cannon {
         this.x = xLoc;
         this.y = yLoc;
         this.direction = (1/4)* Math.PI;
+        this.angle = this.direction;
         this.cannon = new Path.Circle({
             center: new paper.Point(this.x, this.y),
             radius: 3* wUnit,
@@ -14,16 +15,22 @@ class Cannon {
     }
 
     update() {
-        var x_dir = this.velocity * Math.cos(this.direction);
-        var y_dir = this.velocity * Math.sin(this.direction);
+        var x_vel = this.velocity * Math.cos(this.direction);
+        var y_vel = this.velocity * Math.sin(this.direction);
         
-        this.x += x_dir;
-        this.y += y_dir;
+        this.x += x_vel;
+        this.y += y_vel;
         this.cannon.position.x = this.x;
         this.cannon.position.y = this.y;
         /* if(this.x < 0 || this.x > w) {
             dir += Math.PI; 
         } */
+    }
+    collision(angle){
+        var x1 = this.velocity * Math.cos(this.direction); //x velocity
+        var x2 = this.velocity * Math.sin(this.direction); //y velocity
+        this.direction = 2*(angle)-this.angle
+        this.angle = angle
     }
 }
         

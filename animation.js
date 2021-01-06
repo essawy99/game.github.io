@@ -46,7 +46,8 @@ tool.onMouseMove = function(event) {
   point = event.point    
 }
 
-/* tool.onKeyDown = function(event) {
+ tool.onKeyDown = function(event) {
+   /*
     if(event.key == 'a' || event.key == 'left') {
         dir = -1;
                           
@@ -54,6 +55,9 @@ tool.onMouseMove = function(event) {
 
     if(event.key == 'd' || event.key == 'right') {
         dir = 1;           
-    }       
-} */
+    } */
+    if(event.key == 'b'){
+      cannonball.collision(180)
+    }
+} 
 }
