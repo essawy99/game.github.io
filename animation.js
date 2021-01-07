@@ -28,7 +28,7 @@ view.onFrame = function(event) {
     cannonball.update();
     
     //Implement top bottom and sided as walls for ball to bounce off
-    cannonball.check(); //function to check collisions
+    cannonball.check(user1,ship_array,planeArray); //function to check collisions
 
     /* a little messy could this functionality
     be moved to the class */

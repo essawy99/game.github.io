@@ -37,18 +37,25 @@ class Cannon {
             x: this.x_vel,
             y: this.y_vel
         }
-        var d = 2 * this.dot(v, n);
-        this.x_vel -= d * n.x;
-        this.y_vel -= d * n.y;
+        var d = 2 * this.dot(v, n); //formula for distance
+        this.x_vel -= d * n.x; //Formula to get x velocity
+        this.y_vel -= d * n.y; //Formula to get y velocity
+        //Change cannon positions
         this.x += this.x_vel;
         this.y += this.y_vel;
         this.cannon.position.x = this.x;
         this.cannon.position.y = this.y;
     }
-    dot(v1, v2) {
+    dot(v1, v2) { //Dot multiply function
         return v1.x * v2.x + v1.y * v2.y
       }
-    check(){ //function to check collision with top sides and bottom
+    //array1 is ship array array2 is plane array
+    check(user,array1,array2){ //function to check collision with top sides and bottom
+        //An array of all intersections between ball and forcefield
+        var clone_ball = this.cannon.clone();
+        clone_ball.visible = false;
+        clone_ball.position.x += this.x_vel;
+        clone_ball.position.y += this.y_vel;
         if(this.x <= 0){
             this.collision(90);
         }else if(this.x >= w){
@@ -57,8 +64,24 @@ class Cannon {
             this.collision(360);
         }else if(this.y >= h){
             this.collision(180);
+        }else if(clone_ball.intersects(user.arc)){ //Check if ball and arc touch
+            //If ball and arc touch get intersections and use
+            //first point as collision
+            var intersections =  clone_ball.getIntersections(user.arc);
+            var length = intersections.length;
+            var tangent_line = new paper.Path();
+            var i;
+            for(i = 0;i<length;i++){
+                tangent_line.add(new paper.Point(intersections[i].point));
+                console.log("intersection point: " + intersections[i].point)
+            }
+            console.log("Tangent_line: " + tangent_line);
+            console.log("length: " + tangent_line.length);
+            var tangent = tangent_line.getTangentAt(tangent_line.length);
+            console.log("tangent: " + tangent)
+            this.collision(tangent.angle);
         }
-    }
+        }
 }
         
 class User {
