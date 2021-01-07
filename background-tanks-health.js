@@ -52,7 +52,7 @@ class Health { //DHEVA TODO: Implement bar decrease animation on damage
 	constructor() {
 		this._health = 100;
 		
-		this._healthBar = new Path.Rectangle(new Point (w / 16, 31*h/32), new Size(w*7/8, h/64));
+		this._healthBar = new Path.Rectangle(new Point (0, 63*h/64), new Size(w, h/64));
 		this._healthBar.fillColor = new Color("#db2316");
 	}
 	
