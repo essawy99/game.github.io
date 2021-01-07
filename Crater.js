@@ -8,7 +8,7 @@ class Crater {
 			Crater.craterArray.push(Path.Circle(
 			{center: point,
 			 strokeColor: new Color('#c4b399'),
-			 strokeWidth: 5,
+			 strokeWidth: h/125,
 			 fillColor: new Color('#998e7d'),
 			 radius: h / 30})
 			);
@@ -31,7 +31,7 @@ class Crater {
 		const xVarInner2 = Math.cos(Math.PI/8)*innerR
 		const yVarInner2 = Math.sin(Math.PI/8)*innerR
 		
-		let returnShape = new Path({strokeColor: new Color("#ff9900"), fillColor: new Color("#ffea00"), strokeWidth: 20, applyMatrix: false});
+		let returnShape = new Path({strokeColor: new Color("#ff9900"), fillColor: new Color("#ffea00"), strokeWidth: h/75, applyMatrix: false});
 		returnShape.add(new Point(point.x, point.y-outerR));
 		returnShape.add(new Point(point.x+xVarInner1, point.y-yVarInner1));
 		
