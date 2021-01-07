@@ -28,7 +28,7 @@ view.onFrame = function(event) {
     cannonball.update();
     
     //Implement top bottom and sided as walls for ball to bounce off
-    cannonball.check(); //function to check collisions
+    cannonball.check(user1,ship_array,planeArray); //function to check collisions
 
     /* a little messy could this functionality
     be moved to the class */
@@ -44,6 +44,15 @@ view.onFrame = function(event) {
       } //Update all current planes
       total_distance += 20; //total distance goes up by 20 each time even after reset
 }
+
+// Creates an explosion/crater on mouses current location when mouse is clicked (for debug purposes)
+document.getElementById("myCanvas").addEventListener(
+	'click',
+	function() {
+		new Crater(new Point(event.clientX, event.clientY));
+		},
+	false
+);
        
 tool.onMouseMove = function(event) {
   point = event.point    
