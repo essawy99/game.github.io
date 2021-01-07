@@ -37,18 +37,21 @@ class Cannon {
             x: this.x_vel,
             y: this.y_vel
         }
-        var d = 2 * this.dot(v, n);
-        this.x_vel -= d * n.x;
-        this.y_vel -= d * n.y;
+        var d = 2 * this.dot(v, n); //formula for distance
+        this.x_vel -= d * n.x; //Formula to get x velocity
+        this.y_vel -= d * n.y; //Formula to get y velocity
+        //Change cannon positions
         this.x += this.x_vel;
         this.y += this.y_vel;
         this.cannon.position.x = this.x;
         this.cannon.position.y = this.y;
     }
-    dot(v1, v2) {
+    dot(v1, v2) { //Dot multiply function
         return v1.x * v2.x + v1.y * v2.y
       }
-    check(){ //function to check collision with top sides and bottom
+    //array1 is ship array array2 is plane array
+    check(user,array1,array2){ //function to check collision with top sides and bottom
+        //An array of all intersections between ball and forcefield
         if(this.x <= 0){
             this.collision(90);
         }else if(this.x >= w){
@@ -57,8 +60,16 @@ class Cannon {
             this.collision(360);
         }else if(this.y >= h){
             this.collision(180);
+        }else if(this.cannon.intersects(user.arc)){ //Check if ball and arc touch
+            //If ball and arc touch get intersections and use
+            //first point as collision
+            var intersections =  this.cannon.getIntersections(user.arc);
+            console.log("Intersections list: " + intersections)
+            var tangent = intersections[0].tangent;
+            console.log("Angle of tangent: " + (tangent.angle+360)%360);
+            this.collision((tangent.angle+360)%360); //Change angle position by 360 degrees
         }
-    }
+        }
 }
         
 class User {
