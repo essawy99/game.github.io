@@ -183,5 +183,6 @@ class drawing {
         
         output+= "\t}\n";
         output+= "}\n";  
+        console.log(output);
     }    
 }
