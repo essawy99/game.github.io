@@ -26,7 +26,6 @@ class vhLines {
 
                 }
                 
-                console.log(drawing.pointOfInterest)
                 if(cursor.x == point.x && point != drawing.pointOfInterest) {
         
                     this.horizontal.strokeColor = 'orange';
