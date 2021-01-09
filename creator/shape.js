@@ -62,7 +62,6 @@ class shape {
     }
     /* TODO: add strokeWidth  */
     loadShape(array, index) {
-        console.log(array[index]);
         this.path.strokeColor = array[index];
         
         if(array[index +1] != 'null') {
@@ -77,11 +76,9 @@ class shape {
         
         while(true) {
             if (array[i] == "p") {
-                console.log(i);
                 var point = new Point
                 ((array[i+1] * wUnit), (array[i+2] * wUnit) );
                 i+=3;
-                console.log(array[i]);
                 this.newPoint(point);
             }
             else {
@@ -92,7 +89,7 @@ class shape {
             this.curve = true;
             this.path.smooth();
         }
-        console.log(array[i]);
+
         return (i+1);
     }
     
