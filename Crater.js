@@ -1,19 +1,8 @@
 class Crater {
-	static craterArray = [];
-	
 	constructor(point) {
-		let explosion = this._generateExplosion(point, h/20, h/10);
+		let explosion = this._generateExplosion(point, h/40, h/20);
 		
 		explosion.tween({scaling: 0.001}, {scaling: 1}, 100).then(function() {
-			Crater.craterArray.push(Path.Circle(
-			{center: point,
-			 strokeColor: new Color('#c4b399'),
-			 strokeWidth: h/125,
-			 fillColor: new Color('#998e7d'),
-			 radius: h / 30})
-			);
-			
-			project.activeLayer.addChild(explosion);
 			explosion.tween({scaling: 1}, {scaling: 0}, 100);
 		});
 	}
