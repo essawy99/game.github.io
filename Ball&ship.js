@@ -93,7 +93,7 @@ class Cannon {
         }else{
         }
     }      
-    /* check_array(array,type){
+    check_array(array,type){
         //An array of all intersections between ball and forcefield
 
         // new x and y positions to determine where ball would be on next frame
@@ -150,7 +150,7 @@ class Cannon {
                 }
             }
     }
-    }*/
+    }
 } 
         
 class User {
