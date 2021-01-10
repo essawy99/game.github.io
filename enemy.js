@@ -107,7 +107,7 @@ class Enemy_Plane {
         this.planeBody.position.y += 5;
 
         if(this.planeBody.position.y >= (7 * h / 8)){
-            //new Crater(new Point(this.planeBody.position.x,this.planeBody.position.y));
+            new Crater(new Point(this.planeBody.position.x,this.planeBody.position.y));
         }else if(this.planeBody.position.y >= h){
             this.planeBody.remove();
             return true;
