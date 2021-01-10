@@ -1,50 +1,45 @@
+<!DOCTYPE html>
 <html>
 <head>
-    <title>circle</title>
-
+    <title>Ship Breaker</title> <!-- Tab title -->
+	
+	<style> /* Style attricutes used for all buttons (currently) NOTE: Apparently css and html have different comment styles ¯\_(ツ)_/¯  */
+		.button {
+			background-color: transparent;
+			color: #d63d22;
+			font-family: "Courier New";
+			border-color: #d63d22;
+			font-weight: bold;
+			border-width: medium;
+			border-style: dashed;
+			position: absolute;
+			z-index: 3;
+		}
+	
+	</style>
 </head>
+
 <body>
-    <canvas id = "myCanvas" style="left: 0px; top: 0px; position: absolute;" width = 100 height =100 ></canvas>
+	<button class="button" id="start" type="button" onclick="startGame()" style="left: 50%; top: 50%; width: 30%; height: 15%; margin: -10% -15%; font-size: 250%;">Begin Mission</button> <!-- Start button -->
+	<button class="button" id="help" type="button" onclick="helpGame()" style="left: 94.60%; top: 0%; width: 5%; height: 5%;">Help</button>
+	<button class="button" id="pause" type="button" onclick="pauseGame()" style="left: 94.60%; width: 5%; height: 5%; margin: 5% auto">Pause</button>
+	
+	<p id="helpText" style="display: none; position: absolute; z-index: 2; left: 30%; top: 30%; width: 50%;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc luctus, diam sed dapibus dignissim, quam nisl posuere sapien, ac tempus nunc ante quis mauris.
+	Mauris malesuada fermentum felis vel tincidunt. Nulla libero sem, mattis in posuere sed, congue eu risus. In hac habitasse platea dictumst. Mauris sollicitudin sed erat sed efficitur.
+	Pellentesque mollis ultricies velit sit amet venenatis. Quisque facilisis bibendum nibh. Maecenas suscipit orci et sagittis interdum. Donec porttitor enim sit amet justo vestibulum euismod.
+	Vivamus vitae lacus in est pellentesque facilisis. Nullam vitae accumsan mi, non elementum ex.</p> <!-- Help text -->
+	
+    <canvas id = "myCanvas" style="left: 0px; top: 0px; position: absolute; z-index: 1" width = 100 height =100 ></canvas>
 </body>
 
-<script type= "text/javascript" src="paper-full.js"></script>
-    <script>
-        /* var win = window,
-        doc = document,
-        docElem = doc.documentElement,
-        body = doc.getElementsByTagName('body')[0],
-        x = win.innerWidth || docElem.clientWidth || body.clientWidth,
-        y = win.innerHeight|| docElem.clientHeight|| body.clientHeight; */
-
-        /* borrowed from 
-        https://stackoverflow.com/questions/3437786/get-the-size-of-the-screen-curr
-        ent-web-page-and-browser-window#:~:text=To%20get%20the%20width%20and,width()%20. */
-        var w = 0;var h = 0;
-        //IE
-        if(!window.innerWidth){
-            if(!(document.documentElement.clientWidth == 0)){
-            //strict mode
-            w = document.documentElement.clientWidth;h = document.documentElement.clientHeight;
-            } else{
-            //quirks mode
-            w = document.body.clientWidth;h = document.body.clientHeight;
-            }
-        } else {
-            //w3c
-            w = window.innerWidth;h = window.innerHeight;
-  }
-        document.getElementById("myCanvas").width = w;
-        document.getElementById("myCanvas").height = h; 
-        
-
-    </script>
-
-    <script type = "text/javascript" src = "Globalvars.js"> </script>
-    <script type = "text/javascript" src = "Ball&ship.js"> </script>
-    <script type = "text/javascript" src = "enemy.js"> </script>
-    <script type = "text/javascript" src = "background-tanks-health.js"> </script>
-	<script type = "text/javascript" src = "Crater.js"> </script>
-    <script type = "text/javascript" src = "animation.js"> </script>
-    <script type = "text/javascript" src = "design.js"> </script>
-
+<div> <!-- Grouped library scripts -->
+	<script type = "text/javascript" src = "paper-full.js"></script>
+	<script type = "text/javascript" src = "Globalvars.js"></script>
+	<script type = "text/javascript" src = "Ball&ship.js"></script>
+	<script type = "text/javascript" src = "enemy.js"></script>
+	<script type = "text/javascript" src = "background-tanks-health.js"></script>
+	<script type = "text/javascript" src = "Crater.js"></script>
+	<script type = "text/javascript" src = "animation.js"></script>
+	<script type = "text/javascript" src = "design.js"></script>
+</div>
 </html>

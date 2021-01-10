@@ -27,3 +27,6 @@ var width = w/15;
 var wUnit = w/1000;
 var hUnit = h/1000;
 var center =  w/2;
+
+document.getElementById("myCanvas").width = w;
+document.getElementById("myCanvas").height = h; 
