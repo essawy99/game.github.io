@@ -4,7 +4,6 @@ KNOWN BUGS
 	-Help text is currently dummy text; need to replace and format for actual instructions soon
 	
 	PLEASE PLACE ANY OTHER BUGS NOTICED HERE
-
 */
 
 let gameStatus = 0; //1-> Game is running, 0-> Game is paused
@@ -51,18 +50,26 @@ function startGame() {
 			cannonball.check(user1,ship_array,planeArray); //function to check collisions
 
 			/* a little messy could this functionality
-			be moved to the class */
-			if(total_distance > 2000){
-				var plane_2 = new Enemy_Plane();
-				planeArray.push(plane_2)
-				total_distance = 0
-			} else {
-				for (let i = 0; i < planeArray.length; i++) {
-					planeArray[i].update();
-				}
-			} //Update all current planes
-		
-			total_distance += 20; //total distance goes up by 20 each time even after reset
+    be moved to the class */
+    if(total_distance > 2000){
+      var plane_2 = new Enemy_Plane();
+      planeArray.push(plane_2)
+      total_distance = 0
+    }else{
+      var i;
+      for (i = 0; i < planeArray.length; i++) {
+        // If plane is destroyed 
+        // A bool value should return true
+        // Thus we should remove it from array
+        planeArray[i].update();
+        /*
+        if(bool){
+          planeArray = planeArray.splice(i,1); //Remove element at index
+        }
+        */
+      }
+    } //Update all current planes
+    total_distance += 10; //total distance goes up by 10 each time even after reset
 		}
 
 		tool.onMouseMove = function(event) {
@@ -73,7 +80,6 @@ function startGame() {
 			/*
 			if(event.key == 'a' || event.key == 'left') {
 			dir = -1;
-
 			}
 			if(event.key == 'd' || event.key == 'right') {
 			dir = 1;           

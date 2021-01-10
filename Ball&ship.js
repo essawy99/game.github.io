@@ -2,7 +2,7 @@
 
 class Cannon {
     constructor(xLoc, yLoc) {
-        this.velocity = 10 * wUnit;
+        this.velocity = 5 * wUnit;
         this.x = xLoc;
         this.y = yLoc;
         this.direction = (1/4)* Math.PI;
@@ -46,16 +46,21 @@ class Cannon {
         this.cannon.position.x = this.x;
         this.cannon.position.y = this.y;
     }
+
     dot(v1, v2) { //Dot multiply function
         return v1.x * v2.x + v1.y * v2.y
-      }
-    //array1 is ship array array2 is plane array
-    check(user,array1,array2){ //function to check collision with top sides and bottom
+    }
+    // array = ship_array and array2 = planeArray
+    check(user,array,array2){
         //An array of all intersections between ball and forcefield
-        var clone_ball = this.cannon.clone();
-        clone_ball.visible = false;
-        clone_ball.position.x += this.x_vel;
-        clone_ball.position.y += this.y_vel;
+
+        // new x and y positions to determine where ball would be on next frame
+        var x_pos = this.x + this.x_vel; 
+        var y_pos = this.y + this.y_vel;
+
+        //create a line going from current cannonball
+        var line = new Path.Line(new Point(this.x,this.y), new Point(x_pos,y_pos));
+        line.strokeColor = 'black';
         if(this.x <= 0){
             this.collision(90);
         }else if(this.x >= w){
@@ -63,26 +68,90 @@ class Cannon {
         }else if(this.y <= 0){
             this.collision(360);
         }else if(this.y >= h){
-            this.collision(180);
-        }else if(clone_ball.intersects(user.arc)){ //Check if ball and arc touch
+            // Remove cannon ball when it hits bottom of screen 
+            this.cannon.remove();
+        }else if(line.intersects(user.arc)){ //Check if ball and arc touch
             //If ball and arc touch get intersections and use
-            //first point as collision
-            var intersections =  clone_ball.getIntersections(user.arc);
-            var length = intersections.length;
-            var tangent_line = new paper.Path();
-            var i;
-            for(i = 0;i<length;i++){
-                tangent_line.add(new paper.Point(intersections[i].point));
-                console.log("intersection point: " + intersections[i].point)
+            var intersections =  line.getIntersections(user.arc);
+            console.log("intersections: " + intersections)
+            console.log("length: " + intersections.length)
+            // Get point of intersection
+            var point = intersections[0].point;
+            console.log("point: " + point)
+            // Calculate offset
+            var offset = user.arc.getOffsetOf(point);
+            // Get normal
+            var normal = user.arc.getNormalAt(offset);
+            console.log("normal: " + normal);
+            // Set x and y
+            this.x_vel = normal.x * (1/2*this.velocity);
+            this.y_vel = normal.y * (1/2*this.velocity);
+            this.x += this.x_vel;
+            this.y += this.y_vel;
+            this.cannon.position.x = this.x;
+            this.cannon.position.y = this.y;
+        }else{
+        }
+    }      
+    /* check_array(array,type){
+        //An array of all intersections between ball and forcefield
+
+        // new x and y positions to determine where ball would be on next frame
+        var x_pos = this.x + this.x_vel + this.x_vel; 
+        var y_pos = this.y + this.y_vel + this.y_vel;
+
+        //create a line going from current cannonball
+        var line = new Path.Line(new Point(this.x,this.y), new Point(x_pos,y_pos));
+        line.strokeColor = 'black';
+        var i;
+        var length = array.length;
+        var type_of;
+        if(type == "ship"){ //Handle ship array
+            for(i=0;i<length;i++){
+                if(line.intersects(array[i].shipBody)){
+                    //If ball and arc touch get intersections and use
+                var intersections =  line.getIntersections(array[i].shipBody);
+                console.log("intersections: " + intersections)
+                console.log("length: " + intersections.length)
+                var tangent = intersections[0].point;
+                console.log("tangent: " + tangent)
+                var angle = tangent.angle;
+                console.log("angle: " + angle)
+                this.collision(angle);
+    
+                //Deal damage and check if hp of item
+                // is 0 if so, remove from array
+                array[i].planeBody.hp -= 100;
+                if(array[i].planeBody.hp <= 0){
+                    array[i].shipBody.remove();
+                    array = array.splice(i,1);
+                }
+                }
             }
-            console.log("Tangent_line: " + tangent_line);
-            console.log("length: " + tangent_line.length);
-            var tangent = tangent_line.getTangentAt(tangent_line.length);
-            console.log("tangent: " + tangent)
-            this.collision(tangent.angle);
-        }
-        }
-}
+        }else{ //Handle plane array 
+            for(i=0;i<length;i++) {
+                if(line.intersects(array[i].planeBody)){
+                    //If ball and arc touch get intersections and use
+                var intersections =  line.getIntersections(array[i].planeBody);
+                console.log("intersections: " + intersections)
+                console.log("length: " + intersections.length)
+                var tangent = intersections[0].point;
+                console.log("tangent: " + tangent)
+                var angle = tangent.getDirectedAngle(tangent);
+                console.log("angle: " + angle)
+                this.collision(angle); 
+                //Deal damage and check if hp of item
+                // is 0 if so, remove from array
+                array[i].planeBody.hp -= 100;
+                if(array[i].planeBody.hp <= 0){
+                    array[i].planeBody.remove();
+                    array = array.splice(i,1);
+                }
+                }
+            }
+    }
+    }*/
+} 
         
 class User {
     constructor() {
@@ -94,7 +163,11 @@ class User {
         this.size = 40 * wUnit;
         
         this.speed = 20 * wUnit;
-        
+
+        //Can be changed once implementation of collision works
+        this.x_vel = 0;
+        this.y_vel = 0;
+
         //forcefield properties in terms of size
         this.forcefieldWidth = this.size;
         this.forcefieldHeight = this.forcefieldWidth / 2;

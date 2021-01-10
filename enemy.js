@@ -28,7 +28,7 @@ class Enemy_Ships {
         }
         //start of new ship
         this.shipBody = new paper.Path()
-                
+        this.shipBody.hp = 400;
         /* Ship points written in terms of properties */
         //left bound
         this.shipBody.add(new paper.Point
@@ -78,7 +78,7 @@ class Enemy_Plane {
         var plane_array = [];
 
         this.planeBody = new paper.Path()
-
+        this.planeBody.hp = 100; // Health
         this.planeBody.add(new paper.Point
             (center + 80*wUnit, height - 200*hUnit)); // bottom right of plane
         this.planeBody.add(new paper.Point
@@ -105,6 +105,14 @@ class Enemy_Plane {
     }
     update(){
         this.planeBody.position.y += 5;
+
+        if(this.planeBody.position.y >= (7 * h / 8)){
+            //new Crater(new Point(this.planeBody.position.x,this.planeBody.position.y));
+        }else if(this.planeBody.position.y >= h){
+            this.planeBody.remove();
+            return true;
+        }
+        return false;
     }
 
 }
