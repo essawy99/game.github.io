@@ -17,7 +17,7 @@ h = win.innerHeight|| docElem.clientHeight|| body.clientHeight; */
             }
         } else {
             //w3c
-            w = window.innerWidth;h = window.innerHeight;
+            w = window.innerWidth * 0.94;h = window.innerHeight;
   }
 
 var height = h - (h/6);

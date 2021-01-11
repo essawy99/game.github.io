@@ -45,6 +45,10 @@ class Health {
 		'segments[3].point': ['-=', {x: damagePercent*w/100, y: 0}],
 			'segments[2].point': ['-=', {x: damagePercent*w/100, y: 0}]
 		}, 500);
+		
+		if (this._health <= 0) {
+			endGame();
+		}
 	}
 	
 	get health() { return this._health; }

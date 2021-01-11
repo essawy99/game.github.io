@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Ship Breaker</title> <!-- Tab title -->
+    <title>Ship Breaker</title>
 	
-	<style> /* Style attricutes used for all buttons (currently) NOTE: Apparently css and html have different comment styles ¯\_(ツ)_/¯  */
+	<style>
 		.button {
 			background-color: transparent;
 			color: #d63d22;
@@ -15,21 +15,27 @@
 			position: absolute;
 			z-index: 3;
 		}
-	
+		
 	</style>
 </head>
 
 <body>
-	<button class="button" id="start" type="button" onclick="startGame()" style="left: 50%; top: 50%; width: 30%; height: 15%; margin: -10% -15%; font-size: 250%;">Begin Mission</button> <!-- Start button -->
-	<button class="button" id="help" type="button" onclick="helpGame()" style="left: 94.60%; top: 0%; width: 5%; height: 5%;">Help</button>
-	<button class="button" id="pause" type="button" onclick="pauseGame()" style="left: 94.60%; width: 5%; height: 5%; margin: 5% auto">Pause</button>
+	<button class="button" id="start" type="button" onclick="startGame()" style="left: 50%; top: 50%; width: 30%; height: 15%; margin: -10% -15%; font-size: 250%;">Begin Mission</button>
+	<button class="button" id="option" type="button" onclick="" style="left: 50%; top: 60%; width: 20%; height: 5%; margin: -5% -10%; font-size: 250%;">Options</button>
+	<button class="button" id="help1" type="button" onclick="helpGame()" style="left: 50%; top: 70%; width: 20%; height: 5%; margin: -5% -10%; font-size: 250%;">Help</button>
 	
-	<p id="helpText" style="display: none; position: absolute; z-index: 2; left: 30%; top: 30%; width: 50%;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc luctus, diam sed dapibus dignissim, quam nisl posuere sapien, ac tempus nunc ante quis mauris.
+	
+	<button class="button" id="help" type="button" onclick="helpGame()" style="left: 94.60%; top: 0%; width: 5%; height: 5%; display: none">Help</button>
+	<button class="button" id="pause" type="button" onclick="pauseGame()" style="left: 94.60%; width: 5%; height: 5%; margin: 5% auto; display: none">Pause</button>
+	
+	<p id="helpText" style="display: none; position: absolute; z-index: 4; left: 30%; top: 30%; width: 50%;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc luctus, diam sed dapibus dignissim, quam nisl posuere sapien, ac tempus nunc ante quis mauris.
 	Mauris malesuada fermentum felis vel tincidunt. Nulla libero sem, mattis in posuere sed, congue eu risus. In hac habitasse platea dictumst. Mauris sollicitudin sed erat sed efficitur.
 	Pellentesque mollis ultricies velit sit amet venenatis. Quisque facilisis bibendum nibh. Maecenas suscipit orci et sagittis interdum. Donec porttitor enim sit amet justo vestibulum euismod.
 	Vivamus vitae lacus in est pellentesque facilisis. Nullam vitae accumsan mi, non elementum ex.</p> <!-- Help text -->
 	
-    <canvas id = "myCanvas" style="left: 0px; top: 0px; position: absolute; z-index: 1" width = 100 height =100 ></canvas>
+	<h1 id="endText" style="font-family: Courier New; color: #d63d22;  display: none; position: absolute; z-index: 4; left: 40%; top: 40%;">GAME OVER<br>SCORE: NaN<h1>
+	
+    <canvas id = "myCanvas" style="left: 0px; top: 0px; position: absolute; z-index: 1"></canvas>
 </body>
 
 <div> <!-- Grouped library scripts -->
