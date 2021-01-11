@@ -14,7 +14,8 @@ class Cannon {
     }
 
     update() {
-        
+        this.x_vel += 0.1;
+        this.x_vel += 0.1;
         this.x += this.x_vel;
         this.y += this.y_vel;
         this.cannon.position.x = this.x;
@@ -82,8 +83,8 @@ class Cannon {
             var normal = user.arc.getNormalAt(offset);
             console.log("normal: " + normal);
             // Set x and y
-            this.x_vel = normal.x * (1/2*this.velocity);
-            this.y_vel = normal.y * (1/2*this.velocity);
+            this.x_vel = normal.x * this.velocity;
+            this.y_vel = normal.y * this.velocity;
             this.x += this.x_vel;
             this.y += this.y_vel;
             this.cannon.position.x = this.x;
