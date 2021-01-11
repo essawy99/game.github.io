@@ -2,8 +2,15 @@
 class Enemy_Ships {
     constructor(num_ships) {
         var i;
-        // x and y location of ship on screen
+        // spacing between ships
+        const shipSpacing = w / (num_ships + 1);
+
+        // y location of ship on screen
         this.userYLoc = 100 * hUnit;
+
+        // x location of ship on screen
+        this.shipX  = 0 + shipSpacing;
+
         // Array of x locations for each row of generated ships
         this.xLoc = [0,50,-50,-100]; 
         
@@ -21,13 +28,17 @@ class Enemy_Ships {
         var row_counter = 0;
         for(i=0;i<num_ships;i++){
         console.log(String(i) + "th ship")
+        /*
         if((i % 4) == 0 && i != 0){
             console.log(String(i) + ": " + i%4)
             this.userYLoc += 100; //increment y to change row
             this.shipTop = this.userYLoc + (this.size /4);
         }
+        */
+
         //start of new ship
         this.shipBody = new paper.Path()
+        //hp default is 400
         this.shipBody.hp = 400;
         /* Ship points written in terms of properties */
         //left bound
@@ -51,16 +62,19 @@ class Enemy_Ships {
         //rotate ship 90 degrees
         this.shipBody.rotate(90);
         //change x location
-        console.log(String(row_counter) + "ith row")
-        this.shipBody.position.x += this.xLoc[row_counter];
+        this.shipBody.position.x = this.shipX; 
+        //this.shipBody.position.x += this.xLoc[row_counter];
         // style the ship body
         this.shipBody.closed = true;
         this.shipBody.fillColor = 'red';
         ship_array.push(this.shipBody)
+        this.shipX += shipSpacing;
+        /*
         row_counter += 1
         if(row_counter > 3){
             row_counter = 0;
         }
+        */
         }
     }
 }

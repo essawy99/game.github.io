@@ -28,7 +28,7 @@ function startGame() {
 	var cannonball = new Cannon(200,200);  // cannonball
 	var user1 = new User();            // user
 	var ship_array = [];               // ship storage
-	var ship = new Enemy_Ships(7);     // ships
+	var ship = new Enemy_Ships(6);     // ships
 	var plane = new Enemy_Plane();     // plane
 	var planeArray = [plane];          // plane storage
 
