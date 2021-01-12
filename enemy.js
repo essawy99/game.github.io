@@ -1,15 +1,36 @@
 //class that handles the creation of an enemy ship
 class Enemy_Ships {
-    constructor(num_ships) {
-        var i;
-        // spacing between ships
-        const shipSpacing = w / (num_ships + 1);
+    constructor(numShips) {
+        this.shipArray = [];
+        this.shipSpacing = w / (numShips + 1);
+        this.numShips = numShips
+        for(var i =0; i < numShips; i++) {
+            this.shipArray.push(new Enemy_Ship(i * this.shipSpacing)); 
+        }
+    }
+    update(enemy) {
+        for(var i =0; i < this.numShips; i++) {
+           if(this.shipArray[i] != null) {
+            this.shipArray[i].spawnPlane(enemy); 
+           }
+        }
+    }
+    remove(index){
+        this.shipArray[index].shipBody.remove();
+        this.shipArray[index] = null
+    }
+
+}
+
+class Enemy_Ship {
+    constructor(shipSpacing) {
+        
 
         // y location of ship on screen
         this.userYLoc = 100 * hUnit;
 
         // x location of ship on screen
-        this.shipX  = 0 + shipSpacing;
+        this.shipX  = shipSpacing +30 * wUnit;
 
         // Array of x locations for each row of generated ships
         this.xLoc = [0,50,-50,-100]; 
@@ -25,39 +46,28 @@ class Enemy_Ships {
         this.shipWidth = this.size * (4/5);
         this.shipCorner = this.size * (3/5);
         //row counter (to know spot in row)
-        var row_counter = 0;
-        for(i=0;i<num_ships;i++){
-        console.log(String(i) + "th ship")
-        /*
-        if((i % 4) == 0 && i != 0){
-            console.log(String(i) + ": " + i%4)
-            this.userYLoc += 100; //increment y to change row
-            this.shipTop = this.userYLoc + (this.size /4);
-        }
-        */
-
-        //start of new ship
-        this.shipBody = new paper.Path()
+        
+        this.shipBody = new Path()
         //hp default is 400
-        this.shipBody.hp = 400;
+        this.hp = 400;
         /* Ship points written in terms of properties */
         //left bound
-        this.shipBody.add(new paper.Point
+        this.shipBody.add(new Point
             (center - this.shipWidth, this.shipTop)); 
         //top left corner
-        this.shipBody.add(new paper.Point
+        this.shipBody.add(new Point
             (center - this.shipCorner, this.shipTop - this.shipHeight)); 
         //top right corner
-        this.shipBody.add(new paper.Point
+        this.shipBody.add(new Point
             (center + this.shipCorner, this.shipTop - this.shipHeight)); 
         //right bound
-        this.shipBody.add(new paper.Point
+        this.shipBody.add(new Point
             (center + this.shipWidth, this.shipTop)); 
         // bottom right corner
-            this.shipBody.add(new paper.Point
+            this.shipBody.add(new Point
             (center + this.shipCorner, this.shipTop + this.shipHeight)); 
         // bottom left corner
-        this.shipBody.add(new paper.Point
+        this.shipBody.add(new Point
             (center - this.shipCorner, this.shipTop + this.shipHeight)); 
         //rotate ship 90 degrees
         this.shipBody.rotate(90);
@@ -67,8 +77,8 @@ class Enemy_Ships {
         // style the ship body
         this.shipBody.closed = true;
         this.shipBody.fillColor = 'red';
-        ship_array.push(this.shipBody)
-        this.shipX += shipSpacing;
+        
+        
         /*
         row_counter += 1
         if(row_counter > 3){
@@ -76,8 +86,15 @@ class Enemy_Ships {
         }
         */
         }
+        spawnPlane(enemy) {
+            var chance = Math.random();
+            if(chance > .9995) {
+                enemy.spawnPlane(this.shipBody.position.x,this.shipBody.position.y);
+            }
+
+        }
     }
-}
+
 
 
 //Credit: https://stackoverflow.com/questions/4959975/generate-random-number-between-two-numbers-in-javascript
@@ -85,9 +102,31 @@ class Enemy_Ships {
 function randomIntFromInterval(min, max) { // min and max included 
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
-//Class to handle enemy planes
+class Enemy_Planes {
+    constructor() {
+        this.planeArray =[];
+    }
+    update() {
+        for(var i=0; i<this.planeArray.length; i++) {
+            if(this.planeArray[i] != null) {
+                if (this.planeArray[i].planeBody.position.y > 1000*hUnit) {
+                    this.planeArray[i].planeBody.remove();
+                    this.planeArray[i] = null;
+                }
+                else {
+                    this.planeArray[i].planeBody.position.y += 1 * hUnit;
+                }
+            }
+        }
+    }
+    spawnPlane(xLoc, yLoc) {
+        this.planeArray.push(new Enemy_Plane(xLoc,yLoc));
+    }
+}
+
+  //Class to handle enemy planes
 class Enemy_Plane {
-    constructor(){
+    constructor(xLoc, yLoc){
         // Array to store enemy plane
         var plane_array = [];
 
@@ -109,16 +148,15 @@ class Enemy_Plane {
             (center - 90*wUnit, height - 175*hUnit)); // left wing of plane
         this.planeBody.add(new paper.Point
             (center - 50*wUnit, height - 150*hUnit)); // nose/cockpit of plane
-        var spawn_from = randomIntFromInterval(0,ship_array.length-1);
-        //set planes x and y to ships x and y
-        this.planeBody.position.x = ship_array[spawn_from].position.x
-        this.planeBody.position.y = ship_array[spawn_from].position.y
+        
+        this.planeBody.position.x = xLoc
+        this.planeBody.position.y = yLoc 
         this.planeBody.closed = true;
         this.planeBody.fillColor = 'blue';
         plane_array.push(this.planeBody)
     }
     update(){
-        this.planeBody.position.y += 5;
+        this.planeBody.position.y += 1*hUnit;
 
         if(this.planeBody.position.y >= (7 * h / 8)){
             new Crater(new Point(this.planeBody.position.x,this.planeBody.position.y));
@@ -130,6 +168,6 @@ class Enemy_Plane {
     }
 
 }
-var ship_array = []; //array to store ships
+
 
 

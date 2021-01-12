@@ -25,12 +25,12 @@ function startGame() {
 	var tanks = new Tanks(10); //Friendly tanks
 	var health = new Health(); //Player health bar
 
-	var cannonball = new Cannon(200,200);  // cannonball
+	var cannonball = new Cannon(500 *wUnit,500 *hUnit);  // cannonball
 	var user1 = new User();            // user
-	var ship_array = [];               // ship storage
-	var ship = new Enemy_Ships(6);     // ships
-	var plane = new Enemy_Plane();     // plane
-	var planeArray = [plane];          // plane storage
+	var ships = new Enemy_Ships(20);
+	/* var plane = new Enemy_Plane();     // plane
+	var planeArray = [plane];          // plane storage */
+	enemyPlanes = new Enemy_Planes;
 
 
 	var total_distance = 0;            // ????
@@ -54,14 +54,17 @@ function startGame() {
 	view.onFrame = function(event) { //Actual animation loop
 		if (gameStatus) { //Will check if gameState is 0 (triggers pause) or 1 (keeps running)
 			user1.update2(point);
-			cannonball.update();
+			cannonball.update(user1,ships,enemyPlanes);
+
+			ships.update(enemyPlanes);
+			enemyPlanes.update();
 
 			//Implement top bottom and sided as walls for ball to bounce off
-			cannonball.check(user1,ship_array,planeArray); //function to check collisions
+			 //function to check collisions
 
 			/* a little messy could this functionality
 			be moved to the class */
-			if(total_distance > 2000){
+			/* if(total_distance > 2000){
 				var plane_2 = new Enemy_Plane();
 				planeArray.push(plane_2)
 				total_distance = 0
@@ -72,15 +75,12 @@ function startGame() {
 					// A bool value should return true
 					// Thus we should remove it from array
 					planeArray[i].update();
-					/*
-					if(bool){
-						planeArray = planeArray.splice(i,1); //Remove element at index
-					}
-					*/
+					
 				}
 			} //Update all current planes
 			total_distance += 10; //total distance goes up by 10 each time even after reset
-		}
+		} */
+	}
 
 		tool.onMouseMove = function(event) {
 			point = event.point    
