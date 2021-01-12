@@ -26,6 +26,11 @@ function startGame() {
 	var health = new Health(); //Player health bar
 
 	var cannonball = new Cannon(500 *wUnit,500 *hUnit);  // cannonball
+	var c1 = new Cannon(400 *wUnit,400 *hUnit);
+	var c2 = new Cannon(300 *wUnit,300 *hUnit);
+	var c3 = new Cannon(200 *wUnit,200 *hUnit);
+	var c4 = new Cannon(350 *wUnit,350 *hUnit);
+	var c5 = new Cannon(500 *wUnit,500 *hUnit);
 	var user1 = new User();            // user
 	var ships = new Enemy_Ships(20);
 	/* var plane = new Enemy_Plane();     // plane
@@ -55,6 +60,11 @@ function startGame() {
 		if (gameStatus) { //Will check if gameState is 0 (triggers pause) or 1 (keeps running)
 			user1.update2(point);
 			cannonball.update(user1,ships,enemyPlanes);
+			c1.update(user1,ships,enemyPlanes);
+			c2.update(user1,ships,enemyPlanes);
+			c3.update(user1,ships,enemyPlanes);
+			c4.update(user1,ships,enemyPlanes);
+			c5.update(user1,ships,enemyPlanes);
 
 			ships.update(enemyPlanes);
 			enemyPlanes.update();

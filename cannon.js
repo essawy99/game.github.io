@@ -1,6 +1,6 @@
 class Cannon {
     constructor(xLoc, yLoc) {
-        this.velocity = 5 * wUnit;
+        this.velocity = 3 * wUnit;
         this.cannon = new Path.Circle({
             center: new paper.Point(xLoc, yLoc),
             radius: 3* wUnit,
@@ -99,19 +99,16 @@ class Cannon {
                 
                 //If ball and arc touch get intersections and use
                 var intersections =  line.getIntersections(array[i].shipBody);
-                console.log(intersections);
-            
-                var bob = new Path.Circle({
-                    center: intersections[0].point,
-                    radius: 3* wUnit,
-                    fillColor: 'black'
-                });
+
+                
                 
                 var tangent = intersections[0].point;
+
+                var offset = array[i].shipBody.getOffsetOf(tangent);
+                var tanPoint = array[i].shipBody.getTangentAt(offset)
             
-                var angle = tangent.getDirectedAngle(tangent);
-                
-                this.collision(angle);
+    
+               this.collision(tanPoint.angle);
 
                 //Deal damage and check if hp of item
                 // is 0 if so, remove from array
@@ -130,7 +127,7 @@ class Cannon {
     check_plane_array(array1,user,line){
     //An array of all intersections between ball and forcefield
 
-    console.log(array1.planeArray);    
+     
     var array = array1.planeArray
          //Handle ship array
         //Handle plane array 
@@ -141,12 +138,16 @@ class Cannon {
             if(line.intersects(array[i].planeBody)){
                 //If ball and arc touch get intersections and use
                 var intersections =  line.getIntersections(array[i].planeBody);
+
+                
                 
                 var tangent = intersections[0].point;
+
+                var offset = array[i].planeBody.getOffsetOf(tangent);
+                var tanPoint = array[i].planeBody.getTangentAt(offset)
             
-                var angle = tangent.getDirectedAngle(tangent);
-            
-                this.collision(angle); 
+    
+               this.collision(tanPoint.angle);
                 //Deal damage and check if hp of item
                 // is 0 if so, remove from array
                 array[i].planeBody.hp -= 100;
