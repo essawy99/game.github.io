@@ -1,12 +1,3 @@
-/*
-KNOWN BUGS
-	-If help is pressed after pause or pause is pressed after help, text will remain on screen during game play- will fix soon
-	-Help text is currently dummy text; need to replace and format for actual instructions soon
-	-Home screen is blank- what should it be?
-	
-	PLEASE PLACE ANY OTHER BUGS NOTICED HERE
-*/
-
 let gameStatus = 0; //1-> Game is running, 0-> Game is paused
 
 //----------------------------------------------------------------- paper.js set up
@@ -15,22 +6,24 @@ var canvas = document.getElementById('myCanvas');
 paper.setup(canvas);
 //-----------------------------------------------------------------
 
-//HOME SCREEN CURRENTLY BLANK
-
+var ball_array = []; // Keeps track of balls
 //----------------------------------------------------------------- Start button triggers this function to begin animation
 function startGame() {
-	
+	endHome();
 //------------------------------------------- Initialize all required objects
 	var back = new Background(); //Beach
 	var tanks = new Tanks(10); //Friendly tanks
 	var health = new Health(); //Player health bar
 
 	var cannonball = new Cannon(500 *wUnit,500 *hUnit);  // cannonball
+	ball_array.push(cannonball);
+	/*
 	var c1 = new Cannon(400 *wUnit,400 *hUnit);
 	var c2 = new Cannon(300 *wUnit,300 *hUnit);
 	var c3 = new Cannon(200 *wUnit,200 *hUnit);
 	var c4 = new Cannon(350 *wUnit,350 *hUnit);
 	var c5 = new Cannon(500 *wUnit,500 *hUnit);
+	*/
 	var user1 = new User();            // user
 	var ships = new Enemy_Ships(20);
 	/* var plane = new Enemy_Plane();     // plane
@@ -47,27 +40,47 @@ function startGame() {
 	var tool = new Tool();
 	
 	document.getElementById("start").style.display = 'none';
-	
 	document.getElementById("option").style.display = 'none';
-	
 	document.getElementById("help1").style.display = 'none';
 	
 	document.getElementById("help").style.display = 'block';
-	
 	document.getElementById("pause").style.display = 'block';
+	document.getElementById("buy").style.display = 'block';
+	
+	document.getElementById("scoreDisplay").style.display = 'block';
+	document.getElementById("moneyDisplay").style.display = 'block';
 	
 	view.onFrame = function(event) { //Actual animation loop
 		if (gameStatus) { //Will check if gameState is 0 (triggers pause) or 1 (keeps running)
+			//Check game state (if no more balls or health is 0)
+			if(gameState(ball_array,health,user1)){
+				// Game Over 
+				endGame(user1);
+			}
+
+
 			user1.update2(point);
-			cannonball.update(user1,ships,enemyPlanes);
+			// Cannonball collision checks
+			var i;
+			// Loop through static ball array from cannon class
+			for(i = 0;i < ball_array.length; i++){
+				// Check to see if ball is alive
+				if(ball_array[i].alive == true){
+					ball_array[i].update(user1,ships,enemyPlanes);
+				}
+			}
+
+
+			/*
 			c1.update(user1,ships,enemyPlanes);
 			c2.update(user1,ships,enemyPlanes);
 			c3.update(user1,ships,enemyPlanes);
 			c4.update(user1,ships,enemyPlanes);
 			c5.update(user1,ships,enemyPlanes);
+			*/
 
 			ships.update(enemyPlanes);
-			enemyPlanes.update();
+			enemyPlanes.update(health); // Pass in health in case plane passes user
 
 			//Implement top bottom and sided as walls for ball to bounce off
 			 //function to check collisions
@@ -116,18 +129,30 @@ function startGame() {
 			if (event.key == 'e') {
 				health.takeDamage(100);
 			}
+			if (event.key == 'f') { //Create new cannon ball on f
+				console.log("balls left: " + user1.get_balls())
+				console.log("ball array size: " + ball_array.length)
+				if(user1.num_balls > 0){
+					var new_cannon = new Cannon(user1.arc.position.x,(user1.arc.position.y-50));
+					// Add new cannon to cannonball array
+					new_cannon.add_ball(new_cannon,ball_array,user1);
+				}
+			}
 		}
 	}
 }
 //-----------------------------------------------------------------
 
-
+let instructions = document.getElementById("helpText");
 //----------------------------------------------------------------- Switches game state, which is checked at the beginning of each
 function pauseGame() {//											animation loop- will trigger pause
 	if (gameStatus) {
 		gameStatus = 0;
 		return;
 	} else {
+		instructions.style.display = "none"
+		document.getElementById("help").innerHTML = "Help";
+		document.getElementById("help1").innerHTML = "Help";
 		gameStatus = 1;
 		return;
 	}
@@ -136,22 +161,73 @@ function pauseGame() {//											animation loop- will trigger pause
 
 
 //----------------------------------------------------------------- Pauses game and displays help text- TODO: Currently dummy text,
-function helpGame() {//												NEED TO PUT IN ACTUAL INSTRUCTIONS
-	pauseGame();
 
-	if (gameStatus) {
-		document.getElementById("helpText").style.display = "none";
+function helpGame() {//												NEED TO PUT IN ACTUAL INSTRUCTIONS
+
+	if (gameStatus || (!gameStatus && instructions.style.display == "none")) {
+		gameStatus = 0;
+		instructions.style.display = "block";
+		document.getElementById("help").innerHTML = "Close";
+		document.getElementById("help1").innerHTML = "Close";
 		return;
 	} else {
-		document.getElementById("helpText").style.display = "block";
+		document.getElementById("helpText").style.display = "none";
+		document.getElementById("help").innerHTML = "Help";
+		document.getElementById("help1").innerHTML = "Help";
+		gameStatus = 1;
 		return;
 	}
 }
 //-----------------------------------------------------------------
+function buyCannon() {
+	if(money >= 400) {
+		money-=400;
+		document.getElementById("moneyDisplay").innerHTML = "Money: " + money;
+		
+		ball_array.push(new Cannon(500 *wUnit,500 *hUnit));  // cannonball
+	}
+}
 
 
-function endGame() {
+function endGame(user) {
 	view.onFrame = null;
 	
+	// Change inner html to real score before display
+	document.getElementById("endText").innerHTML = "GAME OVER" + "<br>" + "SCORE: " + user.score; 
 	document.getElementById("endText").style.display = "block";
+}
+
+//-----------------------------------------------------------------
+
+ // Function to check if all balls are dead
+ function dead_balls(array){
+	// For loop to loop and check array[i].alive value
+	var i;
+	for(i = 0;i<array.length;i++){
+		if(array[i].alive == true){
+			// If there is an alive ball return false
+			return false;
+		}
+	}
+	return true;
+}
+
+
+
+//-----------------------------------------------------------------
+// Check if there are any more balls or health
+function gameState(ball_array,health,user1){
+	// If health is 0 return true
+	if(health._health <= 0){
+		console.log("No health: " + health._health)
+		return true;
+	}
+	// If there are no more balls
+	// And ball_array has no alive balls
+	// Then return true
+	if(user1.get_balls() <= 0 && dead_balls(ball_array)){
+		return true;
+	}
+	//Otherwise return false
+	return false;
 }

@@ -1,6 +1,9 @@
 class Cannon {
     constructor(xLoc, yLoc) {
+		this.home = 0; // Used for home screen
         this.velocity = 3 * wUnit;
+        //If ball is above beach
+        this.alive = true;
         this.cannon = new Path.Circle({
             center: new paper.Point(xLoc, yLoc),
             radius: 3* wUnit,
@@ -61,27 +64,33 @@ class Cannon {
         if(this.cannon.position.y <= 0){
             this.collision(360);
         }
-        if(this.cannon.position.y >= h){
+		if(this.cannon.position.y >= h && this.home) {
+			this.collision(180);
+		} else if(this.cannon.position.y >= h){
             // Remove cannon ball when it hits bottom of screen 
             this.cannon.remove();
+            // Set ball to 'dead'
+            this.alive = false;
         }
-        if(line.intersects(user.arc)){ //Check if ball and arc touch
-            //If ball and arc touch get intersections and use
-            var intersections =  line.getIntersections(user.arc);
-            
-            // Get point of intersection
-            var point = intersections[0].point;
-            
-            // Calculate offset
-            var offset = user.arc.getOffsetOf(point);
-            // Get normal
-            var normal = user.arc.getNormalAt(offset);
-           
-            // Set x and y
-            this.x_vel = normal.x * this.velocity;
-            this.y_vel = normal.y * this.velocity;
-            
-        }
+		if(!this.home) {
+			if(line.intersects(user.arc)){ //Check if ball and arc touch
+				//If ball and arc touch get intersections and use
+				var intersections =  line.getIntersections(user.arc);
+				
+				// Get point of intersection
+				var point = intersections[0].point;
+				
+				// Calculate offset
+				var offset = user.arc.getOffsetOf(point);
+				// Get normal
+				var normal = user.arc.getNormalAt(offset);
+			   
+				// Set x and y
+				this.x_vel = normal.x * this.velocity;
+				this.y_vel = normal.y * this.velocity;
+				
+			}
+		}
         //Check ship and plane array
         this.check_ship_array(array,user,line);
         this.check_plane_array(array2,user,line);
@@ -100,9 +109,9 @@ class Cannon {
                 //If ball and arc touch get intersections and use
                 var intersections =  line.getIntersections(array[i].ship.path0);
 
-                
-                
-                var tangent = intersections[0].point;
+					
+					
+					var tangent = intersections[0].point;
 
                 var offset = array[i].ship.path0.getOffsetOf(tangent);
                 var tanPoint = array[i].ship.path0.getTangentAt(offset)
@@ -154,10 +163,38 @@ class Cannon {
                 if(array[i].hp <= 0){
                     array[i].body.remove();
                     array = array.splice(i,1);
-                    user.scoreUpdate(100)
+					
+					if(!this.home) {
+                    user.scoreUpdate(100);
+					document.getElementById("scoreDisplay").innerHTML = "Score: " + user.score;
+					money+=100;
+					document.getElementById("moneyDisplay").innerHTML = "Money: " + money;
+					}
                 }
             }
         }
         }
-    }      
+    } 
+    // A check to add balls to ball array
+    add_ball(ball,ball_array,user1){
+        // Lower number of balls
+        user1.num_balls -= 1;
+
+        // Boolean to see if ball replaced a dead ball
+        var replaced = false;
+
+        // For loop to replace dead ball with alive ball
+        var i;
+        for(i = 0;i<ball_array.length;i++){
+            if(ball_array[i].alive == false){
+                console.log("dead ball: " + ball_array[i])
+                ball_array[i] = ball;
+                replaced = true;
+            }
+        }
+        // If ball didn't replace a dead ball
+        if(replaced == false){
+            ball_array.push(ball);
+        }
+    }    
 }

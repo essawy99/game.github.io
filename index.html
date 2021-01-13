@@ -4,38 +4,83 @@
     <title>Ship Breaker</title>
 	
 	<style>
-		.button {
+		.button, .button2, .textBox {
+			left: 55vw;
+			width: 20vw;
+			height: 5vh;
+		
 			background-color: transparent;
-			color: #d63d22;
-			font-family: "Courier New";
 			border-color: #d63d22;
-			font-weight: bold;
 			border-width: medium;
 			border-style: dashed;
+			
+			color: #d63d22;
+			font-family: "Courier New";
+			font-size: 1.5vh;
+			font-weight: bold;
+			
 			position: absolute;
+			margin: -10vw -15vw;
 			z-index: 3;
 		}
 		
+		.button2 {
+			left: 94.5vw;
+			
+			width: 5vw;
+			height: 5vh;
+			
+			margin: 1vh 0;
+			
+			font-size: 1vw;
+			
+			display: none;
+		}
+		
+		.textBox {
+			text-align: center;
+			background-color: #e7c9a9;
+			left: 50vw;
+			top: 30vh;
+			width: 29.70vw; /* I don't know why but when I use 30vw it doesn't match the button? */
+			height: 70vh;
+			display: none;
+		}
+		
+		.textDisplay {
+			color: #d63d22;
+			font-family: Courier New;
+			font-size: 1.5vw;
+			font-weight: bold;
+			z-index: 4;
+			position: absolute;
+			display: none;
+		}
 	</style>
 </head>
 
 <body>
-	<button class="button" id="start" type="button" onclick="startGame()" style="left: 50%; top: 50%; width: 30%; height: 15%; margin: -10% -15%; font-size: 250%;">Begin Mission</button>
-	<button class="button" id="option" type="button" onclick="" style="left: 50%; top: 60%; width: 20%; height: 5%; margin: -5% -10%; font-size: 250%;">Options</button>
-	<button class="button" id="help1" type="button" onclick="helpGame()" style="left: 50%; top: 70%; width: 20%; height: 5%; margin: -5% -10%; font-size: 250%;">Help</button>
+	<button class="button" id="start" type="button" onclick="startGame()" style="left: 50vw; top: 50vh; width: 30vw; height: 15vh; font-size: 2.75vh">Begin Mission</button>
+	<button class="button" id="option" type="button" onclick="" style="top: 70vh">Options</button>
+	<button class="button" id="help1" type="button" onclick="helpGame()" style="top: 80vh; z-index: 5">Help</button>
 	
+	<button class="button2" id="help" type="button" onclick="helpGame()" style="top: 0vh">Help</button>
+	<button class="button2" id="pause" type="button" onclick="pauseGame()" style="top: 6.5vh">Pause</button>
+	<button class="button2" id="buy" type="button" onclick="buyCannon()" style="top: 13vh; font-size: 0.7vw">Buy Cannon</button>
 	
-	<button class="button" id="help" type="button" onclick="helpGame()" style="left: 94.60%; top: 0%; width: 5%; height: 5%; display: none">Help</button>
-	<button class="button" id="pause" type="button" onclick="pauseGame()" style="left: 94.60%; width: 5%; height: 5%; margin: 5% auto; display: none">Pause</button>
+	<div id="helpText" class="textBox">
+		<p style="padding: 1vw; padding-top: 1vh">Deflect the cannonball using your ship's forcefield and protect your allies on the beach! 
+		Move your mouse across the screen to move your ship. Press "p" or the "Pause" button on the side of your viewing terminal to pause. Press 
+		"h" or "Help" to bring up these instructions again.</p>
+	</div>
 	
-	<p id="helpText" style="display: none; position: absolute; z-index: 4; left: 30%; top: 30%; width: 50%;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc luctus, diam sed dapibus dignissim, quam nisl posuere sapien, ac tempus nunc ante quis mauris.
-	Mauris malesuada fermentum felis vel tincidunt. Nulla libero sem, mattis in posuere sed, congue eu risus. In hac habitasse platea dictumst. Mauris sollicitudin sed erat sed efficitur.
-	Pellentesque mollis ultricies velit sit amet venenatis. Quisque facilisis bibendum nibh. Maecenas suscipit orci et sagittis interdum. Donec porttitor enim sit amet justo vestibulum euismod.
-	Vivamus vitae lacus in est pellentesque facilisis. Nullam vitae accumsan mi, non elementum ex.</p> <!-- Help text -->
+	<h2 id="scoreDisplay" class="textDisplay" style="left: 15vw; top: 0; margin: 2.5vh;">Score:</h2>
+	<h2 id="moneyDisplay" class="textDisplay" style="left: 65vw; top: 0; margin: 2.5vh;">Money:</h2>
+	<h1 id="endText" class="textDisplay" style="left: 40vw; top: 40vh; font-size: 2.5vw; text-align: center;">GAME OVER<br>SCORE: NaN</h1>
 	
-	<h1 id="endText" style="font-family: Courier New; color: #d63d22;  display: none; position: absolute; z-index: 4; left: 40%; top: 40%;">GAME OVER<br>SCORE: NaN<h1>
 	
     <canvas id = "myCanvas" style="left: 0px; top: 0px; position: absolute; z-index: 1"></canvas>
+	<div class="rect" style="left: 94vw; top: 0; width: 6vw; height: 100vh; position: absolute; z-index: 1; background-color: #e7c9a9;"></div>
 </body>
 
 <div> <!-- Grouped library scripts -->
@@ -47,6 +92,7 @@
 	<script type = "text/javascript" src = "background-tanks-health.js"></script>
 	<script type = "text/javascript" src = "Crater.js"></script>
 	<script type = "text/javascript" src = "animation.js"></script>
+	<script type = "text/javascript" src = "home.js"></script>
 	<script type = "text/javascript" src = "design.js"></script>
 </div>
 </html>

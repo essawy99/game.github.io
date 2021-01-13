@@ -71,13 +71,27 @@ class Enemy_Planes {
     constructor() {
         this.planeArray =[];
     }
-    update() {
-        
+
+    update(health) {
         for(var i=0; i<this.planeArray.length; i++) {
             if(this.planeArray[i] != null) {
-                
-                this.planeArray[i].update()
-                
+                if (this.planeArray[i].body.path0.position.y > 1000*hUnit) {
+                    this.planeArray[i].body.remove();
+                    this.planeArray[i] = null;
+                }
+                else if(this.planeArray[i].body.path0.position.y >= (7 * h / 8)){
+                    if(this.planeArray[i].bombed == false){
+                        new Crater(new Point(this.planeArray[i].body.path0.position.x,this.planeArray[i].body.path0.position.y));
+                        health.takeDamage(5)
+                        console.log("Took damage: " + health._health)
+                        this.planeArray[i].bombed = true;
+                        this.planeArray[i].body.path0.position.y += 1 * hUnit
+                    }
+                    this.planeArray[i].planeBody.position.y += 1 * hUnit
+                }
+                else {
+                    this.planeArray[i].planeBody.position.y += 1 * hUnit;
+                }
             }
         }
     }
@@ -93,6 +107,7 @@ class Enemy_Plane {
         this.body = new plane(xLoc, yLoc)
         
         var plane_array = [];
+        this.bombed = false;
 
         
         this.hp = 100; // Health
@@ -110,6 +125,7 @@ class Enemy_Plane {
             return true;
         }
         return false;
+        
     }
 
 }
