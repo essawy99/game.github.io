@@ -19,6 +19,23 @@ class Enemy_Ships {
         this.shipArray[index].shipBody.remove();
         this.shipArray[index] = null
     }
+    move_ships(){
+        // Variable that shows where ships should stop moving
+        var goal = 100 * hUnit;
+
+        // while loop to show ship animations
+        var start = -100 * hUnit; // where ships should start
+        var length = this.shipArray.length; // Length of ship array
+        while(start != goal){
+            var i;
+            // For loop to update all ships location
+            for(i = 0; i< length;i++){
+                this.shipArray[i].ship.path0.position.y += hUnit*10;
+                this.shipArray[i].userYloc += hUnit*10;
+            }
+            start += hUnit*10;
+        }
+    }
 
 }
 
@@ -27,7 +44,7 @@ class Enemy_Ship {
         
 
         // y location of ship on screen
-        this.userYLoc = 100 * hUnit;
+        this.userYLoc = 100 * hUnit; //Starts off screen so ships can move up
 
         // x location of ship on screen
         this.shipX  = shipSpacing +30 * wUnit;
@@ -42,6 +59,7 @@ class Enemy_Ship {
         this.ship = new enemyShip(this.shipX, this.userYLoc);
         
         this.hp = 400;
+
         
         
         /*
@@ -53,7 +71,7 @@ class Enemy_Ship {
         }
         spawnPlane(enemy) {
             var chance = Math.random();
-            if(chance > .9995) {
+            if(chance > .9995 && this.hp > 0) {
                 enemy.spawnPlane(this.shipX,this.userYLoc);
             }
 

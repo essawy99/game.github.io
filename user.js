@@ -5,7 +5,7 @@ class User {
         this.score = 0;
         this.coins = 0;
         //Initialize number of balls
-        this.num_balls = 10; 
+        this.num_balls = 5; 
         
         // y location of user on screen
         this.userYLoc = 814 * hUnit;

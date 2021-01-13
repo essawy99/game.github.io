@@ -8,14 +8,19 @@ paper.setup(canvas);
 
 var ball_array = []; // Keeps track of balls
 //----------------------------------------------------------------- Start button triggers this function to begin animation
-function startGame() {
+function startGame(lvl=1) {
 	endHome();
 //------------------------------------------- Initialize all required objects
 	var back = new Background(); //Beach
 	var tanks = new Tanks(10); //Friendly tanks
-	var health = new Health(); //Player health bar
 
-	var cannonball = new Cannon(500 *wUnit,500 *hUnit);  // cannonball
+
+	//TO DO - ADD IN A WAY TO CHECK IF LEVEL OR SURVIVAL MODE
+
+	var level = new Level(lvl); //Level var now contains environment variables
+	var health = level.environment.health; //Player health bar
+
+	var cannonball = level.environment.cannonball;  // cannonball
 	ball_array.push(cannonball);
 	/*
 	var c1 = new Cannon(400 *wUnit,400 *hUnit);
@@ -24,11 +29,14 @@ function startGame() {
 	var c4 = new Cannon(350 *wUnit,350 *hUnit);
 	var c5 = new Cannon(500 *wUnit,500 *hUnit);
 	*/
-	var user1 = new User();            // user
-	var ships = new Enemy_Ships(20);
+	var user1 = level.environment.user;            // user
+	var ships = level.environment.ships;
+
+	//ships.move_ships(); // Move ships to position
 	/* var plane = new Enemy_Plane();     // plane
 	var planeArray = [plane];          // plane storage */
-	enemyPlanes = new Enemy_Planes;
+	enemyPlanes = level.environment.enemy_planes;
+
 
 
 	var total_distance = 0;            // ????
@@ -58,6 +66,9 @@ function startGame() {
 				endGame(user1);
 			}
 
+			if(level.level_end(ships,enemyPlanes)){
+				startGame(level.lvl + 1);
+			}
 
 			user1.update2(point);
 			// Cannonball collision checks
