@@ -1,12 +1,3 @@
-/*
-KNOWN BUGS
-	-If help is pressed after pause or pause is pressed after help, text will remain on screen during game play- will fix soon
-	-Help text is currently dummy text; need to replace and format for actual instructions soon
-	-Home screen is blank- what should it be?
-	
-	PLEASE PLACE ANY OTHER BUGS NOTICED HERE
-*/
-
 let gameStatus = 0; //1-> Game is running, 0-> Game is paused
 
 //----------------------------------------------------------------- paper.js set up
@@ -15,20 +6,17 @@ var canvas = document.getElementById('myCanvas');
 paper.setup(canvas);
 //-----------------------------------------------------------------
 
-//HOME SCREEN CURRENTLY BLANK
-
+var ball_array = []; // Keeps track of balls
 //----------------------------------------------------------------- Start button triggers this function to begin animation
 function startGame() {
-	
+	endHome();
 //------------------------------------------- Initialize all required objects
 	var back = new Background(); //Beach
 	var tanks = new Tanks(10); //Friendly tanks
 	var health = new Health(); //Player health bar
 
 	var cannonball = new Cannon(500 *wUnit,500 *hUnit);  // cannonball
-
-	var ball_array = [cannonball]; // Keeps track of balls
-
+	ball_array.push(cannonball);
 	/*
 	var c1 = new Cannon(400 *wUnit,400 *hUnit);
 	var c2 = new Cannon(300 *wUnit,300 *hUnit);
@@ -52,14 +40,15 @@ function startGame() {
 	var tool = new Tool();
 	
 	document.getElementById("start").style.display = 'none';
-	
 	document.getElementById("option").style.display = 'none';
-	
 	document.getElementById("help1").style.display = 'none';
 	
 	document.getElementById("help").style.display = 'block';
-	
 	document.getElementById("pause").style.display = 'block';
+	document.getElementById("buy").style.display = 'block';
+	
+	document.getElementById("scoreDisplay").style.display = 'block';
+	document.getElementById("moneyDisplay").style.display = 'block';
 	
 	view.onFrame = function(event) { //Actual animation loop
 		if (gameStatus) { //Will check if gameState is 0 (triggers pause) or 1 (keeps running)
@@ -154,13 +143,16 @@ function startGame() {
 }
 //-----------------------------------------------------------------
 
-
+let instructions = document.getElementById("helpText");
 //----------------------------------------------------------------- Switches game state, which is checked at the beginning of each
 function pauseGame() {//											animation loop- will trigger pause
 	if (gameStatus) {
 		gameStatus = 0;
 		return;
 	} else {
+		instructions.style.display = "none"
+		document.getElementById("help").innerHTML = "Help";
+		document.getElementById("help1").innerHTML = "Help";
 		gameStatus = 1;
 		return;
 	}
@@ -169,18 +161,32 @@ function pauseGame() {//											animation loop- will trigger pause
 
 
 //----------------------------------------------------------------- Pauses game and displays help text- TODO: Currently dummy text,
-function helpGame() {//												NEED TO PUT IN ACTUAL INSTRUCTIONS
-	pauseGame();
 
-	if (gameStatus) {
-		document.getElementById("helpText").style.display = "none";
+function helpGame() {//												NEED TO PUT IN ACTUAL INSTRUCTIONS
+
+	if (gameStatus || (!gameStatus && instructions.style.display == "none")) {
+		gameStatus = 0;
+		instructions.style.display = "block";
+		document.getElementById("help").innerHTML = "Close";
+		document.getElementById("help1").innerHTML = "Close";
 		return;
 	} else {
-		document.getElementById("helpText").style.display = "block";
+		document.getElementById("helpText").style.display = "none";
+		document.getElementById("help").innerHTML = "Help";
+		document.getElementById("help1").innerHTML = "Help";
+		gameStatus = 1;
 		return;
 	}
 }
 //-----------------------------------------------------------------
+function buyCannon() {
+	if(money >= 400) {
+		money-=400;
+		document.getElementById("moneyDisplay").innerHTML = "Money: " + money;
+		
+		ball_array.push(new Cannon(500 *wUnit,500 *hUnit));  // cannonball
+	}
+}
 
 
 function endGame(user) {

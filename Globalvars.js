@@ -29,4 +29,6 @@ var hUnit = h/1000;
 var center =  w/2;
 
 document.getElementById("myCanvas").width = w;
-document.getElementById("myCanvas").height = h; 
+document.getElementById("myCanvas").height = h;
+
+let money = 0;

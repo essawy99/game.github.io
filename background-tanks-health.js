@@ -1,10 +1,10 @@
 class Background { //TODO(Dheva): Implement wave animation on shore
 	constructor() {
-		const water = new Path.Rectangle(new Point(0, 0), new Size(w, h)); // Water portion
-		water.fillColor = new Color("#42adf5");
+		this.water = new Path.Rectangle(new Point(0, 0), new Size(w, h)); // Water portion
+		this.water.fillColor = new Color("#42adf5");
 		
-		const beach = new Path.Rectangle(new Point(0, 7 * h / 8), new Size(w, h)); // Beach/Sand portion
-		beach.fillColor = new Color("#ebd8a0");
+		this.beach = new Path.Rectangle(new Point(0, 7 * h / 8), new Size(w, h)); // Beach/Sand portion
+		this.beach.fillColor = new Color("#ebd8a0");
 	}
 }
 

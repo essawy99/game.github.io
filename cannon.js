@@ -1,5 +1,6 @@
 class Cannon {
     constructor(xLoc, yLoc) {
+		this.home = 0; // Used for home screen
         this.velocity = 3 * wUnit;
         //If ball is above beach
         this.alive = true;
@@ -63,29 +64,33 @@ class Cannon {
         if(this.cannon.position.y <= 0){
             this.collision(360);
         }
-        if(this.cannon.position.y >= h){
+		if(this.cannon.position.y >= h && this.home) {
+			this.collision(180);
+		} else if(this.cannon.position.y >= h){
             // Remove cannon ball when it hits bottom of screen 
             this.cannon.remove();
             // Set ball to 'dead'
             this.alive = false;
         }
-        if(line.intersects(user.arc)){ //Check if ball and arc touch
-            //If ball and arc touch get intersections and use
-            var intersections =  line.getIntersections(user.arc);
-            
-            // Get point of intersection
-            var point = intersections[0].point;
-            
-            // Calculate offset
-            var offset = user.arc.getOffsetOf(point);
-            // Get normal
-            var normal = user.arc.getNormalAt(offset);
-           
-            // Set x and y
-            this.x_vel = normal.x * this.velocity;
-            this.y_vel = normal.y * this.velocity;
-            
-        }
+		if(!this.home) {
+			if(line.intersects(user.arc)){ //Check if ball and arc touch
+				//If ball and arc touch get intersections and use
+				var intersections =  line.getIntersections(user.arc);
+				
+				// Get point of intersection
+				var point = intersections[0].point;
+				
+				// Calculate offset
+				var offset = user.arc.getOffsetOf(point);
+				// Get normal
+				var normal = user.arc.getNormalAt(offset);
+			   
+				// Set x and y
+				this.x_vel = normal.x * this.velocity;
+				this.y_vel = normal.y * this.velocity;
+				
+			}
+		}
         //Check ship and plane array
         this.check_ship_array(array,user,line);
         this.check_plane_array(array2,user,line);
@@ -99,32 +104,37 @@ class Cannon {
        
         for(var i=0; i<array.length; i++){
             if(array[i] != null) {
-            if(line.intersects(array[i].shipBody)){
-                
-                //If ball and arc touch get intersections and use
-                var intersections =  line.getIntersections(array[i].shipBody);
+				if(line.intersects(array[i].shipBody)){
+					
+					//If ball and arc touch get intersections and use
+					var intersections =  line.getIntersections(array[i].shipBody);
 
-                
-                
-                var tangent = intersections[0].point;
+					
+					
+					var tangent = intersections[0].point;
 
-                var offset = array[i].shipBody.getOffsetOf(tangent);
-                var tanPoint = array[i].shipBody.getTangentAt(offset)
-            
-    
-               this.collision(tanPoint.angle);
+					var offset = array[i].shipBody.getOffsetOf(tangent);
+					var tanPoint = array[i].shipBody.getTangentAt(offset)
+				
+		
+				   this.collision(tanPoint.angle);
 
-                //Deal damage and check if hp of item
-                // is 0 if so, remove from array
-                array[i].hp -= 100;
-                
-                if(array[i].hp <= 0){
-                    array1.remove(i);
-                    
-                    user.scoreUpdate(400);
-            }
-            }
-        }
+					//Deal damage and check if hp of item
+					// is 0 if so, remove from array
+					array[i].hp -= 100;
+					
+					if(array[i].hp <= 0){
+						array1.remove(i);
+						
+						if(!this.home) {
+						user.scoreUpdate(400);
+						document.getElementById("scoreDisplay").innerHTML = "Score: " + user.score;
+						money+=400;
+						document.getElementById("moneyDisplay").innerHTML = "Money: " + money;
+						}
+					}
+				}
+			}
         }
     }
     // Check plane array
@@ -158,7 +168,13 @@ class Cannon {
                 if(array[i].planeBody.hp <= 0){
                     array[i].planeBody.remove();
                     array = array.splice(i,1);
-                    user.scoreUpdate(100)
+					
+					if(!this.home) {
+                    user.scoreUpdate(100);
+					document.getElementById("scoreDisplay").innerHTML = "Score: " + user.score;
+					money+=100;
+					document.getElementById("moneyDisplay").innerHTML = "Money: " + money;
+					}
                 }
             }
         }
