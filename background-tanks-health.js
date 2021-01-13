@@ -46,9 +46,11 @@ class Health {
 			'segments[2].point': ['-=', {x: damagePercent*w/100, y: 0}]
 		}, 500);
 		
+		/* Moved the check inside anothe function in animation.js
 		if (this._health <= 0) {
 			endGame();
 		}
+		*/
 	}
 	
 	get health() { return this._health; }

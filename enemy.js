@@ -106,12 +106,22 @@ class Enemy_Planes {
     constructor() {
         this.planeArray =[];
     }
-    update() {
+    update(health) {
         for(var i=0; i<this.planeArray.length; i++) {
             if(this.planeArray[i] != null) {
                 if (this.planeArray[i].planeBody.position.y > 1000*hUnit) {
                     this.planeArray[i].planeBody.remove();
                     this.planeArray[i] = null;
+                }
+                else if(this.planeArray[i].planeBody.position.y >= (7 * h / 8)){
+                    if(this.planeArray[i].planeBody.bombed == false){
+                        new Crater(new Point(this.planeArray[i].planeBody.position.x,this.planeArray[i].planeBody.position.y));
+                        health.takeDamage(5)
+                        console.log("Took damage: " + health._health)
+                        this.planeArray[i].planeBody.bombed = true;
+                        this.planeArray[i].planeBody.position.y += 1 * hUnit
+                    }
+                    this.planeArray[i].planeBody.position.y += 1 * hUnit
                 }
                 else {
                     this.planeArray[i].planeBody.position.y += 1 * hUnit;
@@ -132,6 +142,7 @@ class Enemy_Plane {
 
         this.planeBody = new paper.Path()
         this.planeBody.hp = 100; // Health
+        this.planeBody.bombed = false; // true if plane bombed beach false otherwise
         this.planeBody.add(new paper.Point
             (center + 80*wUnit, height - 200*hUnit)); // bottom right of plane
         this.planeBody.add(new paper.Point
