@@ -10,12 +10,12 @@ class Cannon {
             fillColor: 'black'
         });
         this.x_vel = 0;
-        this.y_vel = 5* wUnit;
+        this.y_vel = 3* wUnit;
     }
 
-    update(user,array,array2) {
-        this.check(user,array,array2)
-        this.velocity += .005
+    update(user,ships,planes) {
+        this.check(user,ships,planes);
+        this.velocity += .005;
         this.cannon.position.x += this.x_vel;
         this.cannon.position.y += this.y_vel;
     }
@@ -42,7 +42,7 @@ class Cannon {
         return v1.x * v2.x + v1.y * v2.y
     }
     // array = ship_array and array2 = planeArray
-    check(user,array,array2){
+    check(user,ships,planes){
         //An array of all intersections between ball and forcefield
 
         // new x and y positions to determine where ball would be on next frame
@@ -92,8 +92,8 @@ class Cannon {
 			}
 		}
         //Check ship and plane array
-        this.check_ship_array(array,user,line);
-        this.check_plane_array(array2,user,line);
+        this.check_ship_array(ships,user,line);
+        this.check_plane_array(planes,user,line);
         
         line.remove(); // Remove line to save memory
     }      
@@ -133,11 +133,11 @@ class Cannon {
         }
     }
     // Check plane array
-    check_plane_array(array1,user,line){
+    check_plane_array(planes,user,line){
     //An array of all intersections between ball and forcefield
 
      
-    var array = array1.planeArray
+    var array = planes.planeArray
          //Handle ship array
         //Handle plane array 
         for(var i=0;i<array.length;i++) {
