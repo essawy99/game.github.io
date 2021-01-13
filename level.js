@@ -5,7 +5,7 @@ class Level{
             health : new Health(),
             cannonball : new Cannon(500 *wUnit,500 *hUnit),
             user : new User(),
-            ships : new Enemy_Ships(level), //A new ship per level
+            ships : new Enemy_Ships(level*2), //A new ship per level
             enemy_planes : new Enemy_Planes
         }
         this.lvl = level;
@@ -54,5 +54,27 @@ class Survival{
             ships : new Enemy_Ships(num_ships), //Depends on difficulty
             enemy_planes : new Enemy_Planes
         }
+    }
+    surv_end(ships,planes){ //returns true if level is done else if not
+        var i;
+        // For loop to check if any ships are alive
+        for(i = 0;i<ships.shipArray.length;i++){
+            if(ships.shipArray[i] != null){
+                if(ships.shipArray[0].hp > 0){
+                    return false
+                }
+            }
+        }
+
+        // For loop to check if any planes are alive
+        var j;
+        for(j = 0;j<planes.planeArray.length;j++){
+            if(ships[j] != null){
+                if(planes.planeArray[j].bombed == false){
+                    return false
+                }
+            }
+        }
+        return true;
     }
 }
