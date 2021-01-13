@@ -4,6 +4,8 @@ class User {
         //Initialize user score and coins
         this.score = 0;
         this.coins = 0;
+        //Initialize number of balls
+        this.num_balls = 0; 
         
         // y location of user on screen
         this.userYLoc = 814 * hUnit;
@@ -102,5 +104,11 @@ class User {
     scoreUpdate(points){ // Update score and coins
         this.score += points;
         this.coins += points;
+    }
+    update_balls(num){ // Update number of balls
+        this.num_balls += num;
+    }
+    get_balls(){ //Return number of balls
+        return this.num_balls;
     }
 }

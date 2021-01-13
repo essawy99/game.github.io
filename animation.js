@@ -26,12 +26,18 @@ function startGame() {
 	var health = new Health(); //Player health bar
 
 	var cannonball = new Cannon(500 *wUnit,500 *hUnit);  // cannonball
+
+	var ball_array = [cannonball]; // Keeps track of balls
+
+	/*
 	var c1 = new Cannon(400 *wUnit,400 *hUnit);
 	var c2 = new Cannon(300 *wUnit,300 *hUnit);
 	var c3 = new Cannon(200 *wUnit,200 *hUnit);
 	var c4 = new Cannon(350 *wUnit,350 *hUnit);
 	var c5 = new Cannon(500 *wUnit,500 *hUnit);
+	*/
 	var user1 = new User();            // user
+	user1.num_balls = 5;
 	var ships = new Enemy_Ships(20);
 	/* var plane = new Enemy_Plane();     // plane
 	var planeArray = [plane];          // plane storage */
@@ -59,12 +65,24 @@ function startGame() {
 	view.onFrame = function(event) { //Actual animation loop
 		if (gameStatus) { //Will check if gameState is 0 (triggers pause) or 1 (keeps running)
 			user1.update2(point);
-			cannonball.update(user1,ships,enemyPlanes);
+			// Cannonball collision checks
+			var i;
+			// Loop through static ball array from cannon class
+			for(i = 0;i < ball_array.length; i++){
+				// Check to see if ball is alive
+				if(ball_array[i].alive == true){
+					ball_array[i].update(user1,ships,enemyPlanes);
+				}
+			}
+
+
+			/*
 			c1.update(user1,ships,enemyPlanes);
 			c2.update(user1,ships,enemyPlanes);
 			c3.update(user1,ships,enemyPlanes);
 			c4.update(user1,ships,enemyPlanes);
 			c5.update(user1,ships,enemyPlanes);
+			*/
 
 			ships.update(enemyPlanes);
 			enemyPlanes.update();
@@ -115,6 +133,15 @@ function startGame() {
 			}
 			if (event.key == 'e') {
 				health.takeDamage(100);
+			}
+			if (event.key == 'f') { //Create new cannon ball on space 
+				console.log("balls left: " + user1.get_balls())
+				console.log("ball array size: " + ball_array.length)
+				if(user1.num_balls > 0){
+					var new_cannon = new Cannon(user1.arc.position.x,(user1.arc.position.y-50));
+					// Add new cannon to cannonball array
+					new_cannon.add_ball(new_cannon,ball_array,user1);
+				}
 			}
 		}
 	}

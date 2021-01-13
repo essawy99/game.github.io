@@ -1,6 +1,8 @@
 class Cannon {
     constructor(xLoc, yLoc) {
         this.velocity = 3 * wUnit;
+        //If ball is above beach
+        this.alive = true;
         this.cannon = new Path.Circle({
             center: new paper.Point(xLoc, yLoc),
             radius: 3* wUnit,
@@ -64,6 +66,8 @@ class Cannon {
         if(this.cannon.position.y >= h){
             // Remove cannon ball when it hits bottom of screen 
             this.cannon.remove();
+            // Set ball to 'dead'
+            this.alive = false;
         }
         if(line.intersects(user.arc)){ //Check if ball and arc touch
             //If ball and arc touch get intersections and use
@@ -159,5 +163,27 @@ class Cannon {
             }
         }
         }
-    }      
+    } 
+    // A check to add balls to ball array
+    add_ball(ball,ball_array,user1){
+        // Lower number of balls
+        user1.num_balls -= 1;
+
+        // Boolean to see if ball replaced a dead ball
+        var replaced = false;
+
+        // For loop to replace dead ball with alive ball
+        var i;
+        for(i = 0;i<ball_array.length;i++){
+            if(ball_array[i].alive == false){
+                console.log("dead ball: " + ball_array[i])
+                ball_array[i] = ball;
+                replaced = true;
+            }
+        }
+        // If ball didn't replace a dead ball
+        if(replaced == false){
+            ball_array.push(ball);
+        }
+    }    
 }
