@@ -39,44 +39,9 @@ class Enemy_Ship {
         this.size = 40 * wUnit;
         this.speed = 20 * wUnit;
         
+        this.ship = new enemyShip(this.shipX, this.userYLoc);
         
-        //ship Body properties in terms of size
-        this.shipTop = this.userYLoc + (this.size /4);
-        this.shipHeight = this.size / 5;
-        this.shipWidth = this.size * (4/5);
-        this.shipCorner = this.size * (3/5);
-        //row counter (to know spot in row)
-        
-        this.shipBody = new Path()
-        //hp default is 400
         this.hp = 400;
-        /* Ship points written in terms of properties */
-        //left bound
-        this.shipBody.add(new Point
-            (center - this.shipWidth, this.shipTop)); 
-        //top left corner
-        this.shipBody.add(new Point
-            (center - this.shipCorner, this.shipTop - this.shipHeight)); 
-        //top right corner
-        this.shipBody.add(new Point
-            (center + this.shipCorner, this.shipTop - this.shipHeight)); 
-        //right bound
-        this.shipBody.add(new Point
-            (center + this.shipWidth, this.shipTop)); 
-        // bottom right corner
-            this.shipBody.add(new Point
-            (center + this.shipCorner, this.shipTop + this.shipHeight)); 
-        // bottom left corner
-        this.shipBody.add(new Point
-            (center - this.shipCorner, this.shipTop + this.shipHeight)); 
-        //rotate ship 90 degrees
-        this.shipBody.rotate(90);
-        //change x location
-        this.shipBody.position.x = this.shipX; 
-        //this.shipBody.position.x += this.xLoc[row_counter];
-        // style the ship body
-        this.shipBody.closed = true;
-        this.shipBody.fillColor = 'red';
         
         
         /*
@@ -89,7 +54,7 @@ class Enemy_Ship {
         spawnPlane(enemy) {
             var chance = Math.random();
             if(chance > .9995) {
-                enemy.spawnPlane(this.shipBody.position.x,this.shipBody.position.y);
+                enemy.spawnPlane(this.shipX,this.userYLoc);
             }
 
         }
@@ -107,15 +72,12 @@ class Enemy_Planes {
         this.planeArray =[];
     }
     update() {
+        
         for(var i=0; i<this.planeArray.length; i++) {
             if(this.planeArray[i] != null) {
-                if (this.planeArray[i].planeBody.position.y > 1000*hUnit) {
-                    this.planeArray[i].planeBody.remove();
-                    this.planeArray[i] = null;
-                }
-                else {
-                    this.planeArray[i].planeBody.position.y += 1 * hUnit;
-                }
+                
+                this.planeArray[i].update()
+                
             }
         }
     }
@@ -128,40 +90,23 @@ class Enemy_Planes {
 class Enemy_Plane {
     constructor(xLoc, yLoc){
         // Array to store enemy plane
+        this.body = new plane(xLoc, yLoc)
+        
         var plane_array = [];
 
-        this.planeBody = new paper.Path()
-        this.planeBody.hp = 100; // Health
-        this.planeBody.add(new paper.Point
-            (center + 80*wUnit, height - 200*hUnit)); // bottom right of plane
-        this.planeBody.add(new paper.Point
-            (center + 80*wUnit, height - 200*hUnit)); // Point on the tail of the plane between bottom left and right
-        this.planeBody.add(new paper.Point
-            (center - 80*wUnit, height - 200*hUnit)); // bottom left of plane
-        this.planeBody.add(new paper.Point
-            (center - 60*wUnit, height - 175*hUnit)); // mid right point of plane
-        this.planeBody.add(new paper.Point
-            (center + 60*wUnit, height - 175*hUnit)); // mid left point of plane
-        this.planeBody.add(new paper.Point
-            (center - 90*wUnit, height - 175*hUnit)); // right wing of plane
-        this.planeBody.add(new paper.Point
-            (center - 90*wUnit, height - 175*hUnit)); // left wing of plane
-        this.planeBody.add(new paper.Point
-            (center - 50*wUnit, height - 150*hUnit)); // nose/cockpit of plane
         
-        this.planeBody.position.x = xLoc
-        this.planeBody.position.y = yLoc 
-        this.planeBody.closed = true;
-        this.planeBody.fillColor = 'blue';
+        this.hp = 100; // Health
+        
         plane_array.push(this.planeBody)
     }
     update(){
-        this.planeBody.position.y += 1*hUnit;
-
-        if(this.planeBody.position.y >= (7 * h / 8)){
-            new Crater(new Point(this.planeBody.position.x,this.planeBody.position.y));
-        }else if(this.planeBody.position.y >= h){
-            this.planeBody.remove();
+        this.body.update(0, 1*hUnit);
+        
+        
+        if(this.body.path0.position.y >= (7 * h / 8)){
+            new Crater(new Point(this.body.path0.position.x,this.body.path0.position.y));
+        }else if(this.body.path0.position.y >= h){
+            this.body.remove();
             return true;
         }
         return false;

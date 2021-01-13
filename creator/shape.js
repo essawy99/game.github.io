@@ -149,5 +149,10 @@ class shape {
         return output;
     }
 
+    printShaperemove(shapeNumber) {
+        var output = "\t\tthis.path" + shapeNumber + ".remove()\n";
+        return output;
+    }
+
     /* TODO: place directly function  */
 }

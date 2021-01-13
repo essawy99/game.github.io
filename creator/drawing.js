@@ -180,6 +180,14 @@ class drawing {
         for(var i = 0; i < this.shapes.length; i++){
             output += (this.shapes[i].printShapeUpdate(i));
         }
+
+        output += "\t}\n\n";
+        output += "\tremove(){\n";
+        for(var i = 0; i < this.shapes.length; i++){
+            output += (this.shapes[i].printShaperemove(i));
+        }
+
+
         
         output+= "\t}\n";
         output+= "}\n";  

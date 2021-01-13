@@ -95,17 +95,17 @@ class Cannon {
        
         for(var i=0; i<array.length; i++){
             if(array[i] != null) {
-            if(line.intersects(array[i].shipBody)){
+            if(line.intersects(array[i].ship.path0)){
                 
                 //If ball and arc touch get intersections and use
-                var intersections =  line.getIntersections(array[i].shipBody);
+                var intersections =  line.getIntersections(array[i].ship.path0);
 
                 
                 
                 var tangent = intersections[0].point;
 
-                var offset = array[i].shipBody.getOffsetOf(tangent);
-                var tanPoint = array[i].shipBody.getTangentAt(offset)
+                var offset = array[i].ship.path0.getOffsetOf(tangent);
+                var tanPoint = array[i].ship.path0.getTangentAt(offset)
             
     
                this.collision(tanPoint.angle);
@@ -115,7 +115,7 @@ class Cannon {
                 array[i].hp -= 100;
                 
                 if(array[i].hp <= 0){
-                    array1.remove(i);
+                    array[i].ship.remove();
                     
                     user.scoreUpdate(400);
             }
@@ -135,24 +135,24 @@ class Cannon {
             if(array[i] != null) {
 
             
-            if(line.intersects(array[i].planeBody)){
+            if(line.intersects(array[i].body.path0)){
                 //If ball and arc touch get intersections and use
-                var intersections =  line.getIntersections(array[i].planeBody);
+                var intersections =  line.getIntersections(array[i].body.path0);
 
                 
                 
                 var tangent = intersections[0].point;
 
-                var offset = array[i].planeBody.getOffsetOf(tangent);
-                var tanPoint = array[i].planeBody.getTangentAt(offset)
+                var offset = array[i].body.path0.getOffsetOf(tangent);
+                var tanPoint = array[i].body.path0.getTangentAt(offset)
             
     
                this.collision(tanPoint.angle);
                 //Deal damage and check if hp of item
                 // is 0 if so, remove from array
-                array[i].planeBody.hp -= 100;
-                if(array[i].planeBody.hp <= 0){
-                    array[i].planeBody.remove();
+                array[i].hp -= 100;
+                if(array[i].hp <= 0){
+                    array[i].body.remove();
                     array = array.splice(i,1);
                     user.scoreUpdate(100)
                 }
