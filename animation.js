@@ -36,7 +36,7 @@ function startGame(lvl=1) {
 	//ships.move_ships(); // Move ships to position
 	/* var plane = new Enemy_Plane();     // plane
 	var planeArray = [plane];          // plane storage */
-	enemyPlanes = level.environment.enemy_planes;
+	planes = level.environment.enemy_planes;
 
 
 
@@ -67,7 +67,7 @@ function startGame(lvl=1) {
 				endGame(user1);
 			}
 
-			if(level.level_end(ships,enemyPlanes)){
+			if(level.level_end(ships,planes)){
 				startGame(level.lvl + 1);
 			}
 
