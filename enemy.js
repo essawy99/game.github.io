@@ -30,6 +30,13 @@ class Enemy_Ships {
             user.scoreUpdate(400);
         }
     }
+    deleteAll(){
+        var i;
+        for(i = 0;i<this.shipArray.length;i++){
+            this.shipArray[i].ship.remove()
+        }
+        this.shipArray = [];
+    }
 
     move_ships(){
         // Variable that shows where ships should stop moving
@@ -131,6 +138,14 @@ class Enemy_Planes {
 
     spawnPlane(xLoc, yLoc) {
         this.planeArray.push(new Enemy_Plane(xLoc,yLoc));
+    }
+
+    deleteAll(){
+        var i;
+        for(i = 0;i<this.planeArray.length;i++){
+            this.planeArray[i].body.remove();
+        }
+        this.planeArray = [];
     }
 }
 

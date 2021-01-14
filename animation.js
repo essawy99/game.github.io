@@ -1,3 +1,4 @@
+/*
 let gameStatus = 0; //1-> Game is running, 0-> Game is paused
 
 //----------------------------------------------------------------- paper.js set up
@@ -7,9 +8,9 @@ paper.setup(canvas);
 //-----------------------------------------------------------------
 
 var ball_array = []; // Keeps track of balls
+*/
 //----------------------------------------------------------------- Start button triggers this function to begin animation
 function startGame(lvl=1) {
-	endHome();
 //------------------------------------------- Initialize all required objects
 	var back = new Background(); //Beach
 	var tanks = new Tanks(10); //Friendly tanks
@@ -41,21 +42,12 @@ function startGame(lvl=1) {
 	var point = new paper.Point(200,200);
 //-------------------------------------------
 	
-	gameStatus = 1; //Game running state
+	//gameStatus = 1; //Game running state
 	
-	var tool = new Tool();
+	//var tool = new Tool();
 	
-	document.getElementById("start").style.display = 'none';
-	document.getElementById("option").style.display = 'none';
-	document.getElementById("help1").style.display = 'none';
 	
-	document.getElementById("help").style.display = 'block';
-	document.getElementById("pause").style.display = 'block';
-	document.getElementById("buy").style.display = 'block';
-	
-	document.getElementById("scoreDisplay").style.display = 'block';
-	document.getElementById("moneyDisplay").style.display = 'block';
-	
+	/*
 	view.onFrame = function(event) { //Actual animation loop
 		if (gameStatus) { //Will check if gameState is 0 (triggers pause) or 1 (keeps running)
 			//Check game state (if no more balls or health is 0)
@@ -85,19 +77,19 @@ function startGame(lvl=1) {
 			planes.update(health); // Pass in health in case plane passes user
 
 	}
+	*/
 
-		tool.onMouseMove = function(event) {
+		/* tool.onMouseMove = function(event) {
 			point = event.point    
 		}
 
 		tool.onKeyDown = function(event) {
-			/*
 			if(event.key == 'a' || event.key == 'left') {
 			dir = -1;
 			}
 			if(event.key == 'd' || event.key == 'right') {
 			dir = 1;           
-			} */
+			} 
 			if(event.key == 'b') {
 				cannonball.collision(90);
 			}
@@ -119,6 +111,5 @@ function startGame(lvl=1) {
 					new_cannon.add_ball(new_cannon,ball_array,user1);
 				}
 			}
-		}
-	}
+		} */
 }

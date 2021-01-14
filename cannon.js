@@ -254,5 +254,12 @@ class Cannon {
         if(replaced == false){
             ball_array.push(ball);
         }
-    }    
+    }   
+    deleteAll(ball_array){
+        var i;
+        for(i = 0;i<ball_array.length;i++){
+            ball_array[i].cannon.remove();
+        }
+        ball_array = [];
+    } 
 }
