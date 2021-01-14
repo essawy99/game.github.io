@@ -5,15 +5,17 @@ class CannonBalls {
     }
     
     update(user,ships,planes) {
+        
         // iterates through each cannonball
         for(var i = 0; i < this.cannonBallArray.length; i++) {
+            
             var cannonBall = this.cannonBallArray[i]
             // make sure a ball exists in that location
             if(cannonBall != null) {
                 // update the ball using update function
                 // if the ball is destroyed it will return true
                 // triggering code to nullify that array position
-                if(cannonBall.update(user,ships,planes)) {
+                if(cannonBall.update(user,ships,planes)) {      
                     this.shipArray[i] = null
                 }
             }
@@ -35,29 +37,28 @@ class CannonBalls {
         }
         new Cannon(user.arc.position.x, user.arc.position.y);
     }
-
 }
 
 class CannonBall {
     constructor(xLoc, yLoc) {
 		this.home = 0; // Used for home screen
-        this.velocity = 3 * wUnit;
+        this.velocity = 7 * hUnit;
         //If ball is above beach
         this.alive = true;
         this.cannon = new Path.Circle({
             center: new paper.Point(xLoc, yLoc),
-            radius: 3* wUnit,
+            radius: 3* hUnit,
             fillColor: 'black'
         });
         this.x_vel = 0;
-        this.y_vel = 3* wUnit;
+        this.y_vel = 7* hUnit;
     }
 
     /* only function to be used outside of class (public)
     checks for colisions then updates cannonBall position */
     update(user,ships,planes) {
         // slightly accelerates ball each frame
-        this.velocity += .005;
+        this.velocity += .001 * hUnit;
         // checks for colisions that would change direction  
         this.check(user,ships,planes);
         // update location of ball based on x and y velocity
@@ -92,9 +93,8 @@ class CannonBall {
     /* function checks for colisons between ball and user/ships/planes/walls
         function automatically updates accordingly */
     check(user,ships,planes){
-        //An array of all intersections between ball and forcefield
 
-        // new x and y positions to determine where ball would be on next frame
+        // x and y positions that determine where ball would be on next frame
         var xFuture = this.cannon.position.x + this.x_vel; 
         var yFuture = this.cannon.position.y + this.y_vel;
     
@@ -102,11 +102,14 @@ class CannonBall {
         var line = new Path.Line(new Point(this.cannon.position.x,this.cannon.position.y), 
                                  new Point(xFuture, yFuture));
                                  
-        
-        
-        //Check ship and plane array
-        this.enemyCollisions(ships, line, user);
-        this.enemyCollisions(planes, line, user);
+        // if were not in home screen check for arc collisions
+        if(!this.home) {
+            this.checkArcCollisons(user,line);
+        }
+        //Check for collisions with ships and planes
+        // using general CheckEnemyCollisoins fucntion 
+        this.checkEnemyCollisions(ships, line, user);
+        this.checkEnemyCollisions(planes, line, user);
         
         
         
@@ -149,26 +152,24 @@ class CannonBall {
         and arc makes contact the ball direction changes to the normal
         vector of the point of intersection between the two */
     checkArcCollisons(user, line) {
-        if(!this.home) {
-			if(line.intersects(user.arc)){ //Check if ball and arc touch
+        
+		if(line.intersects(user.arc)){ //Check if ball and arc touch
 				
-				// Get first intersection between line and arc
-				var point = line.getIntersections(user.arc)[0].point;
-				
-				// Calculate offset from arc
-				var offset = user.arc.getOffsetOf(point);
-				// Use offset to Get normal
-				var normal = user.arc.getNormalAt(offset);
+			// Get first intersection between line and arc
+			var point = line.getIntersections(user.arc)[0].point;
+			
+			// Calculate offset from arc
+			var offset = user.arc.getOffsetOf(point);
+			// Use offset to Get normal
+			var normal = user.arc.getNormalAt(offset);
 		
-				// Set x and y velocity according to new angle
-				this.x_vel = normal.x * this.velocity;
-				this.y_vel = normal.y * this.velocity;
-			}
+			// Set x and y velocity according to new angle
+			this.x_vel = normal.x * this.velocity;
+			this.y_vel = normal.y * this.velocity;
 		}
-    }
-    
-    
-    enemyCollisions(container, line, user) {
+	}
+     
+    checkEnemyCollisions(container, line, user) {
 
         // array containin ships/planes
         var array = container.array;
@@ -194,15 +195,9 @@ class CannonBall {
                     // damage ship/plane i
                     if(!this.home) {
                         container.takeDamage(100, i, user);
-                    }
-                    
+                    }    
                 }
             }
         }
-
-    }
-    
-    
-   
-    
+    }  
 }

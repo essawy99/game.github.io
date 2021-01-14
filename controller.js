@@ -29,6 +29,8 @@ function load_local(){
 function delete_all(){
    localStorage.clear();
 }
+//Import tools
+var tools = new Tool();
 
 /*
    TODO (DHEVA): Function should call your function
@@ -50,15 +52,24 @@ function campaign(level){
    }else{
       game = new Game("campaign",1)
    }
+   var mouseLoc = new Point(center);
    view.onFrame = function(event) {
       
-      game.update();
+      game.update(mouseLoc);
    }
+
+   // Add mouse for control of user
+   tool.onMouseMove = function(event) {
+   mouseLoc = event.point    
+}
+
 }
 
 /*
    TODO (DHEVA): Function should call your function
    to show the survival home */
+
+
 function survival(){
    // Remove home first
     endHome();
@@ -71,11 +82,21 @@ function survival(){
    console.log('here') 
    var game = new Game("survival","medium");
 
+   var mouseLoc = new Point(center);
    view.onFrame = function(event) {
       
-      game.update();
+      game.update(mouseLoc);
    }
+
+   // Add mouse for control of user
+   tool.onMouseMove = function(event) {
+   mouseLoc = event.point    
 }
+}
+
+
+
+
 
 
 // Function that sets up game screen
@@ -120,10 +141,4 @@ var game;
    Upon button click on home page either
    campaign or survival should be called */
 
-//Import tools
-var tools = new Tool();
 
-// Add mouse for control of user
-tool.onMouseMove = function(event) {
-   point = event.point    
-}

@@ -79,7 +79,7 @@ class User {
         this.arc.fillColor = 'cyan';
     }
 
-    update(direction) {
+    update2(direction) {
         if(direction == 1) {
             this.arc.position.x += this.speed;
             this.connect.position.x += this.speed;
@@ -93,7 +93,7 @@ class User {
             console.log('h');
         }
     }
-    update2(point) {
+    update(point) {
         this.arc.position.x = point.x;
         this.connect.position.x = point.x;
         this.shipBody.position.x = point.x;

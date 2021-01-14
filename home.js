@@ -17,8 +17,8 @@ function start_home(){
 	screenBall.home = 1;
 	screenBall.x_vel = ((Math.random()*10)-5) * wUnit;
 	
-	screenShips = new Enemy_Ships(20);
-	screenEnemyPlanes = new Enemy_Planes;
+	screenShips = new EnemyShips(20);
+	screenEnemyPlanes = new EnemyPlanes;
 
 	view.onFrame = function(event) { //Actual animation loop
 		screenBall.update(null, screenShips,screenEnemyPlanes);
@@ -36,10 +36,10 @@ function endHome() {
 	});
 	screenBall.cannon.remove();
 	
-	screenShips.shipArray.forEach(function(item, index) {
+	screenShips.array.forEach(function(item, index) {
 		item = null;
 	});
-	screenEnemyPlanes.planeArray.forEach(function(item, index) {
+	screenEnemyPlanes.array.forEach(function(item, index) {
 		item = null;
 	});
 	
