@@ -6,7 +6,8 @@ class Level{
             cannonball : new Cannon(500 *wUnit,500 *hUnit),
             user : new User(),
             ships : new Enemy_Ships(level*2), //A new ship per level
-            enemy_planes : new Enemy_Planes
+            enemy_planes : new Enemy_Planes,
+            CannonBalls : new CannonBalls()
         }
         this.lvl = level;
     }
@@ -70,7 +71,8 @@ class Survival{
             cannonball : new Cannon(500 *wUnit,500 *hUnit),
             user : new User(),
             ships : new Enemy_Ships(num_ships), //Depends on difficulty
-            enemy_planes : new Enemy_Planes
+            enemy_planes : new Enemy_Planes,
+            CannonBalls : new CannonBalls()
         }
     }
     surv_end(ships,planes){ //returns true if level is done else if not

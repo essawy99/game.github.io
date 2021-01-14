@@ -13,7 +13,7 @@ function start_home(){
 	screen = new Background(); //Beach
 	screenTanks = new Tanks(10); //Friendly tanks
 	
-	screenBall = new Cannon(500 *wUnit,500 *hUnit);  // cannonball
+	screenBall = new CannonBall(500 *wUnit,500 *hUnit);  // cannonball
 	screenBall.home = 1;
 	screenBall.x_vel = ((Math.random()*10)-5) * wUnit;
 	

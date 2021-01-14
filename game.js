@@ -14,7 +14,8 @@ class Game{
                 cannonball : new Cannon(500 *wUnit,500 *hUnit),
                 user : new User(),
                 ships : new Enemy_Ships(difficulty*2), //A new ship per level
-                enemy_planes : new Enemy_Planes
+                enemy_planes : new Enemy_Planes,
+                CannonBalls : new CannonBalls
             }
         }
         else if(type == "home") {
@@ -26,7 +27,8 @@ class Game{
                 cannonball : new CannonBalls(),
                 user : new User(),
                 ships : new Enemy_Ships(difficulty*2), //A new ship per level
-                enemy_planes : new Enemy_Planes
+                enemy_planes : new Enemy_Planes,
+                CannonBalls : new CannonBalls()
             }
             
         }
@@ -38,7 +40,7 @@ class Game{
         console.log("poop");
         this.environment.ships.update(this.environment.enemy_planes);
         this.environment.enemy_planes.update(this.environment.health);
-        this.environment.CannonBalls.update();
+        this.environment.CannonBalls.update(this.environment.user, this.environment.ships, this.environment.enemy_planes);
     
     }
     endGame() { //returns true if level is done else if not
