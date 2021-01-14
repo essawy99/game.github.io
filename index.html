@@ -5,7 +5,8 @@
 	
 	<style>
 		.button, .button2, .textBox {
-			left: 55vw;
+			left: 40vw;
+			
 			width: 20vw;
 			height: 5vh;
 		
@@ -20,7 +21,6 @@
 			font-weight: bold;
 			
 			position: absolute;
-			margin: -10vw -15vw;
 			z-index: 3;
 		}
 		
@@ -29,21 +29,22 @@
 			
 			width: 5vw;
 			height: 5vh;
-			
-			margin: 1vh 0;
-			
+						
 			font-size: 1vw;
 			
 			display: none;
 		}
 		
 		.textBox {
+			left: 35vw;
+			top: 25vh;
+			
+			width: 30vw;
+			height: 50vh;
+			
 			text-align: center;
 			background-color: #e7c9a9;
-			left: 50vw;
-			top: 30vh;
-			width: 29.70vw; /* I don't know why but when I use 30vw it doesn't match the button? */
-			height: 70vh;
+
 			display: none;
 		}
 		
@@ -52,23 +53,29 @@
 			font-family: Courier New;
 			font-size: 1.5vw;
 			font-weight: bold;
+			
 			z-index: 4;
 			position: absolute;
+			
 			display: none;
 		}
 	</style>
 </head>
 
 <body>
-	<button class="button" id="start" type="button" onclick="startGame()" style="left: 50vw; top: 30vh; width: 30vw; height: 15vh; font-size: 2.75vh">Begin Mission</button>
-	<button class="button" id="survival" type="button" onclick= "survival()" style="top: 50vh">survival</button>
-	<button class="button" id="campaign" type="button" onclick= "campaign()" style="top: 60vh">campaign</button>
-	<button class="button" id="option" type="button" onclick="" style="top: 70vh">Options</button>
-	<button class="button" id="help1" type="button" onclick="helpGame()" style="top: 80vh; z-index: 5">Help</button>
+	<div>
+		<button class="button" id="start" type="button" onclick="startGame()" style="left: 35vw; top: 30vh; width: 30vw; height: 15vh; font-size: 2.75vh">Begin Mission</button>
+		<button class="button" id="survival" type="button" onclick= "survival()" style="top: 50vh">survival</button>
+		<button class="button" id="campaign" type="button" onclick= "campaign()" style="top: 60vh">campaign</button>
+		<button class="button" id="option" type="button" onclick="" style="top: 70vh">Options</button>
+		<button class="button" id="help1" type="button" onclick="helpGame()" style="top: 80vh; z-index: 5">Help</button>
+	</div>
 	
+	<div>
 	<button class="button2" id="help" type="button" onclick="helpGame()" style="top: 0vh">Help</button>
 	<button class="button2" id="pause" type="button" onclick="pauseGame()" style="top: 6.5vh">Pause</button>
 	<button class="button2" id="buy" type="button" onclick="buyCannon()" style="top: 13vh; font-size: 0.7vw">Buy Cannon</button>
+	</div>
 	
 	<div id="helpText" class="textBox">
 		<p style="padding: 1vw; padding-top: 1vh">Deflect the cannonball using your ship's forcefield and protect your allies on the beach! 
@@ -76,13 +83,13 @@
 		"h" or "Help" to bring up these instructions again.</p>
 	</div>
 	
-	<h2 id="scoreDisplay" class="textDisplay" style="left: 15vw; top: 0; margin: 2.5vh;">Score:</h2>
-	<h2 id="moneyDisplay" class="textDisplay" style="left: 65vw; top: 0; margin: 2.5vh;">Money:</h2>
+	<h2 id="scoreDisplay" class="textDisplay" style="left: 15vw; top: 0;">Score:</h2>
+	<h2 id="moneyDisplay" class="textDisplay" style="left: 65vw; top: 0;">Money:</h2>
 	<h1 id="endText" class="textDisplay" style="left: 40vw; top: 40vh; font-size: 2.5vw; text-align: center;">GAME OVER<br>SCORE: NaN</h1>
 	
 	
     <canvas id = "myCanvas" style="left: 0px; top: 0px; position: absolute; z-index: 1"></canvas>
-	<div class="rect" style="left: 94vw; top: 0; width: 6vw; height: 100vh; position: absolute; z-index: 1; background-color: #e7c9a9;"></div>
+	<div class="rect" style="left: 93vw; top: 0; width: 7vw; height: 100vh; position: absolute; z-index: 0; background-color: #e7c9a9;"></div>
 </body>
 
 <div> <!-- Grouped library scripts -->
