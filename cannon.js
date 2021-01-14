@@ -113,9 +113,9 @@ class CannonBall {
         
         
         //Check ship and plane array
-        this.checkArcCollisons(user, line);
-        this.checkShipCollisions(ships,user,line);
-        this.checkPlaneCollisions(planes,user,line);
+        this.enemyCollisions(ships, line, user);
+        this.enemyCollisions(planes, line, user);
+        
         
         
         line.remove(); // Remove line to save memory
@@ -176,32 +176,34 @@ class CannonBall {
     }
     
     
-    enemyCollisions(array, line) {
-        // get array containing ships
-        var array = ships.shipArray;
+    enemyCollisions(container, line, user) {
 
-        // iterate through each ship
+        // array containin ships/planes
+        var array = container.array;
+        // iterate through each ship/plane
         for(var i = 0; i<array.length; i++){
             if(array[i] != null) {
-                // get ship
-                var ship = array[i].ship
-                // check for intersection between outside of ship and line
-                if(line.intersects(ship.path0)){
+                // get ship/plane
+                var object = array[i].body
+                // check for intersection between outside of ship/plane and line
+                if(line.intersects(object.path0)){
 					
                     // get first point of intersection
-                    var point = line.getIntersections(ship.path0)[0].point;
+                    var point = line.getIntersections(object.path0)[0].point;
 
-                    // Calculate offset from ship
-                    var offset = array[i].ship.path0.getOffsetOf(point);
+                    // Calculate offset from ship/plane
+                    var offset = object.path0.getOffsetOf(point);
                     // Use offset to Get tangent
-                    var tanPoint = array[i].ship.path0.getTangentAt(offset)
+                    var tanPoint = object.path0.getTangentAt(offset)
                     
                     // colide ball with tangent angle
                     this.collision(tanPoint.angle);
-                    console.log('destroyed');
 
-                    // damage ship i
-                    ships.takeDamage(100, i, user);
+                    // damage ship/plane i
+                    if(!this.home) {
+                        container.takeDamage(100, i, user);
+                    }
+                    
                 }
             }
         }
@@ -209,70 +211,6 @@ class CannonBall {
     }
     
     
-    /* Checks all ememy ships for collisions and adjusts accordingly */
-    checkShipCollisions(ships,user,line){
-        // get array containing ships
-        var array = ships.shipArray;
-
-        // iterate through each ship
-        for(var i = 0; i<array.length; i++){
-            if(array[i] != null) {
-                // get ship
-                var ship = array[i].ship
-                // check for intersection between outside of ship and line
-                if(line.intersects(ship.path0)){
-					
-                    // get first point of intersection
-                    var point = line.getIntersections(ship.path0)[0].point;
-
-                    // Calculate offset from ship
-                    var offset = array[i].ship.path0.getOffsetOf(point);
-                    // Use offset to Get tangent
-                    var tanPoint = array[i].ship.path0.getTangentAt(offset)
-                    
-                    // colide ball with tangent angle
-                    this.collision(tanPoint.angle);
-                    console.log('destroyed');
-
-                    // damage ship i
-                    ships.takeDamage(100, i, user);
-                }
-            }
-        }
-    }
-    
-    /* Checks all ememy ships for collisions and adjusts accordingly */
-    checkPlaneCollisions(planes,user,line){
-
-        // get array containing ships
-        var array = planes.planeArray
-
-        // iterate through each plane
-        for(var i = 0; i<array.length; i++){
-            if(array[i] != null) {
-                // get plane
-                var plane = array[i].body
-
-                if(line.intersects(ship.path0)){
-					
-                    // get first point of intersection
-                    var point = line.getIntersections(plane.path0)[0].point;
-
-                    // Calculate offset from ship
-                    var offset = array[i].plane.path0.getOffsetOf(point);
-                    // Use offset to Get tangent
-                    var tanPoint = array[i].plane.path0.getTangentAt(offset)
-                    
-                    // colide ball with tangent angle
-                    this.collision(tanPoint.angle);
-                        //Deal damage and check if hp of item
-                        // is 0 if so, remove from array
-                    
-                    planes.takeDamage(100,i, user);
-                
-                }
-            }
-        }
-    }
+   
     
 }
