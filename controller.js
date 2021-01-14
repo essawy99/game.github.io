@@ -32,11 +32,12 @@ function delete_all(){
 
 /*
    TODO (DHEVA): Function should call your function
-   to show the campaign home */
-function campaign_home(environment,level){
+   to show the campaign home.
+   Level is passed in as the highest level user has
+   completed */
+function campaign_home(level){
    // Remove home first
    endHome();
-   console.log("FINISH")
 }
 
 /*
@@ -44,8 +45,7 @@ function campaign_home(environment,level){
    to show the survival home */
 function survival_home(){
    // Remove home first
-   endHome();
-   console.log("FINISH")
+   endHome(); 
 }
 
 //----------------------------------------------------------------- 
@@ -66,7 +66,7 @@ paper.setup(canvas);
 start_home();
 
 // Variable that stores game_mode
-var game_mode;
+var game_mode = null;
 
 // Environemnt variable
 var environment;
@@ -82,9 +82,17 @@ var environment;
 */
 document.getElementById("survival").addEventListener('click',(event) =>{
    game_mode = "survival";
-   survival_home(environment);
+   // Get users last level completed if they have storage
+   var level = load_local();
+   if(level != null){
+      campaign_home(level);
+   }else{
+      campaign_home(0);
+   }
 });
 document.getElementById("campaign").addEventListener('click',(event) =>{
    game_mode = "campaign"
-   survival_home(environment,);
+   survival_home();
 });
+
+
