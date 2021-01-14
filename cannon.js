@@ -1,7 +1,7 @@
 class CannonBalls {
     constructor() {
         this.cannonBallArray = [];
-        this.cannonBallArray.push(new CannonBall(center,center));
+        this.cannonBallArray.push(new CannonBall(500 *wUnit,500 *hUnit));
     }
     
     update(user,ships,planes) {
@@ -19,14 +19,6 @@ class CannonBalls {
             }
         }
     }
-
-    /* Makes sure all balls are deleted */  
-    deleteAll(){
-        for(var i = 0; i < this.cannonBallArray;i++){
-            this.cannonBallArray[i].cannon.remove();
-        }
-        this.cannonBallArray = [];
-    } 
    
     /* iterates through ship array and adds new
     cannon to a null location. if there are no null 

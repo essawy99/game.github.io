@@ -11,7 +11,6 @@ class Game{
         if(type == "campaign"){
             this.environment = {
                 health : new Health(),
-                cannonball : new CannonBall(500 *wUnit,500 *hUnit),
                 user : new User(),
                 ships : new Enemy_Ships(difficulty*2), //A new ship per level
                 enemy_planes : new Enemy_Planes,
@@ -32,7 +31,6 @@ class Game{
             }
             this.environment = {
                 health : new Health(),
-                cannonball : new CannonBall(500 *wUnit,500 *hUnit),
                 user : new User(),
                 ships : new Enemy_Ships(num_ships), //Depends on difficulty
                 enemy_planes : new Enemy_Planes,
