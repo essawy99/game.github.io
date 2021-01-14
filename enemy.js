@@ -1,11 +1,11 @@
 //class that handles the creation of an enemy ship
-class Enemy_Ships {
+class EnemyShips {
     constructor(numShips) {
         this.array = [];
         this.shipSpacing = w / (numShips + 1);
         this.numShips = numShips
         for(var i =0; i < numShips; i++) {
-            this.array.push(new Enemy_Ship(i * this.shipSpacing)); 
+            this.array.push(new EnemyShip(i * this.shipSpacing)); 
             console.log('built');
         }
     }
@@ -17,7 +17,7 @@ class Enemy_Ships {
         }
     }
     remove(index){
-        this.array[index].shipBody.remove();
+        this.array[index].body.remove();
         this.array[index] = null;
     }
     takeDamage(damage, index, user) {
@@ -32,7 +32,7 @@ class Enemy_Ships {
     deleteAll(){
         var i;
         for(i = 0;i<this.array.length;i++){
-            this.array[i].ship.remove()
+            this.array[i].body.remove()
         }
         this.array = [];
     }
@@ -57,7 +57,7 @@ class Enemy_Ships {
 
 }
 
-class Enemy_Ship {
+class EnemyShip {
     constructor(shipSpacing) {
         
 
@@ -97,7 +97,7 @@ class Enemy_Ship {
 function randomIntFromInterval(min, max) { // min and max included 
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
-class Enemy_Planes {
+class EnemyPlanes {
     constructor() {
         this.array =[];
     }
@@ -136,7 +136,7 @@ class Enemy_Planes {
     }
 
     spawnPlane(xLoc, yLoc) {
-        this.array.push(new Enemy_Plane(xLoc,yLoc));
+        this.array.push(new EnemyPlane(xLoc,yLoc));
     }
 
     deleteAll(){
@@ -149,7 +149,7 @@ class Enemy_Planes {
 }
 
   //Class to handle enemy planes
-class Enemy_Plane {
+class EnemyPlane {
     constructor(xLoc, yLoc){
         // Array to store enemy plane
         this.body = new plane(xLoc, yLoc)
@@ -160,7 +160,7 @@ class Enemy_Plane {
         
         this.hp = 100; // Health
         
-        plane_array.push(this.planeBody)
+        plane_array.push(this.body)
     }
     update(){
         this.body.update(0, 1*hUnit);

@@ -42,7 +42,7 @@ class CannonBalls {
 class CannonBall {
     constructor(xLoc, yLoc) {
 		this.home = 0; // Used for home screen
-        this.velocity = 7 * hUnit;
+        this.velocity = 3 * hUnit;
         //If ball is above beach
         this.alive = true;
         this.cannon = new Path.Circle({
