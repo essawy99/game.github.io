@@ -6,6 +6,7 @@ class Enemy_Ships {
         this.numShips = numShips
         for(var i =0; i < numShips; i++) {
             this.shipArray.push(new Enemy_Ship(i * this.shipSpacing)); 
+            console.log('built');
         }
     }
     update(enemy) {
@@ -59,9 +60,6 @@ class Enemy_Ship {
 
         // x location of ship on screen
         this.shipX  = shipSpacing +30 * wUnit;
-
-        // Array of x locations for each row of generated ships
-        this.xLoc = [0,50,-50,-100]; 
         
         // size and speed attributes can be used to change ship size
         this.size = 40 * wUnit;
@@ -126,7 +124,7 @@ class Enemy_Planes {
                 
         if(this.planeArray[index].hp <= 0){
             this.planeArray[index].body.remove();
-            array = array.splice(i,1);
+            this.planeArray = this.planeArray.splice(i,1);
             user.scoreUpdate(400);
         }
     }

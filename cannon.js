@@ -100,13 +100,14 @@ class Cannon {
         //create a line going from current cannonball to future cannonball
         var line = new Path.Line(new Point(this.cannon.position.x,this.cannon.position.y), 
                                  new Point(xFuture, yFuture));
+                                 
         
         
         //Check ship and plane array
         this.checkArcCollisons(user, line);
         this.checkShipCollisions(ships,user,line);
         this.checkPlaneCollisions(planes,user,line);
-        this.checkWallCollisions()
+        
         
         line.remove(); // Remove line to save memory
 
@@ -187,6 +188,7 @@ class Cannon {
                     
                     // colide ball with tangent angle
                     this.collision(tanPoint.angle);
+                    console.log('destroyed');
 
                     // damage ship i
                     ships.takeDamage(100, i, user);
