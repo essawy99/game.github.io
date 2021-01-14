@@ -50,6 +50,10 @@ function campaign(level){
    }else{
       game = new Game("campaign",1)
    }
+   view.onFrame = function(event) {
+      
+      game.update();
+   }
 }
 
 /*
@@ -57,7 +61,7 @@ function campaign(level){
    to show the survival home */
 function survival(){
    // Remove home first
-    
+    endHome();
    
    //Setup game screen
    game_screen();
@@ -65,12 +69,11 @@ function survival(){
    difficulty = "easy";
    //Start Game
    console.log('here') 
-   var game = new Game("survival",4);
+   var game = new Game("survival","medium");
 
    view.onFrame = function(event) {
       
       game.update();
-      console.log("poop");
    }
 }
 
@@ -117,5 +120,10 @@ var game;
    Upon button click on home page either
    campaign or survival should be called */
 
+//Import tools
+var tools = new Tool();
 
-
+// Add mouse for control of user
+tool.onMouseMove = function(event) {
+   point = event.point    
+}

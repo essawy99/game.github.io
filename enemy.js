@@ -18,13 +18,12 @@ class Enemy_Ships {
     }
     remove(index){
         this.shipArray[index].shipBody.remove();
-        this.shipArray[index] = null
+        this.shipArray[index] = null;
     }
     takeDamage(damage, index, user) {
         //Deal damage and check if hp of item
         // is 0 if so, remove from array
-        this.shipArray[index].hp -= 100;
-                
+        this.shipArray[index].hp -= damage;
         if(this.shipArray[index].hp <= 0){
             this.remove(index);
             user.scoreUpdate(400);
@@ -127,11 +126,11 @@ class Enemy_Planes {
     takeDamage(damage, index, user) {
         //Deal damage and check if hp of item
         // is 0 if so, remove from array
-        this.planeArray[index].hp -= 100;
+        this.planeArray[index].hp -= damage;
                 
         if(this.planeArray[index].hp <= 0){
             this.planeArray[index].body.remove();
-            this.planeArray = this.planeArray.splice(index,1);
+            this.planeArray.splice(index,1);
             user.scoreUpdate(400);
         }
     }

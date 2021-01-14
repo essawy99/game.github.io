@@ -11,7 +11,7 @@ class Game{
         if(type == "campaign"){
             this.environment = {
                 health : new Health(),
-                cannonball : new Cannon(500 *wUnit,500 *hUnit),
+                cannonball : new CannonBall(500 *wUnit,500 *hUnit),
                 user : new User(),
                 ships : new Enemy_Ships(difficulty*2), //A new ship per level
                 enemy_planes : new Enemy_Planes,
@@ -22,26 +22,30 @@ class Game{
 
         }
         else{
+            var num_ships;
+            if(difficulty == "easy"){
+                num_ships = 10;
+            }else if(difficulty == "medium"){
+                num_ships = 20;
+            }else{
+                num_ships = 30;
+            }
             this.environment = {
                 health : new Health(),
-                cannonball : new CannonBalls(),
+                cannonball : new CannonBall(500 *wUnit,500 *hUnit),
                 user : new User(),
-                ships : new Enemy_Ships(difficulty*2), //A new ship per level
+                ships : new Enemy_Ships(num_ships), //Depends on difficulty
                 enemy_planes : new Enemy_Planes,
                 CannonBalls : new CannonBalls()
             }
-            
         }
         
     }
 
     update() {
-        
-        console.log("poop");
         this.environment.ships.update(this.environment.enemy_planes);
         this.environment.enemy_planes.update(this.environment.health);
         this.environment.CannonBalls.update(this.environment.user, this.environment.ships, this.environment.enemy_planes);
-    
     }
     endGame() { //returns true if level is done else if not
         this.environment.ships.deleteAll();
