@@ -60,6 +60,8 @@ function campaign(level){
    // Remove home first
    endHome();
 
+   console.log('made it');
+
    //Setup game screen
    game_screen();
 
@@ -95,6 +97,7 @@ function survival(diff){
    
    //Setup game screen
    game_screen();
+
 
    difficulty = "easy";
    //Start Game

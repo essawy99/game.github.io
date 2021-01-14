@@ -1,15 +1,15 @@
 class CannonBalls {
     constructor() {
-        this.cannonBallArray = [];
-        this.cannonBallArray.push(new CannonBall(500 *wUnit,500 *hUnit));
+        this.array = [];
+        this.array.push(new CannonBall(500 *wUnit,500 *hUnit));
     }
     
     update(user,ships,planes) {
         
         // iterates through each cannonball
-        for(var i = 0; i < this.cannonBallArray.length; i++) {
+        for(var i = 0; i < this.array.length; i++) {
             
-            var cannonBall = this.cannonBallArray[i]
+            var cannonBall = this.array[i]
             // make sure a ball exists in that location
             if(cannonBall != null) {
                 // update the ball using update function
@@ -28,14 +28,14 @@ class CannonBalls {
     Function constructs cannonBall at the location of the 
     cannon*/
     addBall(user) {
-        for(var i = 0; i < this.shipArray.length; i++) {
-            if(this.shipArray[i] == null) {
-                this.shipArray[i] = 
-                new Cannon(user.arc.position.x, user.arc.position.y);
+        for(var i = 0; i < this.array.length; i++) {
+            if(this.array[i] == null) {
+                this.array[i] = 
+                new CannonBall(user.arc.position.x, user.arc.position.y);
                 return;
             }
         }
-        new Cannon(user.arc.position.x, user.arc.position.y);
+        new CannonBall(user.arc.position.x, user.arc.position.y);
     }
 }
 

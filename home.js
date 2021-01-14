@@ -8,9 +8,12 @@ var screenTanks;
 var screenBall;;
 var screenShips;
 var screenEnemyPlanes;
+var game;
 
 function start_home(){
-	screen = new Background(); //Beach
+	game = new Game("home", 2);
+	
+	/* screen = new Background(); //Beach
 	screenTanks = new Tanks(10); //Friendly tanks
 	
 	screenBall = new CannonBalls();
@@ -23,19 +26,20 @@ function start_home(){
 	screenBall.home = 1;
 	screenBall.x_vel = ((Math.random()*10)-5) * wUnit;
 	
-	screenShips = new Enemy_Ships(20);
-	screenEnemyPlanes = new Enemy_Planes;
-
+	screenShips = new EnemyShips(20);
+	screenEnemyPlanes = new EnemyPlanes;
+ */
 	view.onFrame = function(event) { //Actual animation loop
-		screenBall.update(null, screenShips,screenEnemyPlanes);
+		/* screenBall.update(null, screenShips,screenEnemyPlanes);
 	
 		screenShips.update(screenEnemyPlanes);
-		screenEnemyPlanes.update();		
+		screenEnemyPlanes.update(); */
+		game.update();		
 	}
 }
 //-------------------------------------------
 function endHome() {
-	screen.water.remove();
+	/* screen.water.remove();
 	screen.beach.remove();
 	Tanks.tankArray.forEach(function(item, index) {
 		item.remove();
@@ -51,7 +55,9 @@ function endHome() {
 	
 	view.onFrame = null;
 	screenShips.deleteAll();
-	screenEnemyPlanes.deleteAll();
+	screenEnemyPlanes.deleteAll(); */
+
+	game.endGame();
 	document.getElementById("homeMenu").style.display = "none";
 	document.getElementById("campaignLevelSelector").style.display = "none";
 	document.getElementById("survivalDifSelector").style.display = "none";
