@@ -23,8 +23,8 @@ function start_home(){
 	screenBall.home = 1;
 	screenBall.x_vel = ((Math.random()*10)-5) * wUnit;
 	
-	screenShips = new EnemyShips(20);
-	screenEnemyPlanes = new EnemyPlanes;
+	screenShips = new Enemy_Ships(20);
+	screenEnemyPlanes = new Enemy_Planes;
 
 	view.onFrame = function(event) { //Actual animation loop
 		screenBall.update(null, screenShips,screenEnemyPlanes);
@@ -52,8 +52,9 @@ function endHome() {
 	view.onFrame = null;
 	screenShips.deleteAll();
 	screenEnemyPlanes.deleteAll();
-	document.getElementById('survival').style.display = "none";
-	document.getElementById('campaign').style.display = "none";
-	document.getElementById('scoreDisplay').textContent = "";
-	document.getElementById('moneyDisplay').textContent = "";
+	document.getElementById("homeMenu").style.display = "none";
+	document.getElementById("campaignLevelSelector").style.display = "none";
+	document.getElementById("survivalDifSelector").style.display = "none";
+	document.getElementById('scoreDisplay').innerHTML = "Score: ";
+	document.getElementById('moneyDisplay').textContent = "Money: ";
 }	

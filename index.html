@@ -5,7 +5,7 @@
 	
 	<style>
 		.button, .button2, .textBox {
-			left: 40vw;
+			left: 10vw;
 			
 			width: 20vw;
 			height: 5vh;
@@ -28,7 +28,7 @@
 			left: 94.5vw;
 			
 			width: 5vw;
-			height: 5vh;
+			height: 6vh;
 						
 			font-size: 1vw;
 			
@@ -59,22 +59,51 @@
 			
 			display: none;
 		}
+		
+		.arrow {
+			left: 5vw;
+			top: 30vh;
+		
+			width: 0;
+			height: 0;
+			
+			background-color: transparent;
+			border-style: none;
+			border-top: 2.5vh solid transparent;
+			border-right: 5vh solid #d63d22;
+			border-bottom: 2.5vh solid transparent;
+		}
 	</style>
 </head>
 
 <body>
-	<div>
-		<button class="button" id="start" type="button" onclick="startGame()" style="left: 35vw; top: 30vh; width: 30vw; height: 15vh; font-size: 2.75vh">Begin Mission</button>
-		<button class="button" id="survival" type="button" onclick= "survival()" style="top: 50vh">survival</button>
-		<button class="button" id="campaign" type="button" onclick= "campaign()" style="top: 60vh">campaign</button>
-		<button class="button" id="option" type="button" onclick="" style="top: 70vh">Options</button>
-		<button class="button" id="help1" type="button" onclick="helpGame()" style="top: 80vh; z-index: 5">Help</button>
+	<div id="homeMenu" class="textBox" style="left: 30vw; top: 15vh; width: 40vw; height: 60vh; display: block">
+		<button class="button" id="start" type="button" onclick="campaign(1)" style="left: 5vw; top: 2vh; width: 30vw; height: 15vh; font-size: 2.75vh">Begin Mission</button>
+		<button class="button" id="survival" type="button" onclick= "survivalMenu()" style="top: 22vh">survival</button>
+		<button class="button" id="campaign" type="button" onclick= "campaignMenu()" style="top: 32vh">campaign</button>
+		<button class="button" id="option" type="button" onclick="" style="top: 42vh">Options</button>
+		<button class="button" id="help1" type="button" onclick="helpGame()" style="top: 52vh; z-index: 10">Help</button>
+	</div>
+	
+	<div id="campaignLevelSelector" class="textBox" style="top: 25vh; height: 40vh; display: none;">
+		<p id="lvl" style="font-size: 5vh;">Level 1<br><br>NUM ships</p>
+		<button type="button" onclick="left()" class="arrow" style="position: absolute;"></button>
+		<button type="button" onclick="right()" class="arrow" style="position: absolute; left: 20vw; border-right: none; border-left: 5vh dashed #d63d22;"></button>
+		<button type="button" onclick="campaign(lvlSelect)" style="position: absolute; left: 13vw; top: 22.5vw; width: 5vh; height: 5vh; border: dashed #d63d22; background-color: #d63d22"></button>
+	</div>
+	
+	<div id="survivalDifSelector" class="textBox" style="top: 25vh; height: 40vh; display: none;">
+		<p style="font-size: 5vh;">Level 1<br><br></p>
+		<p id='dif' style="font-size: 5vh">easy</p>
+		<button type="button" onclick="leftS()" class="arrow" style="position: absolute;"></button>
+		<button type="button" onclick="rightS()" class="arrow" style="position: absolute; left: 20vw; border-right: none; border-left: 5vh dashed #d63d22;"></button>
+		<button type="button" onclick="survival(dif)" style="position: absolute; left: 13vw; top: 22.5vw; width: 5vh; height: 5vh; border: dashed #d63d22; background-color: #d63d22"></button>
 	</div>
 	
 	<div>
-	<button class="button2" id="help" type="button" onclick="helpGame()" style="top: 0vh">Help</button>
-	<button class="button2" id="pause" type="button" onclick="pauseGame()" style="top: 6.5vh">Pause</button>
-	<button class="button2" id="buy" type="button" onclick="buyCannon()" style="top: 13vh; font-size: 0.7vw">Buy Cannon</button>
+		<button class="button2" id="help" type="button" onclick="helpGame()" style="top: 0vh">Help</button>
+		<button class="button2" id="pause" type="button" onclick="pauseGame()" style="top: 6.5vh">Pause</button>
+		<button class="button2" id="buy" type="button" onclick="buyCannon()" style="top: 13vh; font-size: 0.7vw">Buy Cannon (400)</button>
 	</div>
 	
 	<div id="helpText" class="textBox">

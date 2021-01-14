@@ -12,8 +12,8 @@ class Game{
             this.environment = {
                 health : new Health(),
                 user : new User(),
-                ships : new EnemyShips(difficulty*2), //A new ship per level
-                enemy_planes : new EnemyPlanes,
+                ships : new Enemy_Ships(difficulty*2), //A new ship per level
+                enemy_planes : new Enemy_Planes,
                 CannonBalls : new CannonBalls
             }
         }
@@ -32,8 +32,8 @@ class Game{
             this.environment = {
                 health : new Health(),
                 user : new User(),
-                ships : new EnemyShips(num_ships), //Depends on difficulty
-                enemy_planes : new EnemyPlanes,
+                ships : new Enemy_Ships(num_ships), //Depends on difficulty
+                enemy_planes : new Enemy_Planes,
                 CannonBalls : new CannonBalls()
             }
         }
@@ -41,10 +41,12 @@ class Game{
     }
 
     update(mouseLoc) {
-        this.environment.ships.update(this.environment.enemy_planes);
-        this.environment.enemy_planes.update(this.environment.health);
-        this.environment.CannonBalls.update(this.environment.user, this.environment.ships, this.environment.enemy_planes);
-        this.environment.user.update(mouseLoc);
+		if(gameStatus) {
+			this.environment.ships.update(this.environment.enemy_planes);
+			this.environment.enemy_planes.update(this.environment.health);
+			this.environment.CannonBalls.update(this.environment.user, this.environment.ships, this.environment.enemy_planes);
+        	this.environment.user.update(mouseLoc);
+		}
     }
     endGame() { //returns true if level is done else if not
         this.environment.ships.deleteAll();

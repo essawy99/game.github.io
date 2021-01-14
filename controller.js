@@ -37,6 +37,25 @@ var tools = new Tool();
    to show the campaign home.
    Level is passed in as the highest level user has
    completed */
+   
+function campaignMenu() {
+	document.getElementById("campaignLevelSelector").style.display = 'block';
+}
+
+function left() {
+	if(--lvlSelect <= 0) {
+		
+	} else {
+		document.getElementById("lvl").innerHTML = 'Level '+lvlSelect+"<br><br>NUM ships";
+		lvlSelect--;
+	}
+}
+
+function right() {
+	lvlSelect++;
+	document.getElementById("lvl").innerHTML = 'Level '+lvlSelect+"<br><br>NUM ships";
+}
+
 function campaign(level){
    // Remove home first
    endHome();
@@ -70,7 +89,7 @@ function campaign(level){
    to show the survival home */
 
 
-function survival(){
+function survival(diff){
    // Remove home first
     endHome();
    
@@ -80,7 +99,7 @@ function survival(){
    difficulty = "easy";
    //Start Game
    console.log('here') 
-   var game = new Game("survival","medium");
+   var game = new Game("survival",diff); //changed "medium" to variable diff for input difficulty
 
    var mouseLoc = new Point(center);
    view.onFrame = function(event) {
@@ -94,6 +113,34 @@ function survival(){
 }
 }
 
+function survivalMenu() {
+	document.getElementById("survivalDifSelector").style.display = 'block';
+}
+
+function leftS() {
+	let txt = document.getElementById("dif").innerHTML;
+	console.log(txt);
+	if(txt == 'easy') {
+		document.getElementById("dif").innerHTML = 'hard';
+	} else if(txt == 'medium') {
+		document.getElementById("dif").innerHTML = 'easy';
+	} else {
+		document.getElementById("dif").innerHTML = 'medium';
+	}
+	dif = document.getElementById("dif").innerHTML;
+}
+
+function rightS() {
+	let txt = document.getElementById("dif").innerHTML;
+	if(txt == 'easy') {
+		document.getElementById("dif").innerHTML = 'medium';
+	} else if(txt == 'medium') {
+		document.getElementById("dif").innerHTML = 'hard';
+	} else {
+		document.getElementById("dif").innerHTML = 'easy';
+	}
+}
+
 
 
 
@@ -101,7 +148,7 @@ function survival(){
 
 // Function that sets up game screen
 function game_screen(){
-   document.getElementById("start").style.display = 'none';
+	document.getElementById("start").style.display = 'none';
 	document.getElementById("option").style.display = 'none';
 	document.getElementById("help1").style.display = 'none';
 	

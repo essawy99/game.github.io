@@ -112,8 +112,10 @@ class EnemyPlanes {
                 else if(this.array[i].body.path0.position.y >= (7 * h / 8)){
                     if(this.array[i].bombed == false){
                         new Crater(new Point(this.array[i].body.path0.position.x,this.array[i].body.path0.position.y));
-                        health.takeDamage(5);
-                        console.log("Took damage: " + health._health)
+						if(health != null) {
+							health.takeDamage(5);
+							console.log("Took damage: " + health._health)
+						}
                         this.array[i].bombed = true;
                         this.array[i].body.update(0, 1*hUnit);                    }
                         this.array[i].body.update(0, 1*hUnit);                }
