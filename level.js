@@ -12,6 +12,22 @@ class Level{
     }
     // Checks if level is complete by checking if there are any active 
     // Planes or Ships
+    
+   
+    
+        // could this be integrated into the update ship function
+        // for cleanliness and efficiency. update ship returns false
+        // if no available ships. instead we have an update function
+        // that updates all the attributes
+        
+     /* update() {
+        this.environment.health.update();
+        this.environment.enemy_planes.update();
+        this.environment.ships.update();
+        this.environment.enemy_planes.update();
+    } */
+    /* ----------------------------------------------- */
+    
     level_end(ships,planes){ //returns true if level is done else if not
         var i;
         // For loop to check if any ships are alive
@@ -34,6 +50,8 @@ class Level{
         }
         return true;
     }
+
+      /* ----------------------------------------------- */
 }
 
 // Survival Class
