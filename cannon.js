@@ -1,7 +1,7 @@
 class CannonBalls {
     constructor() {
         this.cannonBallArray = [];
-        this.cannonBallArray.push(new CannonBall(100,100));
+        this.cannonBallArray.push(new CannonBall(center,center));
     }
     
     update(user,ships,planes) {
