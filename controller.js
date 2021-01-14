@@ -35,24 +35,58 @@ function delete_all(){
    to show the campaign home.
    Level is passed in as the highest level user has
    completed */
-function campaign_home(level){
+function campaign(level){
    // Remove home first
    endHome();
+
+   //Setup game screen
+   game_screen();
+
+   difficulty = load_local();
+
+   //Start Game
+   if(difficulty != null){
+      game = new Game("campaign",difficulty)
+   }else{
+      game = new Game("campaign",1)
+   }
 }
 
 /*
    TODO (DHEVA): Function should call your function
    to show the survival home */
-function survival_home(){
+function survival(){
    // Remove home first
    endHome(); 
+   
+   //Setup game screen
+   game_screen();
+
+   difficulty = "easy";
+   //Start Game
+   game = new Game("survival",difficulty);
+}
+
+
+// Function that sets up game screen
+function game_screen(){
+   document.getElementById("start").style.display = 'none';
+	document.getElementById("option").style.display = 'none';
+	document.getElementById("help1").style.display = 'none';
+	
+	document.getElementById("help").style.display = 'block';
+	document.getElementById("pause").style.display = 'block';
+	document.getElementById("buy").style.display = 'block';
+	
+	document.getElementById("scoreDisplay").style.display = 'block';
+	document.getElementById("moneyDisplay").style.display = 'block';
 }
 
 //----------------------------------------------------------------- 
 
 /* 
 
-               GAME LOOP
+               GAME "LOOP"
 
 */
 
@@ -66,31 +100,15 @@ start_home();
 // Variable that stores game_mode
 var game_mode = null;
 
-// Environemnt variable
-var environment;
+//difficulty
+var difficulty;
+
+//game var
+var game;
 
 /*
    Upon button click on home page either
-   campaign_home() or survival_home() should be called */
+   campaign or survival should be called */
 
-
-/*
-   Two event listeners that check if either survival is chosen 
-   or if campaign is chosen
-*/
-function survival() {   
-   game_mode = "survival";
-   // Get users last level completed if they have storage
-   var level = load_local();
-   if(level != null){
-      campaign_home(level);
-   }else{
-      campaign_home(0);
-   }
-}
-function campaign() {
-   game_mode = "campaign"
-   survival_home();
-}
 
 
