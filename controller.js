@@ -55,12 +55,10 @@ function survival_home(){
                GAME LOOP
 
 */
-let gameStatus = 0; //1-> Game is running, 0-> Game is paused
+
 
 //----------------------------------------------------------------- paper.js set up
-paper.install(window);
-var canvas = document.getElementById('myCanvas');
-paper.setup(canvas);
+
 
 //Start home
 start_home();
@@ -80,7 +78,7 @@ var environment;
    Two event listeners that check if either survival is chosen 
    or if campaign is chosen
 */
-document.getElementById("survival").addEventListener('click',(event) =>{
+function survival() {   
    game_mode = "survival";
    // Get users last level completed if they have storage
    var level = load_local();
@@ -89,10 +87,10 @@ document.getElementById("survival").addEventListener('click',(event) =>{
    }else{
       campaign_home(0);
    }
-});
-document.getElementById("campaign").addEventListener('click',(event) =>{
+}
+function campaign() {
    game_mode = "campaign"
    survival_home();
-});
+}
 
 

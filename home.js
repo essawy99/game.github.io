@@ -1,5 +1,10 @@
+paper.install(window);
+var canvas = document.getElementById('myCanvas');
+paper.setup(canvas);
+
 //------------------------------------------- Initialize all required objects
 function start_home(){
+	console.log('no errors');
 	var screen = new Background(); //Beach
 	var screenTanks = new Tanks(10); //Friendly tanks
 	
@@ -9,16 +14,19 @@ function start_home(){
 	
 	var screenShips = new Enemy_Ships(20);
 	var screenEnemyPlanes = new Enemy_Planes;
+
+	view.onFrame = function(event) { //Actual animation loop
+		screenBall.update(null, screenShips,screenEnemyPlanes);
+	
+		screenShips.update(screenEnemyPlanes);
+		screenEnemyPlanes.update();		
+	}
 }
 //-------------------------------------------
 	
-	
-view.onFrame = function(event) { //Actual animation loop
-	screenBall.update(null, screenShips,screenEnemyPlanes);
 
-	screenShips.update(screenEnemyPlanes);
-	screenEnemyPlanes.update();		
-}
+
+
 
 function endHome() {
 	screen.water.remove();

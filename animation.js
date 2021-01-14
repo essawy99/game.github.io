@@ -20,13 +20,6 @@ function startGame(lvl=1) {
 	var cannonball = level.environment.cannonball;  // cannonball
 	ball_array.push(cannonball);
 
-	/*
-	var c1 = new Cannon(400 *wUnit,400 *hUnit);
-	var c2 = new Cannon(300 *wUnit,300 *hUnit);
-	var c3 = new Cannon(200 *wUnit,200 *hUnit);
-	var c4 = new Cannon(350 *wUnit,350 *hUnit);
-	var c5 = new Cannon(500 *wUnit,500 *hUnit);
-	*/
 	var user1 = level.environment.user;            // user
 	var ships = level.environment.ships;
 
