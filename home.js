@@ -17,8 +17,8 @@ function start_home(){
 	screenBall.home = 1;
 	screenBall.x_vel = ((Math.random()*10)-5) * wUnit;
 	
-	screenShips = new EnemyShips(20);
-	screenEnemyPlanes = new EnemyPlanes;
+	screenShips = new Enemy_Ships(20);
+	screenEnemyPlanes = new Enemy_Planes;
 
 	view.onFrame = function(event) { //Actual animation loop
 		screenBall.update(null, screenShips,screenEnemyPlanes);

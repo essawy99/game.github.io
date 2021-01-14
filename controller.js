@@ -37,6 +37,25 @@ var tools = new Tool();
    to show the campaign home.
    Level is passed in as the highest level user has
    completed */
+   
+function campaignMenu() {
+	document.getElementById("campaignLevelSelector").style.display = 'block';
+}
+
+function left() {
+	if(--lvlSelect <= 0) {
+		
+	} else {
+		document.getElementById("lvl").innerHTML = 'Level '+lvlSelect+"<br><br>NUM ships";
+		lvlSelect--;
+	}
+}
+
+function right() {
+	lvlSelect++;
+	document.getElementById("lvl").innerHTML = 'Level '+lvlSelect+"<br><br>NUM ships";
+}
+
 function campaign(level){
    // Remove home first
    endHome();
@@ -101,7 +120,7 @@ function survival(){
 
 // Function that sets up game screen
 function game_screen(){
-   document.getElementById("start").style.display = 'none';
+	document.getElementById("start").style.display = 'none';
 	document.getElementById("option").style.display = 'none';
 	document.getElementById("help1").style.display = 'none';
 	

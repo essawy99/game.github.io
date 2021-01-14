@@ -6,11 +6,16 @@ paper.install(window);
 var canvas = document.getElementById('myCanvas');
 paper.setup(canvas);
 //-----------------------------------------------------------------
-
-var ball_array = []; // Keeps track of balls
 */
+var ball_array = []; // Keeps track of balls
+
+
 //----------------------------------------------------------------- Start button triggers this function to begin animation
 function startGame(lvl=1) {
+	document.getElementById("homeMenu").style.display = "none";
+	document.getElementById("help").style.display = "block";
+	document.getElementById("pause").style.display = "block";
+	document.getElementById("buy").style.display = "block";
 //------------------------------------------- Initialize all required objects
 	var back = new Background(); //Beach
 	var tanks = new Tanks(10); //Friendly tanks

@@ -1,9 +1,10 @@
 // Level class
+let lvlSelect = 1;
 class Level{
     constructor(level){
         this.environment = {
             health : new Health(),
-            cannonball : new Cannon(500 *wUnit,500 *hUnit),
+            cannonball : new CannonBall(500 *wUnit,500 *hUnit),
             user : new User(),
             ships : new Enemy_Ships(level*2), //A new ship per level
             enemy_planes : new Enemy_Planes,
