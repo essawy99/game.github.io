@@ -1,12 +1,13 @@
-class Cannons {
+class CannonBalls {
     constructor() {
-        this.shipArray = [];
+        this.cannonBallArray = [];
+        this.cannonBallArray.push(new cannonBall(100,100));
     }
     
     update(user,ships,planes) {
         // iterates through each cannonball
-        for(var i = 0; i < this.shipArray.length; i++) {
-            var cannonBall = this.shipArray[i]
+        for(var i = 0; i < this.cannonBallArray.length; i++) {
+            var cannonBall = this.cannonBallArray[i]
             // make sure a ball exists in that location
             if(cannonBall != null) {
                 // update the ball using update function
@@ -37,7 +38,7 @@ class Cannons {
 
 }
 
-class Cannon {
+class CannonBall {
     constructor(xLoc, yLoc) {
 		this.home = 0; // Used for home screen
         this.velocity = 3 * wUnit;

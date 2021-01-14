@@ -57,14 +57,21 @@ function campaign(level){
    to show the survival home */
 function survival(){
    // Remove home first
-   endHome(); 
+    
    
    //Setup game screen
    game_screen();
 
    difficulty = "easy";
    //Start Game
-   game = new Game("survival",difficulty);
+   console.log('here') 
+   var game = new Game("survival",4);
+
+   view.onFrame = function(event) {
+      
+      game.update();
+      console.log("poop");
+   }
 }
 
 
