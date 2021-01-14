@@ -124,7 +124,7 @@ class Enemy_Planes {
                 
         if(this.planeArray[index].hp <= 0){
             this.planeArray[index].body.remove();
-            this.planeArray = this.planeArray.splice(i,1);
+            this.planeArray = this.planeArray.splice(index,1);
             user.scoreUpdate(400);
         }
     }

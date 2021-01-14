@@ -1,13 +1,15 @@
 //------------------------------------------- Initialize all required objects
-var screen = new Background(); //Beach
-var screenTanks = new Tanks(10); //Friendly tanks
-
-var screenBall = new Cannon(500 *wUnit,500 *hUnit);  // cannonball
-screenBall.home = 1;
-screenBall.x_vel = ((Math.random()*10)-5) * wUnit;
-
-var screenShips = new Enemy_Ships(20);
-var screenEnemyPlanes = new Enemy_Planes;
+function start_home(){
+	var screen = new Background(); //Beach
+	var screenTanks = new Tanks(10); //Friendly tanks
+	
+	var screenBall = new Cannon(500 *wUnit,500 *hUnit);  // cannonball
+	screenBall.home = 1;
+	screenBall.x_vel = ((Math.random()*10)-5) * wUnit;
+	
+	var screenShips = new Enemy_Ships(20);
+	var screenEnemyPlanes = new Enemy_Planes;
+}
 //-------------------------------------------
 	
 	

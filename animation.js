@@ -14,9 +14,6 @@ function startGame(lvl=1) {
 	var back = new Background(); //Beach
 	var tanks = new Tanks(10); //Friendly tanks
 
-
-	//TO DO - ADD IN A WAY TO CHECK IF LEVEL OR SURVIVAL MODE
-
 	var level = new Level(lvl); //Level var now contains environment variables
 	var health = level.environment.health; //Player health bar
 
