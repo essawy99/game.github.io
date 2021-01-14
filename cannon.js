@@ -19,6 +19,14 @@ class CannonBalls {
             }
         }
     }
+
+    /* Makes sure all balls are deleted */  
+    deleteAll(){
+        for(var i = 0; i < this.cannonBallArray;i++){
+            this.cannonBallArray[i].cannon.remove();
+        }
+        this.cannonBallArray = [];
+    } 
    
     /* iterates through ship array and adds new
     cannon to a null location. if there are no null 
@@ -167,6 +175,41 @@ class CannonBall {
 		}
     }
     
+    
+    enemyCollisions(array, line) {
+        // get array containing ships
+        var array = ships.shipArray;
+
+        // iterate through each ship
+        for(var i = 0; i<array.length; i++){
+            if(array[i] != null) {
+                // get ship
+                var ship = array[i].ship
+                // check for intersection between outside of ship and line
+                if(line.intersects(ship.path0)){
+					
+                    // get first point of intersection
+                    var point = line.getIntersections(ship.path0)[0].point;
+
+                    // Calculate offset from ship
+                    var offset = array[i].ship.path0.getOffsetOf(point);
+                    // Use offset to Get tangent
+                    var tanPoint = array[i].ship.path0.getTangentAt(offset)
+                    
+                    // colide ball with tangent angle
+                    this.collision(tanPoint.angle);
+                    console.log('destroyed');
+
+                    // damage ship i
+                    ships.takeDamage(100, i, user);
+                }
+            }
+        }
+
+    }
+    
+    
+    /* Checks all ememy ships for collisions and adjusts accordingly */
     checkShipCollisions(ships,user,line){
         // get array containing ships
         var array = ships.shipArray;
@@ -194,34 +237,33 @@ class CannonBall {
                     // damage ship i
                     ships.takeDamage(100, i, user);
                 }
-                }
             }
         }
+    }
     
-    // Check plane array
+    /* Checks all ememy ships for collisions and adjusts accordingly */
     checkPlaneCollisions(planes,user,line){
-    //An array of all intersections between ball and forcefield
 
-     
+        // get array containing ships
         var array = planes.planeArray
-            //Handle ship array
-            //Handle plane array 
-        for(var i=0;i<array.length;i++) {
+
+        // iterate through each plane
+        for(var i = 0; i<array.length; i++){
             if(array[i] != null) {
+                // get plane
+                var plane = array[i].body
 
-                
-                if(line.intersects(array[i].body.path0)){
-                    //If ball and arc touch get intersections and use
-                    var intersections =  line.getIntersections(array[i].body.path0);
+                if(line.intersects(ship.path0)){
+					
+                    // get first point of intersection
+                    var point = line.getIntersections(plane.path0)[0].point;
 
-                        
-                        
-                    var tangent = intersections[0].point;
-
-                    var offset = array[i].body.path0.getOffsetOf(tangent);
-                    var tanPoint = array[i].body.path0.getTangentAt(offset)
+                    // Calculate offset from ship
+                    var offset = array[i].plane.path0.getOffsetOf(point);
+                    // Use offset to Get tangent
+                    var tanPoint = array[i].plane.path0.getTangentAt(offset)
                     
-            
+                    // colide ball with tangent angle
                     this.collision(tanPoint.angle);
                         //Deal damage and check if hp of item
                         // is 0 if so, remove from array
@@ -232,35 +274,5 @@ class CannonBall {
             }
         }
     }
-        
-     
-    // A check to add balls to ball array
-    add_ball(ball,ball_array,user1){
-        // Lower number of balls
-        user1.num_balls -= 1;
-
-        // Boolean to see if ball replaced a dead ball
-        var replaced = false;
-
-        // For loop to replace dead ball with alive ball
-        var i;
-        for(i = 0;i<ball_array.length;i++){
-            if(ball_array[i].alive == false){
-                console.log("dead ball: " + ball_array[i])
-                ball_array[i] = ball;
-                replaced = true;
-            }
-        }
-        // If ball didn't replace a dead ball
-        if(replaced == false){
-            ball_array.push(ball);
-        }
-    }   
-    deleteAll(ball_array){
-        var i;
-        for(i = 0;i<ball_array.length;i++){
-            ball_array[i].cannon.remove();
-        }
-        ball_array = [];
-    } 
+    
 }
