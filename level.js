@@ -57,6 +57,7 @@ class Level{
 }
 
 // Survival Class
+let dif = 'easy';
 class Survival{
     constructor(difficulty){
         var num_ships;

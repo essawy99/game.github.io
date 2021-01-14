@@ -32,7 +32,7 @@ class Enemy_Ships {
     deleteAll(){
         var i;
         for(i = 0;i<this.array.length;i++){
-            this.array[i].ship.remove()
+            this.array[i].body.remove()
         }
         this.array = [];
     }

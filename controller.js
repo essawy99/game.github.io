@@ -89,7 +89,7 @@ function campaign(level){
    to show the survival home */
 
 
-function survival(){
+function survival(diff){
    // Remove home first
     endHome();
    
@@ -99,7 +99,7 @@ function survival(){
    difficulty = "easy";
    //Start Game
    console.log('here') 
-   var game = new Game("survival","medium");
+   var game = new Game("survival",diff); //changed "medium" to variable diff for input difficulty
 
    var mouseLoc = new Point(center);
    view.onFrame = function(event) {
@@ -111,6 +111,34 @@ function survival(){
    tool.onMouseMove = function(event) {
    mouseLoc = event.point    
 }
+}
+
+function survivalMenu() {
+	document.getElementById("survivalDifSelector").style.display = 'block';
+}
+
+function leftS() {
+	let txt = document.getElementById("dif").innerHTML;
+	console.log(txt);
+	if(txt == 'easy') {
+		document.getElementById("dif").innerHTML = 'hard';
+	} else if(txt == 'medium') {
+		document.getElementById("dif").innerHTML = 'easy';
+	} else {
+		document.getElementById("dif").innerHTML = 'medium';
+	}
+	dif = document.getElementById("dif").innerHTML;
+}
+
+function rightS() {
+	let txt = document.getElementById("dif").innerHTML;
+	if(txt == 'easy') {
+		document.getElementById("dif").innerHTML = 'medium';
+	} else if(txt == 'medium') {
+		document.getElementById("dif").innerHTML = 'hard';
+	} else {
+		document.getElementById("dif").innerHTML = 'easy';
+	}
 }
 
 

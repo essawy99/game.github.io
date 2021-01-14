@@ -46,8 +46,9 @@ function endHome() {
 	view.onFrame = null;
 	screenShips.deleteAll();
 	screenEnemyPlanes.deleteAll();
-	document.getElementById('survival').style.display = "none";
-	document.getElementById('campaign').style.display = "none";
-	document.getElementById('scoreDisplay').textContent = "";
-	document.getElementById('moneyDisplay').textContent = "";
+	document.getElementById("homeMenu").style.display = "none";
+	document.getElementById("campaignLevelSelector").style.display = "none";
+	document.getElementById("survivalDifSelector").style.display = "none";
+	document.getElementById('scoreDisplay').innerHTML = "Score: ";
+	document.getElementById('moneyDisplay').textContent = "Money: ";
 }	
