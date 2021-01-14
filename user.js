@@ -104,6 +104,9 @@ class User {
     scoreUpdate(points){ // Update score and coins
         this.score += points;
         this.coins += points;
+        document.getElementById("scoreDisplay").innerHTML = "Score: " + this.score;
+		document.getElementById("moneyDisplay").innerHTML = "Money: " + this.coins;
+
     }
     update_balls(num){ // Update number of balls
         this.num_balls += num;

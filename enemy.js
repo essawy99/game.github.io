@@ -19,6 +19,17 @@ class Enemy_Ships {
         this.shipArray[index].shipBody.remove();
         this.shipArray[index] = null
     }
+    takeDamage(damage, index, user) {
+        //Deal damage and check if hp of item
+        // is 0 if so, remove from array
+        this.shipArray[index].hp -= 100;
+                
+        if(this.shipArray[index].hp <= 0){
+            this.remove(index);
+            user.scoreUpdate(400);
+        }
+    }
+
     move_ships(){
         // Variable that shows where ships should stop moving
         var goal = 100 * hUnit;
@@ -62,13 +73,10 @@ class Enemy_Ship {
 
         
         
-        /*
-        row_counter += 1
-        if(row_counter > 3){
-            row_counter = 0;
+       
         }
-        */
-        }
+        
+        
         spawnPlane(enemy) {
             var chance = Math.random();
             if(chance > .9995 && this.hp > 0) {
@@ -110,6 +118,19 @@ class Enemy_Planes {
             }
         }
     }
+
+    takeDamage(damage, index, user) {
+        //Deal damage and check if hp of item
+        // is 0 if so, remove from array
+        this.planeArray[index].hp -= 100;
+                
+        if(this.planeArray[index].hp <= 0){
+            this.planeArray[index].body.remove();
+            array = array.splice(i,1);
+            user.scoreUpdate(400);
+        }
+    }
+
     spawnPlane(xLoc, yLoc) {
         this.planeArray.push(new Enemy_Plane(xLoc,yLoc));
     }
