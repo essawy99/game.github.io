@@ -20,7 +20,7 @@ function store(lvl){
 function load_local(){
    // Load local storage
    var storage = localStorage.getItem('recent_lvl'); 
-
+	return storage;
 }
 
 // A function that deletes all game data
@@ -39,27 +39,30 @@ var tools = new Tool();
    Level is passed in as the highest level user has
    completed */
    
-   var game;
+var game;
 
-   function start_home(){
-      game = new Game("home", 6);
-      
-      view.onFrame = function(event) { //Actual animation loop
-         game.update();		
-      }
-   }
-   //-------------------------------------------
-   function endHome() {
-   
-      game.endGame();
-      document.getElementById("homeMenu").style.display = "none";
-      document.getElementById("campaignLevelSelector").style.display = "none";
-      document.getElementById("survivalDifSelector").style.display = "none";
-      document.getElementById('scoreDisplay').innerHTML = "Score: ";
-      document.getElementById('moneyDisplay').textContent = "Money: ";
-   }	
+function start_home(){
+  game = new Game("home", 6);
+  
+  view.onFrame = function(event) { //Actual animation loop
+	 game.update();		
+  }
+}
+//-------------------------------------------
+function endHome() {
 
+  game.endGame();
+  document.getElementById("homeMenu").style.display = "none";
+  document.getElementById("campaignLevelSelector").style.display = "none";
+  document.getElementById("survivalDifSelector").style.display = "none";
+  document.getElementById('scoreDisplay').innerHTML = "Score: ";
+  document.getElementById('moneyDisplay').textContent = "Money: ";
+}	
 
+//---------------Campaign Menu functions----------------//
+let lvlSelect = 1;
+let unlocked = load_local();
+if(unlocked == null) { unlocked = 1; } //TEMP FIX- REMOVE LATER
 function campaignMenu() {
 	document.getElementById("campaignLevelSelector").style.display = 'block';
 }
@@ -67,12 +70,53 @@ function campaignMenu() {
 function left() {
 	if(lvlSelect > 1) {
 		document.getElementById("lvl").innerHTML = 'Level '+(--lvlSelect)+"<br><br><br>NUM ships";
+		
+		if(lvlSelect <= unlocked && document.getElementById("campaignStart").disabled) {
+			document.getElementById("campaignStart").disabled = false;
+			document.getElementById("campaignStart").style.backgroundColor = "#d63d22";
+		}
 	}
 }
 
 function right() {
 	document.getElementById("lvl").innerHTML = 'Level '+(++lvlSelect)+"<br><br><br>NUM ships";
+	
+	if(lvlSelect > unlocked && !document.getElementById("campaignStart").disabled) {
+		document.getElementById("campaignStart").disabled = true;
+		document.getElementById("campaignStart").style.backgroundColor = "grey";
+	}
 }
+//------------------------------------------------------
+
+//---------------Survival Menu functions----------------// 
+function survivalMenu() {
+	document.getElementById("survivalDifSelector").style.display = 'block';
+}
+
+function leftS() {
+	let txt = document.getElementById("dif").innerHTML;
+	console.log(txt);
+	if(txt == 'easy') {
+		document.getElementById("dif").innerHTML = 'hard';
+	} else if(txt == 'medium') {
+		document.getElementById("dif").innerHTML = 'easy';
+	} else {
+		document.getElementById("dif").innerHTML = 'medium';
+	}
+	dif = document.getElementById("dif").innerHTML;
+}
+
+function rightS() {
+	let txt = document.getElementById("dif").innerHTML;
+	if(txt == 'easy') {
+		document.getElementById("dif").innerHTML = 'medium';
+	} else if(txt == 'medium') {
+		document.getElementById("dif").innerHTML = 'hard';
+	} else {
+		document.getElementById("dif").innerHTML = 'easy';
+	}
+}
+//------------------------------------------------------
 
 function campaign(level){
    // Remove home first
@@ -132,34 +176,6 @@ function survival(diff){
    tool.onMouseMove = function(event) {
       mouseLoc = event.point;   
    }
-}
-
-function survivalMenu() {
-	document.getElementById("survivalDifSelector").style.display = 'block';
-}
-
-function leftS() {
-	let txt = document.getElementById("dif").innerHTML;
-	console.log(txt);
-	if(txt == 'easy') {
-		document.getElementById("dif").innerHTML = 'hard';
-	} else if(txt == 'medium') {
-		document.getElementById("dif").innerHTML = 'easy';
-	} else {
-		document.getElementById("dif").innerHTML = 'medium';
-	}
-	dif = document.getElementById("dif").innerHTML;
-}
-
-function rightS() {
-	let txt = document.getElementById("dif").innerHTML;
-	if(txt == 'easy') {
-		document.getElementById("dif").innerHTML = 'medium';
-	} else if(txt == 'medium') {
-		document.getElementById("dif").innerHTML = 'hard';
-	} else {
-		document.getElementById("dif").innerHTML = 'easy';
-	}
 }
 
 
