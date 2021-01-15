@@ -87,7 +87,7 @@ class User {
         console.log('made');
         if(this.sp % 2 == 0) {
 
-        lUnit = this.path.length /10
+        var lUnit = this.arc.length /10
         var l = 0;
         
         
