@@ -1,0 +1,69 @@
+.button, .button2, .textBox {
+	left: 10vw;
+	
+	width: 20vw;
+	height: 5vh;
+
+	background-color: transparent;
+	border-color: #d63d22;
+	border-width: medium;
+	border-style: dashed;
+	
+	color: #d63d22;
+	font-family: "Courier New";
+	font-size: 1.5vh;
+	font-weight: bold;
+	
+	position: absolute;
+	z-index: 3;
+}
+
+.button2 {
+	left: 94.5vw;
+	
+	width: 5vw;
+	height: 6vh;
+				
+	font-size: 1vw;
+	
+	display: none;
+}
+
+.textBox {
+	left: 35vw;
+	top: 25vh;
+	
+	width: 30vw;
+	height: 50vh;
+	
+	text-align: center;
+	background-color: #e7c9a9;
+
+	display: none;
+}
+
+.textDisplay {
+	color: #d63d22;
+	font-family: Courier New;
+	font-size: 1.5vw;
+	font-weight: bold;
+	
+	z-index: 4;
+	position: absolute;
+	
+	display: none;
+}
+
+.arrow {
+	left: 5vw;
+	top: 30vh;
+
+	width: 0;
+	height: 0;
+	
+	background-color: transparent;
+	border-style: none;
+	border-top: 2.5vh solid transparent;
+	border-right: 5vh solid #d63d22;
+	border-bottom: 2.5vh solid transparent;
+}
