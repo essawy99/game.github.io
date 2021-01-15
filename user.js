@@ -73,57 +73,51 @@ class User {
         // style the forcefield
         /* this.arc.fullySelected = true; */
         this.arc.strokeColor = 'blue';
-        this.connect.strokeColor = 'blue';
+        /* this.connect.strokeColor = 'blue'; */
         this.arc.strokeWidth = 3;
-        this.connect.strokeWidth = 2;
-        this.arc.fillColor = 'cyan';
+        /* this.connect.strokeWidth = 2;
+        this.arc.fillColor = 'cyan'; */
+        this.sp = -1;
 
-
-        this.elec = new Path();
-        this.elec.add(new Point(this.through.x, this.through.y));
-        this.elec.strokeColor = 'blue';
-        this.elec.strokeWidth = 1;
-        this.sp = 0;
-        for(var i = 0; i < 4; i++) {
-            var random = (Math.random() * 16 * wUnit) - 8 * wUnit;
-            var off = (this.through.y - this.to.y) / 4
-            this.elec.add(new Point(this.through.x + random, this.through.y - off * i));
-        }
+        this.generateElectricity();
     }
 
-    update2(direction) {
-        if(direction == 1) {
-            this.arc.position.x += this.speed;
-            this.connect.position.x += this.speed;
-            this.shipBody.position.x += this.speed;
-            console.log('h');
-            }
-        if(direction == -1) {
-            this.arc.position.x -= this.speed;
-            this.connect.position.x -= this.speed;
-            this.shipBody.position.x -= this.speed;
-            console.log('h');
-        }
-    }
-    update(point) {
-        this.arc.position.x = point.x;
-        this.connect.position.x = point.x;
-        this.shipBody.position.x = point.x;
-
+    generateElectricity(xPos) {
         this.sp++;
-        if(this.sp % 3 == 0) {
-        this.elec.remove();
+        console.log('made');
+        if(this.sp % 2 == 0) {
+
+        var lUnit = this.arc.length /10
+        var l = 0;
+        
+        
+        this.elecSource = {x : this.shipBody.position.x - 5 * wUnit, y: this.shipBody.position.y};
         this.elec = new Path();
         this.elec.add(new Point(this.through.x, this.through.y));
         this.elec.strokeColor = 'blue';
-        this.elec.strokeWidth = 1;
+        this.elec.strokeWidth = 2;
+        this.sp = 0;
+        this.arc.strokeWidth = 2;
+        
         
         for(var i = 0; i < 4; i++) {
             var random = (Math.random() * 10 * wUnit) - 5 * wUnit;
             var off = (this.through.y - this.to.y) / 4
             this.elec.add(new Point(this.through.x + random, this.through.y - off * i));
         }
+        this.elec.add(this.elecSource.x, this.elecSource.y);
     }
+    }
+
+    update(point) {
+        this.elec.remove();
+        this.arc.strokeWidth = 0;
+        this.generateElectricity(point.x);
+        this.arc.position.x = point.x;
+        this.connect.position.x = point.x;
+        this.shipBody.position.x = point.x;
+
+        
     } 
     spend_coins(cost){ // decrease coins upon spending
         this.coins -= cost; 
