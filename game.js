@@ -42,12 +42,14 @@ class Game{
     }
 
     update(mouseLoc) {	
-		this.cannonBalls.update(this.user, this.ships, this.planes);
-        this.ships.update(this.planes);
-        this.planes.update(this.health);
-        if(this.type != "home") {
-            this.user.update(mouseLoc)
-        }    
+		if(gameStatus) {
+			this.cannonBalls.update(this.user, this.ships, this.planes);
+			this.ships.update(this.planes);
+			this.planes.update(this.health);
+			if(this.type != "home") {
+				this.user.update(mouseLoc)
+			}
+		}
     }
 
     endGame() { //returns true if level is done else if not

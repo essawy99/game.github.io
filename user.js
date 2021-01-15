@@ -127,7 +127,14 @@ class User {
         this.coins += points;
         document.getElementById("scoreDisplay").innerHTML = "Score: " + this.score;
 		document.getElementById("moneyDisplay").innerHTML = "Money: " + this.coins;
-
+		
+		if(this.coins >= 400) {
+			document.getElementById("buy").style.color = "#d63d22";
+			document.getElementById("buy").style.borderColor = "#d63d22";
+		} else if(this.coins < 400) {
+			document.getElementById("buy").style.borderColor = "grey";
+			document.getElementById("buy").style.color = "grey";
+		}
     }
     update_balls(num){ // Update number of balls
         this.num_balls += num;
