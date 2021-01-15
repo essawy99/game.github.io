@@ -65,17 +65,13 @@ function campaignMenu() {
 }
 
 function left() {
-	if(--lvlSelect <= 0) {
-		
-	} else {
-		document.getElementById("lvl").innerHTML = 'Level '+lvlSelect+"<br><br>NUM ships";
-		lvlSelect--;
+	if(lvlSelect > 1) {
+		document.getElementById("lvl").innerHTML = 'Level '+(--lvlSelect)+"<br><br><br>NUM ships";
 	}
 }
 
 function right() {
-	lvlSelect++;
-	document.getElementById("lvl").innerHTML = 'Level '+lvlSelect+"<br><br>NUM ships";
+	document.getElementById("lvl").innerHTML = 'Level '+(++lvlSelect)+"<br><br><br>NUM ships";
 }
 
 function campaign(level){
