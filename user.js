@@ -77,6 +77,18 @@ class User {
         this.arc.strokeWidth = 3;
         this.connect.strokeWidth = 2;
         this.arc.fillColor = 'cyan';
+
+
+        this.elec = new Path();
+        this.elec.add(new Point(this.through.x, this.through.y));
+        this.elec.strokeColor = 'blue';
+        this.elec.strokeWidth = 1;
+        this.sp = 0;
+        for(var i = 0; i < 4; i++) {
+            var random = (Math.random() * 16 * wUnit) - 8 * wUnit;
+            var off = (this.through.y - this.to.y) / 4
+            this.elec.add(new Point(this.through.x + random, this.through.y - off * i));
+        }
     }
 
     update2(direction) {
@@ -97,6 +109,21 @@ class User {
         this.arc.position.x = point.x;
         this.connect.position.x = point.x;
         this.shipBody.position.x = point.x;
+
+        this.sp++;
+        if(this.sp % 3 == 0) {
+        this.elec.remove();
+        this.elec = new Path();
+        this.elec.add(new Point(this.through.x, this.through.y));
+        this.elec.strokeColor = 'blue';
+        this.elec.strokeWidth = 1;
+        
+        for(var i = 0; i < 4; i++) {
+            var random = (Math.random() * 10 * wUnit) - 5 * wUnit;
+            var off = (this.through.y - this.to.y) / 4
+            this.elec.add(new Point(this.through.x + random, this.through.y - off * i));
+        }
+    }
     } 
     spend_coins(cost){ // decrease coins upon spending
         this.coins -= cost; 

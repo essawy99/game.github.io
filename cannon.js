@@ -1,9 +1,12 @@
 class CannonBalls {
-    constructor() {
+    constructor(home) {
+        this.home = home;
         this.array = [];
-        this.array.push(new CannonBall(500 *wUnit,500 *hUnit));
+        this.array.push(new CannonBall(500 *wUnit,500 *hUnit, this.home));
     }
     
+    /* Iterates through each live cannonball, checks for
+    collisions and updates location */
     update(user,ships,planes) {
         
         // iterates through each cannonball
@@ -31,17 +34,26 @@ class CannonBalls {
         for(var i = 0; i < this.array.length; i++) {
             if(this.array[i] == null) {
                 this.array[i] = 
-                new CannonBall(user.arc.position.x, user.arc.position.y);
+                new CannonBall(user.arc.position.x, user.arc.position.y, this.home);
                 return;
             }
         }
-        new CannonBall(user.arc.position.x, user.arc.position.y);
+        new CannonBall(user.arc.position.x, user.arc.position.y, this.home);
+    }
+
+    /* function destroys all cannonBalls */
+    deleteAll() {
+        for(var i = 0; i < this.array.length; i++) {
+            if(this.array[i] == null) {
+                this.array[i].remove()
+            }
+        }
     }
 }
 
 class CannonBall {
-    constructor(xLoc, yLoc) {
-		this.home = 0; // Used for home screen
+    constructor(xLoc, yLoc, home) {
+		this.home = home; // Used for home screen
         this.velocity = 3 * hUnit;
         //If ball is above beach
         this.alive = true;
@@ -199,5 +211,10 @@ class CannonBall {
                 }
             }
         }
-    }  
+    }
+    
+    /* Simple function to remove ball */
+    remove() {
+        this.cannon.remove();
+    }
 }

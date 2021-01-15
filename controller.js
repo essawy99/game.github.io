@@ -1,15 +1,13 @@
-/* controls the movement between different UI areas
-   and builds new levels / survival objects. updates those
-   objects every frame */
+/* A set of functions called by buttons in the UI 
+   to build new levels and move between different
+   areas in the UI */
 
+// set of functions required to set up paper.js
+paper.install(window);
+var canvas = document.getElementById('myCanvas');
+paper.setup(canvas);
 
-//----------------------------------------------------------------- 
-
-/* 
-
-               HELPER FUNCTIONS
-
-*/
+//---------------Save game functions----------------// 
 
 // A function that stores game data in local storage
 function store(lvl){
@@ -29,7 +27,10 @@ function load_local(){
 function delete_all(){
    localStorage.clear();
 }
-//Import tools
+
+//----------------------------------------------// 
+
+// required for mouse/keyboard interaction
 var tools = new Tool();
 
 /*
@@ -38,6 +39,27 @@ var tools = new Tool();
    Level is passed in as the highest level user has
    completed */
    
+   var game;
+
+   function start_home(){
+      game = new Game("home", 6);
+      
+      view.onFrame = function(event) { //Actual animation loop
+         game.update();		
+      }
+   }
+   //-------------------------------------------
+   function endHome() {
+   
+      game.endGame();
+      document.getElementById("homeMenu").style.display = "none";
+      document.getElementById("campaignLevelSelector").style.display = "none";
+      document.getElementById("survivalDifSelector").style.display = "none";
+      document.getElementById('scoreDisplay').innerHTML = "Score: ";
+      document.getElementById('moneyDisplay').textContent = "Money: ";
+   }	
+
+
 function campaignMenu() {
 	document.getElementById("campaignLevelSelector").style.display = 'block';
 }
@@ -101,7 +123,7 @@ function survival(diff){
 
    difficulty = "easy";
    //Start Game
-   console.log('here') 
+   
    var game = new Game("survival",diff); //changed "medium" to variable diff for input difficulty
 
    var mouseLoc = new Point(center);
@@ -112,8 +134,8 @@ function survival(diff){
 
    // Add mouse for control of user
    tool.onMouseMove = function(event) {
-   mouseLoc = event.point    
-}
+      mouseLoc = event.point;   
+   }
 }
 
 function survivalMenu() {
@@ -163,29 +185,12 @@ function game_screen(){
 	document.getElementById("moneyDisplay").style.display = 'block';
 }
 
-//----------------------------------------------------------------- 
-
-/* 
-
-               GAME "LOOP"
-
-*/
 
 
-//----------------------------------------------------------------- paper.js set up
-
-
-//Start home
+// function starts up entire program
 start_home();
 
-// Variable that stores game_mode
-var game_mode = null;
 
-//difficulty
-var difficulty;
-
-//game var
-var game;
 
 /*
    Upon button click on home page either
