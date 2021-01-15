@@ -17,7 +17,7 @@ class Tanks { //TODO(Dheva): REPLACE WITH NEW DESIGN
 		const tankSpacing = w / (this._numTanks + 1);
 		const tankUnit = (2 * h / 64);
 		for(let i = 1; tankSpacing * i < w; i++) {
-			Tanks.tankArray.push(this.drawTank(new Point((tankSpacing*i)-(tankUnit/2), (57*h/64)), tankUnit)); //Pushes to static array
+			Tanks.tankArray.push(new TankDraft((tankSpacing*i)-(tankUnit/2), (59*h/64), tankUnit)); //Pushes to static array
 		}
 	}
 	
