@@ -64,12 +64,13 @@ let lvlSelect = 1;
 let unlocked = load_local();
 if(unlocked == null) { unlocked = 1; } //TEMP FIX- REMOVE LATER
 function campaignMenu() {
+	document.getElementById("homeMenu").style.display = 'none';
 	document.getElementById("campaignLevelSelector").style.display = 'block';
 }
 
 function left() {
 	if(lvlSelect > 1) {
-		document.getElementById("lvl").innerHTML = 'Level '+(--lvlSelect)+"<br><br><br>NUM ships";
+		document.getElementById("lvl").innerHTML = 'Level '+(--lvlSelect)+"<br><br>NUM ships";
 		
 		if(lvlSelect <= unlocked && document.getElementById("campaignStart").disabled) {
 			document.getElementById("campaignStart").disabled = false;
@@ -79,7 +80,7 @@ function left() {
 }
 
 function right() {
-	document.getElementById("lvl").innerHTML = 'Level '+(++lvlSelect)+"<br><br><br>NUM ships";
+	document.getElementById("lvl").innerHTML = 'Level '+(++lvlSelect)+"<br><br>NUM ships";
 	
 	if(lvlSelect > unlocked && !document.getElementById("campaignStart").disabled) {
 		document.getElementById("campaignStart").disabled = true;
@@ -87,9 +88,14 @@ function right() {
 	}
 }
 //------------------------------------------------------
-
+function backMenu() {
+	document.getElementById("campaignLevelSelector").style.display = 'none';
+	document.getElementById("survivalDifSelector").style.display = 'none';
+	document.getElementById("homeMenu").style.display = 'block';
+}
 //---------------Survival Menu functions----------------// 
 function survivalMenu() {
+	document.getElementById("homeMenu").style.display = 'none';
 	document.getElementById("survivalDifSelector").style.display = 'block';
 }
 

@@ -15,28 +15,30 @@
 	</div>
 	
 	<div id="campaignLevelSelector" class="textBox" style="top: 25vh; height: 40vh; display: none;">
-		<p id="lvl" style="font-size: 4vw;">Level 1<br><br><br>NUM ships</p>
+		<p id="lvl" style="font-size: 4vw;">Level 1<br><br>NUM ships</p>
 		
-		<div class="arrow" style="left: 0.6vw; top: 29.5vh; border-top: 3.1vh solid transparent; border-right: 6.2vh solid #7a1502; border-bottom: 3.1vh solid transparent;"></div>
+		<div class="arrow" style="left: 0.6vw; top: 23.5vh; border-top: 3.1vh solid transparent; border-right: 6.2vh solid #7a1502; border-bottom: 3.1vh solid transparent;"></div>
 		<button type="button" onclick="left()" class="arrow"></button>
 		
-		<div class="arrow" style="left: 22.6vw; top: 29.5vh; border-top: 3.1vh solid transparent; border-right: none; border-left: 6.2vh solid #7a1502; border-bottom: 3.1vh solid transparent;"></div>
+		<div class="arrow" style="left: 22.6vw; top: 23.5vh; border-top: 3.1vh solid transparent; border-right: none; border-left: 6.2vh solid #7a1502; border-bottom: 3.1vh solid transparent;"></div>
 		<button type="button" onclick="right()" class="arrow" style="left: 23vw; border-right: none; border-left: 5vh dashed #d63d22;"></button>
 		
 		<button id="campaignStart" type="button" class="circ" onclick="campaign('lvlSelect')" style="position: absolute;"></button>
+		<button class="button" id="exit" type="button" onclick="backMenu()" style="left: 5vw; top: 32.5vh;">Back</button>
 	</div>
 	
 	<div id="survivalDifSelector" class="textBox" style="top: 25vh; height: 40vh; display: none;">
-		<p style="font-size: 4vw;">Select Difficulty<br><br></p>
-		<p id='dif' style="font-size: 5vw">easy</p>
+		<p style="font-size: 4vw;">Select Difficulty</p>
+		<p id='dif' style="left: 8.5vw; top: 9vh; font-size: 5vw; position: absolute">easy</p>
 		
-		<div class="arrow" style="left: 0.6vw; top: 29.5vh; border-top: 3.1vh solid transparent; border-right: 6.2vh solid #7a1502; border-bottom: 3.1vh solid transparent;"></div>
+		<div class="arrow" style="left: 0.6vw; top: 23.5vh; border-top: 3.1vh solid transparent; border-right: 6.2vh solid #7a1502; border-bottom: 3.1vh solid transparent;"></div>
 		<button type="button" onclick="leftS()" class="arrow"></button>
 		
-		<div class="arrow" style="left: 22.6vw; top: 29.5vh; border-top: 3.1vh solid transparent; border-right: none; border-left: 6.2vh solid #7a1502; border-bottom: 3.1vh solid transparent;"></div>
+		<div class="arrow" style="left: 22.6vw; top: 23.5vh; border-top: 3.1vh solid transparent; border-right: none; border-left: 6.2vh solid #7a1502; border-bottom: 3.1vh solid transparent;"></div>
 		<button type="button" onclick="rightS()" class="arrow" style="left: 23vw; border-right: none; border-left: 5vh dashed #d63d22;"></button>
 		
 		<button type="button" class="circ" onclick="campaign('lvlSelect')" style="position: absolute;"></button>
+		<button class="button" id="exit" type="button" onclick="backMenu()" style="left: 5vw; top: 32.5vh;">Back</button>
 	</div>
 	
 	<div>
@@ -45,7 +47,7 @@
 		<button class="button2" id="buy" type="button" onclick="buyCannon()" style="top: 13vh; font-size: 0.7vw">Buy Cannon (400)</button>
 	</div>
 	
-	<div id="helpText" class="textBox">
+	<div id="helpText" class="textBox" style="top: 15vh">
 		<p style="padding: 1vw; padding-top: 1vh">Deflect the cannonball using your ship's forcefield and protect your allies on the beach! 
 		Move your mouse across the screen to move your ship. Press "p" or the "Pause" button on the side of your viewing terminal to pause. Press 
 		"h" or "Help" to bring up these instructions again.</p>

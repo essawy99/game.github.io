@@ -56,7 +56,7 @@
 
 .arrow {
 	left: 0.3vw;
-	top: 30vh;
+	top: 24vh;
 
 	width: 0;
 	height: 0;
@@ -71,7 +71,7 @@
 }
 
 .circ {
-	top: 29.5vh;
+	top: 23.5vh;
 	left: 12vw;
 	height: 6vh;
 	width: 6vh;
