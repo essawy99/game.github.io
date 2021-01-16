@@ -49,6 +49,18 @@ class EnemyPlanes {
         }
         this.array = [];
     }
+    // Checks if any planes are alive
+    planesAlive(){
+        var i;
+        for(i = 0;this.array.length;i++){
+            if(this.array[i] != null){
+                if(this.array[i].bombed == false){
+                    return false;
+                }
+            }
+        }
+        return false;
+    }
 }
 
   //Class to handle enemy planes
