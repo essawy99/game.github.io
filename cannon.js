@@ -18,6 +18,7 @@ class CannonBalls {
                 // update the ball using update function
                 // if the ball is destroyed it will return true
                 // triggering code to nullify that array position
+                
                 if(cannonBall.update(user,ships,planes)) {      
                     this.shipArray[i] = null
                 }

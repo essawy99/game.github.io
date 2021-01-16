@@ -23,6 +23,7 @@ class EnemyShips {
         //Deal damage and check if hp of item
         // is 0 if so, remove from array
         this.array[index].hp -= damage;
+        console.log("if")
         if(this.array[index].hp <= 0){
             this.remove(index);
             user.scoreUpdate(400);

@@ -70,7 +70,6 @@ class Game{
         this.cannonBalls.deleteAll();
         this.ships.deleteAll();
         this.planes.deleteAll();
-        
     }
 
 }
