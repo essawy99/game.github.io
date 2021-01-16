@@ -24,6 +24,18 @@ class CannonBalls {
             }
         }
     }
+    //Function to check if any balls are alive
+    ballsAlive(){
+        var i;
+        for(i = 0;i<this.array.length;i++){
+            if(this.array[i] != null){
+                if(this.array[i].alive == true){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
    
     /* iterates through ship array and adds new
     cannon to a null location. if there are no null 
