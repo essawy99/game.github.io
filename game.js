@@ -49,7 +49,16 @@ class Game{
 			if(this.type != "home") {
 				this.user.update(mouseLoc)
 			}
-		}
+        }
+        //if game is over
+        if(game.cannonBalls.ballsAlive() == false || game.health <= 0){
+            return -1;
+        }
+        // if you win
+        if(game.ships.shipsAlive() == false || game.planes.planesAlive() == false){
+            return 1;
+        }
+        return 0; // If game is still continuing 
     }
 
     endGame() { //returns true if level is done else if not
@@ -64,4 +73,3 @@ class Game{
     }
 
 }
-

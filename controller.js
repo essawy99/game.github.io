@@ -44,9 +44,6 @@ var game;
 function start_home(){
   game = new Game("home", 6);
   
-  view.onFrame = function(event) { //Actual animation loop
-	 game.update();		
-  }
 }
 //-------------------------------------------
 function endHome() {
@@ -141,16 +138,6 @@ function campaign(level){
    }else{
       game = new Game("campaign",1)
    }
-   var mouseLoc = new Point(center);
-   view.onFrame = function(event) {
-      
-      game.update(mouseLoc);
-   }
-
-   // Add mouse for control of user
-   tool.onMouseMove = function(event) {
-   mouseLoc = event.point    
-}
 
 }
 
@@ -170,18 +157,7 @@ function survival(diff){
    difficulty = "easy";
    //Start Game
    
-   var game = new Game("survival",diff); //changed "medium" to variable diff for input difficulty
-
-   var mouseLoc = new Point(center);
-   view.onFrame = function(event) {
-      
-      game.update(mouseLoc);
-   }
-
-   // Add mouse for control of user
-   tool.onMouseMove = function(event) {
-      mouseLoc = event.point;   
-   }
+   game = new Game("survival",diff); //changed "medium" to variable diff for input difficulty
 }
 
 
@@ -208,10 +184,15 @@ function game_screen(){
 // function starts up entire program
 start_home();
 
+var mouseLoc = new Point(center);
+view.onFrame = function(event) { //Actual animation loop
+   var gameStatus = game.update(mouseLoc);		
 
+   //Handle depending on if game is finished
+   // Store +1 lvl
+ }
 
-/*
-   Upon button click on home page either
-   campaign or survival should be called */
-
-
+// Add mouse for control of user
+tool.onMouseMove = function(event) {
+mouseLoc = event.point    
+}
