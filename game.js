@@ -51,11 +51,11 @@ class Game{
 			}
         }
         //if game is over
-        if(game.cannonBalls.ballsAlive() == false || game.health <= 0){
+        if(this.cannonBalls.ballsAlive() || this.health <= 0){
             return -1;
         }
         // if you win
-        if(game.ships.shipsAlive() == false || game.planes.planesAlive() == false){
+        else if(this.ships.shipsAlive() == false || this.planes.planesAlive() == false){
             return 1;
         }
         return 0; // If game is still continuing 

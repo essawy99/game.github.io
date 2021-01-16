@@ -26,6 +26,7 @@ class CannonBalls {
     }
     //Function to check if any balls are alive
     ballsAlive(){
+        console.log("balls alive")
         var i;
         for(i = 0;i<this.array.length;i++){
             if(this.array[i] != null){
