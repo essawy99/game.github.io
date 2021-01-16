@@ -50,17 +50,16 @@ class EnemyPlanes {
         this.array = [];
     }
     // Checks if any planes are alive
-    planesAlive(){
-        console.log("planes alive")
+    planesDead(){
         var i;
         for(i = 0;this.array.length;i++){
             if(this.array[i] != null){
                 if(this.array[i].bombed == false){
-                    return true;
+                    return false;
                 }
             }
         }
-        return false;
+        return true;
     }
 }
 

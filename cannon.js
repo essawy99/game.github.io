@@ -25,17 +25,16 @@ class CannonBalls {
         }
     }
     //Function to check if any balls are alive
-    ballsAlive(){
-        console.log("balls alive")
+    ballsDead(){
         var i;
         for(i = 0;i<this.array.length;i++){
             if(this.array[i] != null){
                 if(this.array[i].alive == true){
-                    return true;
+                    return false;
                 }
             }
         }
-        return false;
+        return true;
     }
    
     /* iterates through ship array and adds new
@@ -51,7 +50,7 @@ class CannonBalls {
                 return;
             }
         }
-        new CannonBall(user.arc.position.x, user.arc.position.y, this.home);
+        this.array.push(new CannonBall(user.arc.position.x, user.arc.position.y - 100, this.home));
     }
 
     /* function destroys all cannonBalls */

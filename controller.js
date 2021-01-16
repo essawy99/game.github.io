@@ -20,7 +20,7 @@ function store(lvl){
 function load_local(){
    // Load local storage
    var storage = localStorage.getItem('recent_lvl'); 
-	return storage;
+   return storage;
 }
 
 // A function that deletes all game data
@@ -130,12 +130,14 @@ function campaign(level){
    //Setup game screen
    game_screen();
 
-   difficulty = load_local();
+   var difficulty = load_local();
+   console.log(load_local())
 
    //Start Game
-   if(difficulty != null){
+   if(difficulty != undefined){
       game = new Game("campaign",difficulty)
    }else{
+	  difficulty = 1;
       game = new Game("campaign",1)
    }
 
@@ -186,13 +188,40 @@ start_home();
 
 var mouseLoc = new Point(center);
 view.onFrame = function(event) { //Actual animation loop
-   var gameStatus = game.update(mouseLoc);		
+   var game_return = game.update(mouseLoc);		
 
-   //Handle depending on if game is finished
-   // Store +1 lvl
+   
+   // Game over
+   if(game_return == -1){
+	   console.log("game over")
+   }else if(game_return == 1){
+	   if(game.type == "campaign"){
+		   store(game.difficulty + 1);
+		   console.log("winner, CAMPAIGN")
+	   }else{
+			console.log("winner, survival")
+	   }
+   }
  }
 
 // Add mouse for control of user
 tool.onMouseMove = function(event) {
-mouseLoc = event.point    
+	mouseLoc = event.point    
 }
+
+
+tool.onKeyDown = function(event) {
+	if (event.key == 'p') {
+		pauseGame();
+	}
+	if (event.key == 'h') {
+		helpGame();
+	}
+	if (event.key == 'f') { //Create new cannon ball on f
+		buyCannon(game.user,game.cannonBalls);
+	}
+	//Give coins
+	if (event.key == "c"){
+		game.user.coins += 1000;
+	}
+} 

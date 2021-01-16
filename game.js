@@ -1,13 +1,14 @@
 class Game{
     
     constructor(type,difficulty){
-        // record game type
+        console.log(difficulty)
+        // record game type and difficulty
         this.type = type;
-
+        this.difficulty = difficulty;
         // figure out number of ships to generate
         // based on parameters
         var numShips;
-        if(type == campaign) {
+        if(type == "campaign") {
             numShips = 2 * difficulty;
         }
         else if(difficulty == "easy"){
@@ -51,11 +52,11 @@ class Game{
 			}
         }
         //if game is over
-        if(this.cannonBalls.ballsAlive() || this.health <= 0){
+        if(this.cannonBalls.ballsDead() || this.health <= 0){
             return -1;
         }
         // if you win
-        else if(this.ships.shipsAlive() == false || this.planes.planesAlive() == false){
+        if(this.ships.shipsDead() && this.planes.planesDead()){
             return 1;
         }
         return 0; // If game is still continuing 

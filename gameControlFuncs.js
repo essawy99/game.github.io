@@ -36,13 +36,13 @@ function helpGame() {//												NEED TO PUT IN ACTUAL INSTRUCTIONS
 	}
 }
 //-----------------------------------------------------------------
-function buyCannon(player) {
+function buyCannon(player,cannonballs) {
 	if(player.coins >= 400) {
 		player.spend_coins(400);
 		player.scoreUpdate(0);
 		document.getElementById("moneyDisplay").innerHTML = "Money: " + player.coins;
 		
-		ball_array.push(new CannonBall(500 *wUnit,500 *hUnit));  // cannonball
+		cannonballs.addBall(player);  // cannonball
 	}
 }
 

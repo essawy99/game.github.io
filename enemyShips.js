@@ -54,17 +54,16 @@ class EnemyShips {
         }
     }
     // Checks if any ships are alive
-    shipsAlive(){
-        console.log("ships alive")
+    shipsDead(){
         var j;
         for(j = 0;this.array.length;j++){
             if(this.array[j] != null){
-                if(this.array[j].health == 0){
-                    return true;
+                if(this.array[j].hp > 0){
+                    return false;
                 }
             }
         }
-        return false;
+        return true;
     }
 
 }
