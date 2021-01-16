@@ -15,29 +15,29 @@
 	</div>
 	
 	<div id="campaignLevelSelector" class="textBox" style="top: 25vh; height: 40vh; display: none;">
-		<p id="lvl" style="font-size: 4vw;">Level 1<br><br>NUM ships</p>
+		<p id="lvl" style="font-size: 4vh;">Level 1<br><br>NUM ships</p>
 		
-		<div class="arrow" style="left: 0.6vw; top: 23.5vh; border-top: 3.1vh solid transparent; border-right: 6.2vh solid #7a1502; border-bottom: 3.1vh solid transparent;"></div>
+		<div class="arrow" style="left: 0; top: 23.5vh; border-top: 3.1vh solid transparent; border-right: 6.2vh solid #7a1502; border-bottom: 3.1vh solid transparent;"></div>
 		<button type="button" onclick="left()" class="arrow"></button>
 		
-		<div class="arrow" style="left: 22.6vw; top: 23.5vh; border-top: 3.1vh solid transparent; border-right: none; border-left: 6.2vh solid #7a1502; border-bottom: 3.1vh solid transparent;"></div>
-		<button type="button" onclick="right()" class="arrow" style="left: 23vw; border-right: none; border-left: 5vh dashed #d63d22;"></button>
+		<div class="arrow" style="left: calc(29.7vw - 6.2vh); top: 23.5vh; border-top: 3.1vh solid transparent; border-right: none; border-left: 6.2vh solid #7a1502; border-bottom: 3.1vh solid transparent;"></div>
+		<button type="button" onclick="right()" class="arrow" style="left: calc(29.7vw - 5.9vh); border-right: none; border-left: 5vh dashed #d63d22;"></button>
 		
 		<button id="campaignStart" type="button" class="circ" onclick="campaign('lvlSelect')" style="position: absolute;"></button>
 		<button class="button" id="exit" type="button" onclick="backMenu()" style="left: 5vw; top: 32.5vh;">Back</button>
 	</div>
 	
 	<div id="survivalDifSelector" class="textBox" style="top: 25vh; height: 40vh; display: none;">
-		<p style="font-size: 4vw;">Select Difficulty</p>
-		<p id='dif' style="left: 8.5vw; top: 9vh; font-size: 5vw; position: absolute">easy</p>
+		<p style="font-size: 4vh;">Select Difficulty</p>
+		<p id='dif' style="left: 8.5vw; top: 9vh; font-size: 5vh; position: absolute">easy</p>
 		
 		<div class="arrow" style="left: 0.6vw; top: 23.5vh; border-top: 3.1vh solid transparent; border-right: 6.2vh solid #7a1502; border-bottom: 3.1vh solid transparent;"></div>
 		<button type="button" onclick="leftS()" class="arrow"></button>
 		
-		<div class="arrow" style="left: 22.6vw; top: 23.5vh; border-top: 3.1vh solid transparent; border-right: none; border-left: 6.2vh solid #7a1502; border-bottom: 3.1vh solid transparent;"></div>
-		<button type="button" onclick="rightS()" class="arrow" style="left: 23vw; border-right: none; border-left: 5vh dashed #d63d22;"></button>
+		<div class="arrow" style="left: calc(29.7vw - 6.2vh); top: 23.5vh; border-top: 3.1vh solid transparent; border-right: none; border-left: 6.2vh solid #7a1502; border-bottom: 3.1vh solid transparent;"></div>
+		<button type="button" onclick="rightS()" class="arrow" style="left: calc(29.7vw - 5.7vh); border-right: none; border-left: 5vh dashed #d63d22;"></button>
 		
-		<button type="button" class="circ" onclick="survival('lvlSelect')" style="position: absolute;"></button>
+		<button type="button" class="circ" onclick="survival(document.getElementById('dif'))" style="position: absolute;"></button>
 		<button class="button" id="exit" type="button" onclick="backMenu()" style="left: 5vw; top: 32.5vh;">Back</button>
 	</div>
 	

@@ -33,12 +33,7 @@ function delete_all(){
 // required for mouse/keyboard interaction
 var tools = new Tool();
 
-/*
-   TODO (DHEVA): Function should call your function
-   to show the campaign home.
-   Level is passed in as the highest level user has
-   completed */
-   
+
 var game;
 
 function start_home(){
@@ -143,9 +138,6 @@ function campaign(level){
 
 }
 
-/*
-   TODO (DHEVA): Function should call your function
-   to show the survival home */
 
 
 function survival(diff){
