@@ -53,6 +53,18 @@ class EnemyShips {
             start += hUnit*10;
         }
     }
+    // Checks if any ships are alive
+    shipsAlive(){
+        var j;
+        for(j = 0;this.array.length;j++){
+            if(this.array[j] != null){
+                if(this.array[j].health == 0){
+                    return false;
+                }
+            }
+        }
+        return false;
+    }
 
 }
 
