@@ -201,8 +201,9 @@ view.onFrame = function(event) { //Actual animation loop
 	   }else{
 			console.log("winner, survival")
 	   }
-	   //TODO: DHEVA implement menu
    }
+   //TODO: DHEVA implement menu
+   
  }
 
 // Add mouse for control of user
