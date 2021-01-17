@@ -23,6 +23,7 @@ class EnemyShips {
         //Deal damage and check if hp of item
         // is 0 if so, remove from array
         this.array[index].hp -= damage;
+        console.log("if")
         if(this.array[index].hp <= 0){
             this.remove(index);
             user.scoreUpdate(400);
@@ -52,6 +53,18 @@ class EnemyShips {
             }
             start += hUnit*10;
         }
+    }
+    // Checks if any ships are alive
+    shipsDead(){
+        var j;
+        for(j = 0;this.array.length;j++){
+            if(this.array[j] != null){
+                if(this.array[j].hp > 0){
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
 }

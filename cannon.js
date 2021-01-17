@@ -18,11 +18,24 @@ class CannonBalls {
                 // update the ball using update function
                 // if the ball is destroyed it will return true
                 // triggering code to nullify that array position
+                
                 if(cannonBall.update(user,ships,planes)) {      
                     this.shipArray[i] = null
                 }
             }
         }
+    }
+    //Function to check if any balls are alive
+    ballsDead(){
+        var i;
+        for(i = 0;i<this.array.length;i++){
+            if(this.array[i] != null){
+                if(this.array[i].alive == true){
+                    return false;
+                }
+            }
+        }
+        return true;
     }
    
     /* iterates through ship array and adds new
@@ -38,7 +51,7 @@ class CannonBalls {
                 return;
             }
         }
-        new CannonBall(user.arc.position.x, user.arc.position.y, this.home);
+        this.array.push(new CannonBall(user.arc.position.x, user.arc.position.y - 100, this.home));
     }
 
     /* function destroys all cannonBalls */

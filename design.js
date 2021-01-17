@@ -634,3 +634,70 @@ class shipBody3 {
 	}
 }
 
+undefined
+/* Code: {-s-rgb(2,59,7)-rgb(8,89,15)-true-p-385.8784893267652-145.04652435
+686918-p-517.7887246852764-145.04652435686918-p-530.3776683087028-164.20361
+247947454-p-530.3776683087028-381.49972632731254-p-516.6940339354132-400.65
+681444991793-p-385.8784893267652-400.65681444991793-p-373.28954570333883-38
+1.49972632731254-p-373.28954570333883-164.20361247947454-false-s-rgb(1,64,7
+)-rgb(8,102,17)-true-p-444.99178981937604-40.503557744937055-p-461.41215106
+732346-40.503557744937055-p-461.41215106732346-97.42747673782156-p-457.5807
+334428024-97.42747673782156-p-459.22276956759714-178.98193760262726-p-474.5
+4844006568146-178.98193760262726-p-517.7887246852764-255.06294471811714-p-4
+74.54844006568146-358.5112205801861-p-434.592227695676-358.5112205801861-p-
+385.8784893267652-255.06294471811714-p-434.592227695676-178.98193760262726-
+p-449.91789819376027-178.98193760262726-p-448.2758620689655-97.427476737821
+56-p-444.99178981937604-97.42747673782156-p-444.99178981937604-74.438970990
+69513-false}*/
+class TankDraft {
+	constructor(x,y) {
+		this.xLoc = x;
+		this.yLoc = y;
+		this.size = 0.3;
+		this.path0= new Path();
+		this.path0.strokeColor = { red: 0.00784, green: 0.23137, blue: 0.02745 };
+		this.path0.fillColor = { red: 0.03137, green: 0.34902, blue: 0.05882 };
+		this.path0.closed = true;
+		this.path0.add( new Point(-65.95511767925561* wUnit * this.size + this.xLoc, -75.53366174055829 * wUnit * this.size + this.yLoc));
+		this.path0.add( new Point(65.95511767925561* wUnit * this.size + this.xLoc, -75.53366174055829 * wUnit * this.size + this.yLoc));
+		this.path0.add( new Point(78.544061302682* wUnit * this.size + this.xLoc, -56.37657361795293 * wUnit * this.size + this.yLoc));
+		this.path0.add( new Point(78.544061302682* wUnit * this.size + this.xLoc, 160.91954022988506 * wUnit * this.size + this.yLoc));
+		this.path0.add( new Point(64.86042692939245* wUnit * this.size + this.xLoc, 180.07662835249042 * wUnit * this.size + this.yLoc));
+		this.path0.add( new Point(-65.95511767925561* wUnit * this.size + this.xLoc, 180.07662835249042 * wUnit * this.size + this.yLoc));
+		this.path0.add( new Point(-78.544061302682* wUnit * this.size + this.xLoc, 160.91954022988506 * wUnit * this.size + this.yLoc));
+		this.path0.add( new Point(-78.544061302682* wUnit * this.size + this.xLoc, -56.37657361795293 * wUnit * this.size + this.yLoc));
+		this.path1= new Path();
+		this.path1.strokeColor = { red: 0.00392, green: 0.25098, blue: 0.02745 };
+		this.path1.fillColor = { red: 0.03137, green: 0.4, blue: 0.06667 };
+		this.path1.closed = true;
+		this.path1.add( new Point(-6.841817186644773* wUnit * this.size + this.xLoc, -180.07662835249042 * wUnit * this.size + this.yLoc));
+		this.path1.add( new Point(9.578544061302683* wUnit * this.size + this.xLoc, -180.07662835249042 * wUnit * this.size + this.yLoc));
+		this.path1.add( new Point(9.578544061302683* wUnit * this.size + this.xLoc, -123.15270935960591 * wUnit * this.size + this.yLoc));
+		this.path1.add( new Point(5.74712643678161* wUnit * this.size + this.xLoc, -123.15270935960591 * wUnit * this.size + this.yLoc));
+		this.path1.add( new Point(7.389162561576355* wUnit * this.size + this.xLoc, -41.59824849480022 * wUnit * this.size + this.yLoc));
+		this.path1.add( new Point(22.714833059660645* wUnit * this.size + this.xLoc, -41.59824849480022 * wUnit * this.size + this.yLoc));
+		this.path1.add( new Point(65.95511767925561* wUnit * this.size + this.xLoc, 34.48275862068966 * wUnit * this.size + this.yLoc));
+		this.path1.add( new Point(22.714833059660645* wUnit * this.size + this.xLoc, 137.93103448275863 * wUnit * this.size + this.yLoc));
+		this.path1.add( new Point(-17.24137931034483* wUnit * this.size + this.xLoc, 137.93103448275863 * wUnit * this.size + this.yLoc));
+		this.path1.add( new Point(-65.95511767925561* wUnit * this.size + this.xLoc, 34.48275862068966 * wUnit * this.size + this.yLoc));
+		this.path1.add( new Point(-17.24137931034483* wUnit * this.size + this.xLoc, -41.59824849480022 * wUnit * this.size + this.yLoc));
+		this.path1.add( new Point(-1.9157088122605364* wUnit * this.size + this.xLoc, -41.59824849480022 * wUnit * this.size + this.yLoc));
+		this.path1.add( new Point(-3.557744937055282* wUnit * this.size + this.xLoc, -123.15270935960591 * wUnit * this.size + this.yLoc));
+		this.path1.add( new Point(-6.841817186644773* wUnit * this.size + this.xLoc, -123.15270935960591 * wUnit * this.size + this.yLoc));
+		this.path1.add( new Point(-6.841817186644773* wUnit * this.size + this.xLoc, -146.14121510673235 * wUnit * this.size + this.yLoc));
+	}
+
+	update(xIncr, yIncr){
+		this.path0.position.x += xIncr
+		this.path0.position.y += yIncr
+		this.path1.position.x += xIncr
+		this.path1.position.y += yIncr
+	}
+
+	remove(){
+		this.path0.remove()
+		this.path1.remove()
+	}
+}
+
+

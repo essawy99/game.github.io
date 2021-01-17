@@ -7,7 +7,7 @@
 	background-color: transparent;
 	border-color: #d63d22;
 	border-width: medium;
-	border-style: dashed;
+	border-style: outset;
 	
 	color: #d63d22;
 	font-family: "Courier New";
@@ -55,15 +55,29 @@
 }
 
 .arrow {
-	left: 5vw;
-	top: 30vh;
+	left: 0;
+	top: 24vh;
 
 	width: 0;
 	height: 0;
 	
-	background-color: transparent;
 	border-style: none;
+	background-color: transparent;
 	border-top: 2.5vh solid transparent;
 	border-right: 5vh solid #d63d22;
+	border-left: none;
 	border-bottom: 2.5vh solid transparent;
+	
+	position: absolute;
+}
+
+.circ {
+	top: 23.5vh;
+	left: calc(15vw - 3vh);
+	height: 6vh;
+	width: 6vh;
+	background-color: #d63d22;
+	border-color: #d63d22;
+	border-radius: 50%;
+	display: inline-block;
 }
