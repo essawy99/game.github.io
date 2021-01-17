@@ -11,30 +11,26 @@
 		<button class="button" id="campaign" type="button" onclick= "campaignMenu()" style="top: 22vh">campaign</button>
 		<button class="button" id="survival" type="button" onclick= "survivalMenu()" style="top: 32vh">survival</button>
 		<button class="button" id="option" type="button" onclick="" style="top: 42vh">Options</button>
-		<button class="button" id="help1" type="button" onclick="helpGame()" style="top: 52vh; z-index: 10">Help</button>
+		<button class="button" id="helpHome" type="button" onclick="helpGame()" style="top: 52vh; z-index: 10">Help</button>
 	</div>
 	
 	<div id="campaignLevelSelector" class="textBox" style="top: 25vh; height: 40vh; display: none;">
 		<p id="lvl" style="font-size: 4vh;">Level 1<br><br>NUM ships</p>
 		
-		<div class="arrow" style="left: 0; top: 23.5vh; border-top: 3.1vh solid transparent; border-right: 6.2vh solid #7a1502; border-bottom: 3.1vh solid transparent;"></div>
 		<button type="button" onclick="left()" class="arrow"></button>
 		
-		<div class="arrow" style="left: calc(29.7vw - 6.2vh); top: 23.5vh; border-top: 3.1vh solid transparent; border-right: none; border-left: 6.2vh solid #7a1502; border-bottom: 3.1vh solid transparent;"></div>
 		<button type="button" onclick="right()" class="arrow" style="left: calc(29.7vw - 5.9vh); border-right: none; border-left: 5vh dashed #d63d22;"></button>
 		
 		<button id="campaignStart" type="button" class="circ" onclick="campaign('lvlSelect')" style="position: absolute;"></button>
 		<button class="button" id="exit" type="button" onclick="backMenu()" style="left: 5vw; top: 32.5vh;">Back</button>
 	</div>
 	
-	<div id="survivalDifSelector" class="textBox" style="top: 25vh; height: 40vh; display: none;">
-		<p style="font-size: 4vh;">Select Difficulty</p>
-		<p id='dif' style="left: 8.5vw; top: 9vh; font-size: 5vh; position: absolute">easy</p>
+	<div id="survivalDifSelector" class="textBox" style="top: 25vh; height: 40vh; display: none; text-align: center;">
+		<p style="font-size: 4vw;">Select Difficulty</p>
+		<p id='dif' style="text-align: center; font-size: 5vw;">easy</p>
 		
-		<div class="arrow" style="left: 0.6vw; top: 23.5vh; border-top: 3.1vh solid transparent; border-right: 6.2vh solid #7a1502; border-bottom: 3.1vh solid transparent;"></div>
-		<button type="button" onclick="leftS()" class="arrow"></button>
+		<button type="button" onclick="leftS()" class="arrow";></button>
 		
-		<div class="arrow" style="left: calc(29.7vw - 6.2vh); top: 23.5vh; border-top: 3.1vh solid transparent; border-right: none; border-left: 6.2vh solid #7a1502; border-bottom: 3.1vh solid transparent;"></div>
 		<button type="button" onclick="rightS()" class="arrow" style="left: calc(29.7vw - 5.7vh); border-right: none; border-left: 5vh dashed #d63d22;"></button>
 		
 		<button type="button" class="circ" onclick="survival(document.getElementById('dif'))" style="position: absolute;"></button>
@@ -47,16 +43,31 @@
 		<button class="button2" id="buy" type="button" onclick="buyCannon(game.user,game.cannonBalls)" style="top: 13vh; font-size: 0.7vw; color: grey; border-color: grey;">Buy Cannon (400)</button>
 	</div>
 	
-	<div id="helpText" class="textBox" style="top: 15vh">
-		<p style="padding: 1vw; padding-top: 1vh">Deflect the cannonball using your ship's forcefield and protect your allies on the beach! 
-		Move your mouse across the screen to move your ship. Press "p" or the "Pause" button on the side of your viewing terminal to pause. Press 
-		"h" or "Help" to bring up these instructions again.</p>
+	<div id="helpText" class="textBox" style="top: 25vh; height: 40vh; display: none;">
+		<p id="help1" style="padding: 1vw; padding-top: 1vh; display: block">Fight off enemy ships to win! After entering the game, press 'spacebar' once you're ready for the game to start.</p>
+		<p id="help2" style="padding: 1vw; padding-top: 1vh; display: none">Aircraft carriers send planes that launch air strikes on your home base, decreasing your base's "health".</p>
+		<p id="help3" style="padding: 1vw; padding-top: 1vh; display: none">Shoot and Deflect cannonballs at your enemies to protect your base.</p>
+		<p id="help4" style="padding: 1vw; padding-top: 1vh; display: none">Buy extra cannonballs to have in play using either 'f' or the side menu button.</p>
+		<p id="help5" style="padding: 1vw; padding-top: 1vh; display: none">In order to buy cannonballs, you must destroy enemy forces to generate funding.</p>
+		<p id="help6" style="padding: 1vw; padding-top: 1vh; display: none">Once all enemy ships are sunk, you Win! However, if there are no cannonballs in play, or your base runs out of health you Lose.<br>Good Luck!</p>
+		
+		<button type="button" onclick="helpLeft()" class="arrow";></button>
+		
+		<button type="button" onclick="helpRight()" class="arrow" style="left: calc(29.7vw - 5.7vh); border-right: none; border-left: 5vh dashed #d63d22;"></button>
+		
+		<button class="button" id="closeHelp" type="button" onclick="helpGame()" style="left: 10vw; width: 10vw; top: 32.5vh;">Back</button>
 	</div>
 	
-	<h2 id="scoreDisplay" class="textDisplay" style="left: 15vw; top: 0;">Score:</h2>
-	<h2 id="moneyDisplay" class="textDisplay" style="left: 65vw; top: 0;">Money:</h2>
-	<h1 id="endText" class="textDisplay" style="left: 40vw; top: 40vh; font-size: 2.5vw; text-align: center;">GAME OVER<br>SCORE: NaN</h1>
+	<div id="endBlock" class="textBox" style="top: 25vh; height: 40vh; display: none;">
+		<p id="endText" style="text-align: center; font-size: 3vh">GAME OVER<br>SCORE: NaN</p>
+		
+		<button class="button" id="reDo" type="button" onclick="replay()" style="left: 10vw; width: 10vw; top: 12.5vh;">Replay</button>
+		<button class="button" id="cont" type="button" onclick="next()" style="left: 10vw; width: 10vw; top: 22.5vh;">Next Mission</button>
+		<button class="button" id="menuFromGame" type="button" onclick="goHome()" style="left: 10vw; width: 10vw; top: 32.5vh;">Menu</button>
+	</div>
 	
+	<h2 id="scoreDisplay" class="textDisplay" style="left: 15vw; top: 0; display: none;">Score:</h2>
+	<h2 id="moneyDisplay" class="textDisplay" style="left: 65vw; top: 0; display: none">Money:</h2>	
 	
     <canvas id = "myCanvas" style="left: 0px; top: 0px; position: absolute; z-index: 1"></canvas>
 	<div class="rect" style="left: 93vw; top: 0; width: 7vw; height: 100vh; position: absolute; z-index: 0; background-color: #e7c9a9;"></div>

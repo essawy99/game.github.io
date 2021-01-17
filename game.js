@@ -62,6 +62,11 @@ class Game{
         return 0; // If game is still continuing 
     }
 
+    buyCannon() {
+        this.user.coins -= 400;
+        this.cannonBalls.addBall(this.user);
+    }
+
     endGame() { //returns true if level is done else if not
         if(this.type != "home") {
 			this.health.deleteAll();

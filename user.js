@@ -140,4 +140,11 @@ class User {
     get_balls(){ //Return number of balls
         return this.num_balls;
     }
+	
+	deleteAll() { //Does this delete everything?
+		this.shipBody.remove();
+		this.arc.remove();
+		this.connect.remove();
+		this.elec.remove();
+	}
 }

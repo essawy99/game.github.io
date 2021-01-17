@@ -31,4 +31,4 @@ var center =  w/2;
 document.getElementById("myCanvas").width = w;
 document.getElementById("myCanvas").height = h;
 
-let gameStatus = 1;
+let gameStatus = 0;

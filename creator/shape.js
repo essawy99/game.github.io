@@ -76,6 +76,7 @@ class shape {
         
         while(true) {
             if (array[i] == "p") {
+                console.log("hi2");
                 var point = new Point
                 ((array[i+1] * wUnit), (array[i+2] * wUnit) );
                 i+=3;

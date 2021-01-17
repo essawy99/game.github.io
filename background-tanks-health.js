@@ -54,4 +54,8 @@ class Health {
 	}
 	
 	get health() { return this._health; }
+	
+	deleteAll() {
+		this._healthBar.remove();
+	}
 }

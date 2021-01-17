@@ -2,16 +2,22 @@
 class EnemyShips {
     constructor(numShips) {
         this.array = [];
-        this.shipSpacing = w / (numShips);
-        this.numShips = numShips
-        for(var i =0; i < numShips; i++) {
-            this.array.push(new EnemyShip(i * this.shipSpacing)); 
+        this.numShips = 5;
+        var shipSpacing = ((w/2) - 50 * wUnit) / (this.numShips);
+        this.array.push(new EnemyShip(center)); 
+        for(var i =1; i <= this.numShips; i++) {
+            console.log("yo");
+            this.array.push(new EnemyShip(center - i * shipSpacing)); 
+            this.array.push(new EnemyShip(center + i * shipSpacing)); 
         }
     }
     update(enemy) {
         for(var i =0; i < this.numShips; i++) {
-           if(this.array[i] != null) {
-            this.array[i].spawnPlane(enemy); 
+            if(this.array[i] != null) {
+                var chance = Math.random();
+                if(chance > .9995 && this.hp > 0) {
+                 enemy.spawnPlane(this.shipX,this.userYLoc);
+            }
            }
         }
     }
@@ -57,7 +63,7 @@ class EnemyShips {
     // Checks if any ships are alive
     shipsDead(){
         var j;
-        for(j = 0;this.array.length;j++){
+        for(j = 0;j < this.array.length;j++){
             if(this.array[j] != null){
                 if(this.array[j].hp > 0){
                     return false;
@@ -70,26 +76,14 @@ class EnemyShips {
 }
 
 class EnemyShip {
-    constructor(shipSpacing) {
+    constructor(xLoc) {
         
-
-        // y location of ship on screen
-        this.userYLoc = 100 * hUnit; //Starts off screen so ships can move up
-
-        // x location of ship on screen
-        this.shipX  = shipSpacing + 50 * wUnit;
-        
-        // size and speed attributes can be used to change ship size
-        this.size = 40 * wUnit;
-        this.speed = 20 * wUnit;
-        
-        this.body = new shipBody3(this.shipX, this.userYLoc);
-        
-        this.hp = 400;
-
-        
-        
+        this.yLoc = 50 * wUnit; //Starts off screen so ships can move up
+        this.xLoc = xLoc
+        this.body = new shipBody3(this.xLoc, this.yLoc);  
        
+        this.hp = 400;
+     
         }
         
         
