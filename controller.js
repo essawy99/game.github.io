@@ -180,19 +180,20 @@ start_home();
 
 var mouseLoc = new Point(center);
 view.onFrame = function(event) { //Actual animation loop
-   var game_return = game.update(mouseLoc);		
+   var gameReturn = game.update(mouseLoc);		
 
    
    // Game over
-   if(game_return == -1){
+   if(gameReturn == -1){
 	   console.log("game over")
-   }else if(game_return == 1){
+   }else if(gameReturn == 1){
 	   if(game.type == "campaign"){
 		   store(game.difficulty + 1);
 		   console.log("winner, CAMPAIGN")
 	   }else{
 			console.log("winner, survival")
 	   }
+	   start_home
    }
    //TODO: DHEVA implement menu
    
@@ -212,7 +213,7 @@ tool.onKeyDown = function(event) {
 		helpGame();
 	}
 	if (event.key == 'f') { //Create new cannon ball on f
-		buyCannon(game.user,game.cannonBalls);
+		game.buyCannon(game.user,game.cannonBalls);
 	}
 	//Give coins
 	if (event.key == "c"){
