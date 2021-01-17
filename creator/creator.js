@@ -1,14 +1,17 @@
+var currentDrawing;
+
 // next four lines initialize paper.js
 paper.install(window);
 window.onload = function() {
 var canvas = document.getElementById('myCanvas');
 paper.setup(canvas);
 
+
 // create tool for animations
 var tool = new Tool();
 
 // create objects that define the program
-var currentDrawing = new drawing();
+currentDrawing = new drawing();
 var currentGrid = new vhLines();
 
 // when you click down the program decides whether
@@ -55,4 +58,12 @@ tool.onKeyDown = function(event) {
     }  
 }
 
+
+        
+
 } // close bracket for paper.js
+
+function log(input) {
+    console.log(input);
+    currentDrawing.loadDrawing(input);
+}

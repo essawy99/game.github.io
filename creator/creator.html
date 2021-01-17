@@ -3,12 +3,25 @@
     <title>circle</title>
     
 </head>
+
+
 <body>
-    <canvas id = "myCanvas" style="left: 0px; top: 0px; position: absolute;" ></canvas>
+    <canvas id = "myCanvas" style="left: 600px; top: 0px; position: absolute;" ></canvas>
+
+    <p>Enter Amount Here:</p>
+<textarea type="text" id = input name="input" style="height: 222px; margin: 0px; width: 325px;"></textarea>
+<button class="button" onclick="log(document.getElementById('input').value)" style = "top: 10000px">Calculate!</button>
+<p>Final Amount</p>
+<div class="output">
+    <output for="roundedNumber" name="finalAmount"></output>
+</div>
 </body>
+
+
 
 <script type= "text/javascript" src="paper-full.js"></script>
     <script>
+        
         var win = window,
         doc = document,
         docElem = doc.documentElement,
@@ -16,7 +29,7 @@
         x = win.innerWidth || docElem.clientWidth || body.clientWidth,
         y = win.innerHeight|| docElem.clientHeight|| body.clientHeight;
         
-        document.getElementById("myCanvas").width = x;
+        document.getElementById("myCanvas").width = x - 300;
         document.getElementById("myCanvas").height = y; 
     
     </script>

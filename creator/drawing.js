@@ -83,19 +83,23 @@ class drawing {
     
     /* TODO: print directly function */
     
-    loadDrawing() {
-        var input = prompt("Enter Save-Code") ;
-        var processedInput;
+    loadDrawing(input) {
+        /* var input = prompt("Enter Save-Code") ; */
+
+        var processedInput ;
         for (let i = 0; i < input.length; i++) {
             if(input.charAt(i) != '\n') {
                 processedInput += input.charAt(i);
             }
         }
 
+        console.log(processedInput);
+
         var partsArray = processedInput.split('-');
         var i = 1;
         while(true) {
             if(partsArray[i] == "s") {
+                console.log("hi");
                 this.addNewShape();
                 i++;
                 i = this.shapeOfInterest.loadShape(partsArray, i);
