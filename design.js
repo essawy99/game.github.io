@@ -392,6 +392,7 @@ class plane {
 		this.path4.add( new Point(14.547413793103448* wUnit * this.size + this.xLoc, 117.45689655172413 * wUnit * this.size + this.yLoc));
 		this.path4.add( new Point(39.331896551724135* wUnit * this.size + this.xLoc, 123.92241379310344 * wUnit * this.size + this.yLoc));
 		this.path4.add( new Point(39.331896551724135* wUnit * this.size + this.xLoc, 134.69827586206895 * wUnit * this.size + this.yLoc));
+		console.log(this.path0);
 		
 	}
 

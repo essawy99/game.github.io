@@ -87,9 +87,9 @@ class EnemyShip {
         spawnPlane(enemy) {
             console.log('1');
             var chance = Math.random();
-            if(chance > .05) {
+            if(chance > .9995) {
                 console.log('2');
-                enemy.spawnPlane(this.shipX,this.userYLoc);
+                enemy.spawnPlane(this.xLoc,this.yLoc);
             }
 
         }

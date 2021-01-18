@@ -29,9 +29,12 @@ class EnemyPlanes {
 						}
                         plane.bombed = true;                   
                     }
-                        plane.body.update(0, 1*hUnit);                
+                    plane.body.update(0, 1*hUnit);                
                 }
                 // move position 1 unit forward
+                else{
+                    plane.body.update(0, 1*hUnit); 
+                }
                               
             }
         }
@@ -51,7 +54,6 @@ class EnemyPlanes {
     //-----------------------------------------------------------------
     /* generates plane at location xLoc,yLoc */
     spawnPlane(xLoc, yLoc) {
-        console.log('made it');
         this.array.push(new EnemyPlane(xLoc,yLoc));
     }
 
