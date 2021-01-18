@@ -1,4 +1,4 @@
-
+/* Object to store a user and it's necessary attributes */
 class User {
     constructor() {
        //Initialize user score and coins
@@ -83,7 +83,8 @@ class User {
     
        this.generateElectricity();
     }
-    
+    //-----------------------------------------------------------------
+    /* Generates electricity between ship and arc */
     generateElectricity(xPos) {
        this.sp++;
        if(this.sp % 2 == 0) {
@@ -165,7 +166,8 @@ class User {
         }
     }
     }
-    
+    //-----------------------------------------------------------------
+    /* Updates user position (ship,arc, and electricity) */
     update(point) {
        //Store previous move
        this.previousMove = this.arc.position.x - point.x; //Double check!
@@ -178,36 +180,45 @@ class User {
        this.shipBody.position.x = point.x;
     
     }
+    //-----------------------------------------------------------------
+    /* Function to update coins upon spending */
     spend_coins(cost){ // decrease coins upon spending
        this.coins -= cost;
     }
+    //-----------------------------------------------------------------
+    /* Function to update score */
     scoreUpdate(points){ // Update score and coins
        this.score += points;
        this.coins += points;
        document.getElementById("scoreDisplay").innerHTML = "Score: " + this.score;
-    document.getElementById("moneyDisplay").innerHTML = "Money: " + this.coins;
-    
-    if(this.coins >= 400) {
-     document.getElementById("buy").style.color = "#d63d22";
-     document.getElementById("buy").style.borderColor = "#d63d22";
-    } else if(this.coins < 400) {
-     document.getElementById("buy").style.borderColor = "grey";
-     document.getElementById("buy").style.color = "grey";
+        document.getElementById("moneyDisplay").innerHTML = "Money: " + this.coins;
+        
+        if(this.coins >= 400) {
+        document.getElementById("buy").style.color = "#d63d22";
+        document.getElementById("buy").style.borderColor = "#d63d22";
+        } else if(this.coins < 400) {
+        document.getElementById("buy").style.borderColor = "grey";
+        document.getElementById("buy").style.color = "grey";
+        }
     }
-    }
-    update_balls(num){ // Update number of balls
+    //-----------------------------------------------------------------
+    /* Update number of balls */
+    update_balls(num){
        this.num_balls += num;
     }
-    get_balls(){ //Return number of balls
+    //-----------------------------------------------------------------
+    /* Return number of balls */
+    get_balls(){ 
        return this.num_balls;
     }
-    
-    deleteAll() { //Does this delete everything?
-    this.shipBody.remove();
-    this.arc.remove();
-    this.connect.remove();
-    this.elecLeft.remove();
-    this.elecRight.remove();
+    //-----------------------------------------------------------------
+    /* Function to remove user object and attributes off screen  */
+    deleteAll() { 
+        this.shipBody.remove();
+        this.arc.remove();
+        this.connect.remove();
+        this.elecLeft.remove();
+        this.elecRight.remove();
     }
-    }
+}
     
