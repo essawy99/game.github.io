@@ -43,14 +43,14 @@ class Game{
     }
 
     update(mouseLoc) {	
-		if(gameStatus) {
-			this.cannonBalls.update(this.user, this.ships, this.planes);
-			this.ships.update(this.planes);
-			this.planes.update(this.health);
-			if(this.type != "home") {
+        console.log('updating');
+		this.cannonBalls.update(this.user, this.ships, this.planes);
+		this.ships.update(this.planes);
+		this.planes.update(this.health);
+		if(this.type != "home") {
 				this.user.update(mouseLoc)
 			}
-        }
+        
         //if game is over
         if(this.cannonBalls.ballsDead() || this.health <= 0){
             return -1;

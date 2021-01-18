@@ -36,7 +36,7 @@ var tools = new Tool();
 
 var game;
 
-function start_home(){
+function startHome(){
   game = new Game("home", 6);
   
 }
@@ -221,7 +221,7 @@ function goHome() {
 	document.getElementById("endBlock").style.display = "none";
 	document.getElementById("scoreDisplay").style.display = 'none';
 	document.getElementById("moneyDisplay").style.display = 'none';
-	start_home();
+	startHome();
 	document.getElementById("start").style.display = 'block'; //Not sure why but these buttons dont display after the first return to menu unless called again for some reason
 	document.getElementById("option").style.display = 'block';
 	document.getElementById("homeMenu").style.display = "block";
@@ -248,59 +248,65 @@ function game_screen(){
 
 // function starts up entire program
 
-start_home();
+startHome();
 
 var mouseLoc = new Point(center);
 
-function runGame() {
-		view.onFrame = function(event) { //Actual animation loop
 
-   var game_return = game.update(mouseLoc);		
-
-   
-   // Game over
-   if(game.type != "home") {
-		if(game_return == -1){
-		   console.log("game over")
-		   view.onFrame = null;
-		   
-		   document.getElementById("endText").innerHTML = "GAME OVER<br>SCORE: "+game.user.score;
+function gameOver() {
+	document.getElementById("endText").innerHTML = "GAME OVER<br>SCORE: "+game.user.score;
 		   document.getElementById("cont").style.display = "none";
 		   document.getElementById("reDo").style.top = "17.5vh";
 		   document.getElementById("menuFromGame").style.top = "27.5vh";
 		   document.getElementById("endBlock").style.display = "block";
 		   game.endGame();
-	   }else if(game_return == 1){
+}
+
+function youWin() {
+	store(game.difficulty + 1);
+	console.log("winner, CAMPAIGN");
+	view.onFrame = null;
+   
+	document.getElementById("endText").innerHTML = "Campaign Mission Completed!<br>SCORE: "+game.user.score;
+	document.getElementById("reDo").style.top = "12.5vh";
+	document.getElementById("cont").style.top = "22.5vh";
+	document.getElementById("cont").style.display = "display";
+	document.getElementById("menuFromGame").style.top = "32.5vh";
+	document.getElementById("endBlock").style.display = "block";
+	game.endGame()
+}
+
+startHome();
+view.onFrame = function(event) { //Actual animation loop
+
+   var game_return = game.update(mouseLoc);		
+
+   
+   
+   // Game over
+   if(game.type != "home") {
+		if(game_return == -1){
+		   gameOver();
+	   }
+	   else if(game_return == 1){
 		   if(game.type == "campaign"){
-				store(game.difficulty + 1);
-				console.log("winner, CAMPAIGN");
-				view.onFrame = null;
-			   
-				document.getElementById("endText").innerHTML = "Campaign Mission Completed!<br>SCORE: "+game.user.score;
-				document.getElementById("reDo").style.top = "12.5vh";
-				document.getElementById("cont").style.top = "22.5vh";
-				document.getElementById("cont").style.display = "display";
-				document.getElementById("menuFromGame").style.top = "32.5vh";
-				document.getElementById("endBlock").style.display = "block";
-		   }else{
-				console.log("winner, survival");
-				view.onFrame = null;
-				
-				document.getElementById("endText").innerHTML = "You Survived!<br>SCORE: "+game.user.score;
+				youWin();
+		   }
+		   else{
+				/* Can't win survival */
+			/* 	document.getElementById("endText").innerHTML = "You Survived!<br>SCORE: "+game.user.score;
 				document.getElementById("cont").style.display = "none";
 				document.getElementById("cont").style.display = "none";
 				document.getElementById("reDo").style.top = "17.5vh";
 				document.getElementById("menuFromGame").style.top = "27.5vh";
-				document.getElementById("endBlock").style.display = "block";
+				document.getElementById("endBlock").style.display = "block"; */
 		   }
-			game.endGame();
 	   }
-	   start_home
    }
    //TODO: DHEVA implement menu
    
  }
-}
+
 
 
 
@@ -330,4 +336,6 @@ tool.onKeyDown = function(event) {
 		gameStatus = 1;
 		runGame();
 	}
+
+	
 } 
