@@ -1,27 +1,40 @@
-//class that handles the creation of an enemy ship
+/* Object to store a game's ships */
 class EnemyShips {
     constructor(numShips) {
-        this.array = [];
-        this.numShips = 5;
-        var shipSpacing = ((w/2) - 50 * wUnit) / (this.numShips);
-        this.array.push(new EnemyShip(center)); 
+        this.array = []; //Array to store enemy ships
+        this.numShips = numShips;
+        var shipSpacing = ((w/2) - 50 * wUnit) / (this.numShips); //Spacing of ships
+        this.array.push(new EnemyShip(center));
+
+        //Add ships to array
         for(var i =1; i <= this.numShips; i++) {
             console.log("yo");
-            this.array.push(new EnemyShip(center - i * shipSpacing)); 
-            this.array.push(new EnemyShip(center + i * shipSpacing)); 
+            this.array.push(new EnemyShip(center - i * shipSpacing));
+            this.array.push(new EnemyShip(center + i * shipSpacing));
         }
     }
+    //-----------------------------------------------------------------
+    /* Updates ship position */
     update(enemy) {
         for(var i =0; i < this.numShips; i++) {
+            // If index is not null
             if(this.array[i] != null) {
-                this.array[i].spawnPlane(enemy);
+                // Spawn a plane based off of randomness
+                var chance = Math.random();
+                if(chance > .9995 && this.hp > 0) {
+                 enemy.spawnPlane(this.shipX,this.userYLoc);
+            }
            }
         }
     }
+    //-----------------------------------------------------------------
+    /* Remove ship path and set it's index in array to null */
     remove(index){
         this.array[index].body.remove();
         this.array[index] = null;
     }
+    //-----------------------------------------------------------------
+    /* Deal damage and check if hp of item is 0 if so, remove from array */
     takeDamage(damage, index, user) {
         //Deal damage and check if hp of item
         // is 0 if so, remove from array
@@ -32,15 +45,18 @@ class EnemyShips {
             user.scoreUpdate(400);
         }
     }
+    //-----------------------------------------------------------------
+    /* Remove all ship paths and set array to empty */
     deleteAll(){
-        var i;
-        for(i = 0;i<this.array.length;i++){
+        for(var i = 0;i<this.array.length;i++){
             this.array[i].body.remove()
         }
         this.array = [];
     }
 
-    move_ships(){
+    //-----------------------------------------------------------------
+    /* TODO/IN-PROGRESS: Move ships from off screen to position for animation */
+   /*  move_ships(){
         // Variable that shows where ships should stop moving
         var goal = 100 * hUnit;
 
@@ -56,11 +72,12 @@ class EnemyShips {
             }
             start += hUnit*10;
         }
-    }
-    // Checks if any ships are alive
+    } */
+
+    //-----------------------------------------------------------------
+    /* Checks if all ships are dead. If true return true otherwise return false */
     shipsDead(){
-        var j;
-        for(j = 0;j < this.array.length;j++){
+        for(var j = 0;j < this.array.length;j++){
             if(this.array[j] != null){
                 if(this.array[j].hp > 0){
                     return false;
@@ -71,24 +88,24 @@ class EnemyShips {
     }
 
 }
-
+//-----------------------------------------------------------------
+/* Object to store a ship and it's relevant data */
 class EnemyShip {
     constructor(xLoc) {
-        
+
         this.yLoc = 50 * wUnit; //Starts off screen so ships can move up
-        this.xLoc = xLoc
-        this.body = new shipBody3(this.xLoc, this.yLoc);  
-       
+        this.xLoc = xLoc;
+        this.body = new shipBody3(this.xLoc, this.yLoc);
+
         this.hp = 400;
-     
+
         }
-        
-        
+
+        //-----------------------------------------------------------------
+        /* Function that spawns a plane from object */
         spawnPlane(enemy) {
-            console.log('1');
             var chance = Math.random();
-            if(chance > .05) {
-                console.log('2');
+            if(chance > .9995 && this.hp > 0) {
                 enemy.spawnPlane(this.shipX,this.userYLoc);
             }
 
