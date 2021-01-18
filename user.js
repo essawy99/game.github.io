@@ -87,14 +87,14 @@ class User {
     /* Generates electricity between ship and arc */
     generateElectricity(xPos) {
        this.sp++;
-       if(this.sp % 2 == 0) {
+       if(this.sp % 1 == 0) {
     
        // lUnit contains 10 different points of the arc
        var lUnit = this.arc.length /10
     
        // Create 2 sources of electricity and 2 paths
-       this.sourceLeft = {x : this.shipBody.position.x + 5 * wUnit, y: this.shipBody.position.y};
-       this.sourceRight = {x : this.shipBody.position.x - 5 * wUnit, y: this.shipBody.position.y};
+       this.sourceLeft = {x : this.shipBody.position.x + 5 * wUnit, y: this.shipBody.position.y + 5 * wUnit};
+       this.sourceRight = {x : this.shipBody.position.x - 5 * wUnit, y: this.shipBody.position.y + 5 * wUnit};
        this.elecLeft = new Path();
        //this.elec.add(new Point(this.through.x, this.through.y));
        this.elecRight = new Path();
@@ -103,8 +103,8 @@ class User {
 
        this.elecLeft.strokeColor = 'blue';
        this.elecRight.strokeColor = 'blue';
-       this.elecLeft.strokeWidth = 2;
-       this.elecRight.strokeWidth = 2;
+       this.elecLeft.strokeWidth = 1;
+       this.elecRight.strokeWidth = 1;
        this.sp = 0;
        this.arc.strokeWidth = 2;
     
@@ -114,55 +114,36 @@ class User {
            var offset = this.arc.getPointAt(i*lUnit)
            // For left elec source
            if(i > 4){
+            var source = this.sourceLeft;
+           }
+           else {
+            var source = this.sourceRight;
+           }
 
             // Divide into 5 points
-            var distanceX = (offset.x - this.sourceLeft.x)/5;
-            var distanceY = (offset.y - this.sourceLeft.y)/5;
+            var distanceX = (offset.x - source.x)/5;
+            var distanceY = (offset.y - source.y)/5;
 
             //Store previous x and y
-            var previousX = this.sourceLeft.x;
-            var previousY = this.sourceLeft.y;
+            var originX = source.x;
+            var originY = source.y;
 
             for(var j = 0;j<5;j++){
                 //Random movement to create lightning effect
                 var random = (Math.random() * 10 * wUnit) - 5 * wUnit;
                 //Calculate current x and y point
-                var pointX = previousX + distanceX;
-                var pointY = previousY + distanceY;
+                var pointX = originX + distanceX;
+                var pointY = originY + distanceY;
 
                 //Add points to lightning path
                 this.elecLeft.add(new Point(pointX + random,pointY));
 
                 //Set previous points to points just added
-                previousX = pointX;
-                previousY = pointY;
+                originX = pointX;
+                originY = pointY;
             }
            }
-           // For right elec source
-           else{
-            // Divide into 5 points
-            var distanceX = (offset.x - this.sourceRight.x)/5;
-            var distanceY = (offset.y - this.sourceRight.y)/5;
-
-            //Store previous x and y
-            var previousX = this.sourceRight.x;
-            var previousY = this.sourceRight.y;
-
-            for(var j = 0;j<5;j++){
-                //Random movement to create lightning effect
-                var random = (Math.random() * 10 * wUnit) - 5 * wUnit;
-                //Calculate current x and y point
-                var pointX = previousX + distanceX;
-                var pointY = previousY + distanceY;
-
-                //Add points to lightning path
-                this.elecLeft.add(new Point(pointX + random,pointY));
-
-                //Set previous points to points just added
-                previousX = pointX;
-                previousY = pointY;
-            }
-           }
+           
         }
     }
     }
