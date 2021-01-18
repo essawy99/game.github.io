@@ -2,6 +2,8 @@
    to build new levels and move between different
    areas in the UI */
 
+
+//-----------------------------------------------------------------
 // set of functions required to set up paper.js
 paper.install(window);
 var canvas = document.getElementById('myCanvas');
@@ -28,15 +30,16 @@ function delete_all(){
    localStorage.clear();
 }
 
-//----------------------------------------------// 
+//-------------------- Functions to handle creation and deletion of screen items --------------------------// 
 
 
-
+/* Function that creates home page */
 function startHome(){
   game = new Game("home", 6);
   
 }
-//-------------------------------------------
+
+/* Function that ends the home screen to prepare for in-game */
 function endHome() {
 
   game.endGame();
@@ -47,6 +50,8 @@ function endHome() {
   document.getElementById('moneyDisplay').textContent = "Money: ";
 }	
 
+
+//---------------------------------------------------------------------------------------------------------
 //---------------Campaign functions----------------//
 let lvlSelect = 1;
 let unlocked = load_local();
@@ -56,6 +61,7 @@ function campaignMenu() {
 	document.getElementById("campaignLevelSelector").style.display = 'block';
 }
 
+/* Function that moves left on campaign selection menu */
 function left() {
 	if(lvlSelect > 1) {
 		document.getElementById("lvl").innerHTML = 'Level '+(--lvlSelect)+"<br><br>NUM ships";
@@ -67,6 +73,7 @@ function left() {
 	}
 }
 
+/* Function that moves right on campaign selection menu */
 function right() {
 	document.getElementById("lvl").innerHTML = 'Level '+(++lvlSelect)+"<br><br>NUM ships";
 	
@@ -76,6 +83,7 @@ function right() {
 	}
 }
 
+/* Function that handles creating campaign game object */
 function campaign(level){
    // Remove home first
    endHome();
@@ -97,18 +105,21 @@ function campaign(level){
    }
 	runGame();
 }
-//------------------------------------------------------
-function backMenu() { // Used by Campaign and Survival
+//--------------------- Campaign and Survival functions---------------------------------
+/* Function that goes back to previous selection */
+function backMenu() { 
 	document.getElementById("campaignLevelSelector").style.display = 'none';
 	document.getElementById("survivalDifSelector").style.display = 'none';
 	document.getElementById("homeMenu").style.display = 'block';
 }
 //---------------Survival functions----------------// 
+/* Function that creates survival menu */
 function survivalMenu() {
 	document.getElementById("homeMenu").style.display = 'none';
 	document.getElementById("survivalDifSelector").style.display = 'block';
 }
 
+/* Function that moves left on survival selection menu */
 function leftS() {
 	let txt = document.getElementById("dif").innerHTML;
 	console.log(txt);
@@ -122,6 +133,7 @@ function leftS() {
 	dif = document.getElementById("dif").innerHTML;
 }
 
+/* Function that moves right on survival selection menu */
 function rightS() {
 	let txt = document.getElementById("dif").innerHTML;
 	if(txt == 'easy') {
@@ -133,6 +145,8 @@ function rightS() {
 	}
 }
 
+
+/* Function that handles creating survival game object */
 function survival(diff){
    // Remove home first
     endHome();
@@ -149,6 +163,7 @@ function survival(diff){
 //------------------------------------------------------
 
 //---------------Help functions----------------//
+/* Function that handles displaying of help menu */
 function helpGame() {
 	if (instructions.style.display == "none") {
 		gameStatus = 0;
@@ -175,6 +190,7 @@ function helpGame() {
 	}
 }
 
+/* Function that handles moving right on help menu */
 function helpRight() {
 	let flag = 0;
 	for (let i = 1; i < 6; i++) {
@@ -186,6 +202,7 @@ function helpRight() {
 	}
 }
 
+/* Function that handles moving left on help menu */
 function helpLeft() {
 	let flag = 0;
 	for (let i = 6; i > 1; i--) {
@@ -198,7 +215,8 @@ function helpLeft() {
 }
 //-----------------------------------------------
 
-//---------------End functions----------------//
+//---------------End of Game Menu/Screen Functions----------------//
+/* Function that handles replaying the current mission */
 function replay() {
 	game = new Game(game.type,game.difficulty);
 	document.getElementById("endBlock").style.display = "none";
@@ -206,6 +224,7 @@ function replay() {
 	document.getElementById("moneyDisplay").innerHTML = '';
 	runGame();
 }
+/* Function that handles moving to the next mission */
 function next() {
 	game = new Game(game.type,game.difficulty+1);
 	document.getElementById("endBlock").style.display = "none";
@@ -213,6 +232,7 @@ function next() {
 	document.getElementById("moneyDisplay").innerHTML = '';
 	runGame();
 }
+/* Function that returns player to menu */
 function goHome() {
 	document.getElementById("endBlock").style.display = "none";
 	document.getElementById("scoreDisplay").style.display = 'none';
@@ -223,31 +243,6 @@ function goHome() {
 	document.getElementById("homeMenu").style.display = "block";
 	runGame();
 }
-
-//-----------------------------------------------
-
-// Function that sets up game screen
-function game_screen(){
-	document.getElementById("start").style.display = 'none';
-	document.getElementById("option").style.display = 'none';
-	document.getElementById("help1").style.display = 'none';
-	
-	document.getElementById("help").style.display = 'block';
-	document.getElementById("pause").style.display = 'block';
-	document.getElementById("buy").style.display = 'block';
-	
-	document.getElementById("scoreDisplay").style.display = 'block';
-	document.getElementById("moneyDisplay").style.display = 'block';
-}
-
-
-
-// function starts up entire program
-
-
-
-var mouseLoc = new Point(center);
-
 
 function gameOver() {
 	document.getElementById("endText").innerHTML = "GAME OVER<br>SCORE: "+game.user.score;
@@ -271,6 +266,29 @@ function youWin() {
 	document.getElementById("endBlock").style.display = "block";
 	game.endGame()
 }
+
+//------------------- Game Screen Setup Functions ----------------------------
+
+/* Function that sets up game screen */
+function game_screen(){
+	document.getElementById("start").style.display = 'none';
+	document.getElementById("option").style.display = 'none';
+	document.getElementById("help1").style.display = 'none';
+	
+	document.getElementById("help").style.display = 'block';
+	document.getElementById("pause").style.display = 'block';
+	document.getElementById("buy").style.display = 'block';
+	
+	document.getElementById("scoreDisplay").style.display = 'block';
+	document.getElementById("moneyDisplay").style.display = 'block';
+}
+
+
+
+
+//------------------- In Game Processes ----------------------------
+// Variable that sets user cursor to center of game screen
+var mouseLoc = new Point(center);
 
 // required for mouse/keyboard interaction
 var tools = new Tool();
