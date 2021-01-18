@@ -31,8 +31,8 @@ class EnemyPlanes {
                     }
                         plane.body.update(0, 1*hUnit);                
                 }
-                // move position1 unit forward
-                plane.body.update(0, 1*hUnit);                
+                // move position 1 unit forward
+                              
             }
         }
     }
@@ -51,6 +51,7 @@ class EnemyPlanes {
     //-----------------------------------------------------------------
     /* generates plane at location xLoc,yLoc */
     spawnPlane(xLoc, yLoc) {
+        console.log('made it');
         this.array.push(new EnemyPlane(xLoc,yLoc));
     }
 

@@ -14,10 +14,7 @@ class EnemyShips {
     update(enemy) {
         for(var i =0; i < this.numShips; i++) {
             if(this.array[i] != null) {
-                var chance = Math.random();
-                if(chance > .9995 && this.hp > 0) {
-                 enemy.spawnPlane(this.shipX,this.userYLoc);
-            }
+                this.array[i].spawnPlane(enemy);
            }
         }
     }
@@ -88,8 +85,10 @@ class EnemyShip {
         
         
         spawnPlane(enemy) {
+            console.log('1');
             var chance = Math.random();
-            if(chance > .9995 && this.hp > 0) {
+            if(chance > .05) {
+                console.log('2');
                 enemy.spawnPlane(this.shipX,this.userYLoc);
             }
 

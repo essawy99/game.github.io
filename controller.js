@@ -30,11 +30,7 @@ function delete_all(){
 
 //----------------------------------------------// 
 
-// required for mouse/keyboard interaction
-var tools = new Tool();
 
-
-var game;
 
 function startHome(){
   game = new Game("home", 6);
@@ -248,7 +244,7 @@ function game_screen(){
 
 // function starts up entire program
 
-startHome();
+
 
 var mouseLoc = new Point(center);
 
@@ -276,10 +272,18 @@ function youWin() {
 	game.endGame()
 }
 
+// required for mouse/keyboard interaction
+var tools = new Tool();
+var game;
 startHome();
+var blah = 0;
 view.onFrame = function(event) { //Actual animation loop
 
-   var game_return = game.update(mouseLoc);		
+   blah++ 
+   var game_return = 0;
+	if(blah % 10 == 0) {
+		game_return = game.update(mouseLoc);	
+	}
 
    
    

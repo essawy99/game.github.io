@@ -3,12 +3,12 @@ class CannonBalls {
         this.home = home;
         this.array = [];
         this.array.push(new CannonBall(500 *wUnit,500 *hUnit, this.home));
+        this.timeAlive = 0;
     }
     
     /* Iterates through each live cannonball, checks for
     collisions and updates location */
     update(user,ships,planes) {
-        
         // iterates through each cannonball
         for(var i = 0; i < this.array.length; i++) {
             
@@ -67,21 +67,28 @@ class CannonBalls {
 class CannonBall {
     constructor(xLoc, yLoc, home) {
 		this.home = home; // Used for home screen
-        this.velocity = 3 * hUnit;
+        this.velocity = 4 * hUnit;
         //If ball is above beach
         this.alive = true;
         this.cannon = new Path.Circle({
             center: new paper.Point(xLoc, yLoc),
-            radius: 3* hUnit,
+            radius: 3 * hUnit,
             fillColor: 'black'
         });
-        this.x_vel = 0;
-        this.y_vel = 7* hUnit;
+        this.x_vel = 0 * hUnit;
+        this.y_vel = 10 * hUnit;
+        this.timeAlive = 0;
     }
 
     /* only function to be used outside of class (public)
     checks for colisions then updates cannonBall position */
     update(user,ships,planes) {
+        // if too much time has passed with no collision
+        // with arc create a random collision
+        this.timeAlive++;
+        if(this.timeAlive > 1000) {
+            this.collision(45);
+        }
         // slightly accelerates ball each frame
         this.velocity += .001 * hUnit;
         // checks for colisions that would change direction  
@@ -179,7 +186,7 @@ class CannonBall {
     checkArcCollisons(user, line) {
         
 		if(line.intersects(user.arc)){ //Check if ball and arc touch
-				
+            this.timeAlive = 0;              // reset time since last collision	
 			// Get first intersection between line and arc
 			var point = line.getIntersections(user.arc)[0].point;
 			
