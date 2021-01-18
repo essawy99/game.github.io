@@ -1,3 +1,4 @@
+/* Object that stores game and necessary attributes */
 class Game{
     
     constructor(type,difficulty){
@@ -40,7 +41,8 @@ class Game{
             this.cannonBalls = new CannonBalls(false);
         }
     }
-
+    //-----------------------------------------------------------------
+    /* Update game state */
     update(mouseLoc) {	
         var start = performance.now();
         this.cannonBalls.update(this.user, this.ships, this.planes);
@@ -77,12 +79,15 @@ class Game{
         return 0; // If game is still continuing 
     }
 
+    //-----------------------------------------------------------------
+    /* Purchase cannon function */
     buyCannon() {
         this.user.coins -= 400;
         this.cannonBalls.addBall(this.user);
     }
-
-    endGame() { //returns true if level is done else if not
+    //-----------------------------------------------------------------
+    /* Removes all objects on screen when called */
+    endGame() {
         if(this.type != "home") {
 			this.health.deleteAll();
         	this.user.deleteAll();

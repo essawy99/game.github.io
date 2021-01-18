@@ -6,10 +6,11 @@ class CannonBalls {
         this.array.push(new CannonBall(500 *wUnit,500 *hUnit, this.home));
         this.timeAlive = 0;
     }
-
-    /* Iterates through each live cannonball, checks for
-    collisions and updates location */
+    //-----------------------------------------------------------------
+    /* Function to update cannonballs */
     update(user,ships,planes) {
+        /* Iterates through each live cannonball, checks for
+        collisions and updates location */
         // iterates through each cannonball
         var array = [];
         for(var i = 0; i < this.array.length; i++) {
@@ -33,7 +34,8 @@ class CannonBalls {
         }
         console.log(this.array);
     }
-    //Function to check if any balls are alive
+    //-----------------------------------------------------------------
+    /* Function to check if any balls are alive - returns false if there are- else true */
     ballsDead(){
         var i;
         for(i = 0;i<this.array.length;i++){
@@ -46,12 +48,14 @@ class CannonBalls {
         return true;
     }
 
-    /* iterates through ship array and adds new
-    cannon to a null location. if there are no null
-    locations it pushes a cannonBall to a new location
-    Function constructs cannonBall at the location of the
-    cannon*/
+    //-----------------------------------------------------------------
+    /* Function to add ball */
     addBall(user) {
+        /* iterates through ship array and adds new
+        cannon to a null location. if there are no null
+        locations it pushes a cannonBall to a new location
+        Function constructs cannonBall at the location of the
+        cannon*/
         for(var i = 0; i < this.array.length; i++) {
             if(this.array[i] == null) {
                 this.array[i] =
@@ -62,7 +66,8 @@ class CannonBalls {
         this.array.push(new CannonBall(user.arc.position.x, user.arc.position.y - 100, this.home));
     }
 
-    /* function destroys all cannonBalls */
+    //-----------------------------------------------------------------
+    /* Function to destroy/delete all cannonballs */
     deleteAll() {
         for(var i = 0; i < this.array.length; i++) {
             if(this.array[i] == null) {
@@ -72,6 +77,8 @@ class CannonBalls {
     }
 }
 
+//-----------------------------------------------------------------
+/* Object to store a cannonball and all of its attributes */
 class CannonBall {
     constructor(xLoc, yLoc, home) {
 		this.home = home; // Used for home screen
@@ -88,7 +95,9 @@ class CannonBall {
         this.timeAlive = 0;
     }
 
-    /* only function to be used outside of class (public)
+    //-----------------------------------------------------------------
+    /* Function to update a cannonball
+    NOTE: only function to be used outside of class (public)
     checks for colisions then updates cannonBall position */
     update(user,ships,planes) {
         // if too much time has passed with no collision
@@ -112,7 +121,8 @@ class CannonBall {
         }
     }
 
-    /* Method bounces the ball off the angle inputted into the function
+    //-----------------------------------------------------------------
+    /* Function bounces the ball off the angle inputted into the function
        using vector multiplication */
     collision(ang){
         var angle = (ang*Math.PI) / 180; // calculates angle in radians
@@ -131,11 +141,13 @@ class CannonBall {
         this.x_vel -= d * n.x;           //Formula to get x velocity
         this.y_vel -= d * n.y;           //Formula to get y velocity
     }
-
+    //-----------------------------------------------------------------
+    /* Function to calculate dot product */
     dot(v1, v2) {                        //Dot multiply function
         return v1.x * v2.x + v1.y * v2.y
     }
-
+    
+    //-----------------------------------------------------------------
     /* function checks for colisons between ball and user/ships/planes/walls
         function automatically updates accordingly */
     check(user,ships,planes){
@@ -169,7 +181,8 @@ class CannonBall {
         return this.checkWallCollisions();
     }
 
-    /* Checks fo wall collisons returns false if the ball
+    //-----------------------------------------------------------------
+    /* Function checks for wall collisons returns false if the ball
     falls through bottom of screen. In home screen ball
     bounces off of bottom */
     checkWallCollisions() {
@@ -189,7 +202,10 @@ class CannonBall {
         }
     }
 
-    /* if not in home screen we bounce ball off of arc. If the ball
+
+    //-----------------------------------------------------------------
+    /* Function to check collisions between user's arc and cannonball
+    NOTE:if not in home screen we bounce ball off of arc. If the ball
         and arc makes contact the ball direction changes to the normal
         vector of the point of intersection between the two */
     checkArcCollisons(user, line) {
@@ -258,6 +274,8 @@ class CannonBall {
         }
 	}
 
+    //-----------------------------------------------------------------
+    /* Function to check collisions between enemy objects and cannonball */
     checkEnemyCollisions(container, line, user) {
 
         // array containin ships/planes
@@ -290,7 +308,8 @@ class CannonBall {
         }
     }
 
-    /* Simple function to remove ball */
+    //-----------------------------------------------------------------
+    /* Function to remove a cannonball object */
     remove() {
         this.cannon.remove();
     }

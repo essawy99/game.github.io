@@ -1,8 +1,14 @@
 //-----------------------------------------------------------------
+/* File stores functions that control game */
+//-----------------------------------------------------------------
 
+// Load instructions variable with help text
 let instructions = document.getElementById("helpText");
-//----------------------------------------------------------------- Switches game state, which is checked at the beginning of each
-function pauseGame() {//											animation loop- will trigger pause
+//----------------------------------------------------------------- 
+/* Function to pause game:
+	switches game state, which is checked at the beginning of each
+	animation loop- will trigger pause */
+function pauseGame() {//											
 	if (gameStatus) {
 		gameStatus = 0;
 		return;
@@ -17,9 +23,10 @@ function pauseGame() {//											animation loop- will trigger pause
 //-----------------------------------------------------------------
 
 
-//----------------------------------------------------------------- Pauses game and displays help text- TODO: Currently dummy text,
+//----------------------------------------------------------------- 
+/* Function pauses game and displays help text */
 
-function helpGame() {//												NEED TO PUT IN ACTUAL INSTRUCTIONS
+function helpGame() {//												
 
 	if (gameStatus || (!gameStatus && instructions.style.display == "none")) {
 		gameStatus = 0;
@@ -34,58 +41,4 @@ function helpGame() {//												NEED TO PUT IN ACTUAL INSTRUCTIONS
 		gameStatus = 1;
 		return;
 	}
-}
-//-----------------------------------------------------------------
-function buyCannon(player,cannonballs) {
-	if(player.coins >= 400) {
-		player.spend_coins(400);
-		player.scoreUpdate(0);
-		document.getElementById("moneyDisplay").innerHTML = "Money: " + player.coins;
-		
-		cannonballs.addBall(player);  // cannonball
-	}
-}
-
-
-function endGame(user) {
-	view.onFrame = null;
-	
-	// Change inner html to real score before display
-	document.getElementById("endText").innerHTML = "GAME OVER" + "<br>" + "SCORE: " + user.score; 
-	document.getElementById("endText").style.display = "block";
-}
-
-//-----------------------------------------------------------------
-
- // Function to check if all balls are dead
- function dead_balls(array){
-	// For loop to loop and check array[i].alive value
-	var i;
-	for(i = 0;i<array.length;i++){
-		if(array[i].alive == true){
-			// If there is an alive ball return false
-			return false;
-		}
-	}
-	return true;
-}
-
-
-
-//-----------------------------------------------------------------
-// Check if there are any more balls or health
-function gameState(ball_array,health,user1){
-	// If health is 0 return true
-	if(health._health <= 0){
-		console.log("No health: " + health._health)
-		return true;
-	}
-	// If there are no more balls
-	// And ball_array has no alive balls
-	// Then return true
-	if(user1.get_balls() <= 0 && dead_balls(ball_array)){
-		return true;
-	}
-	//Otherwise return false
-	return false;
 }

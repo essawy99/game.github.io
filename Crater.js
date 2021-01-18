@@ -1,3 +1,4 @@
+/* Object to create crater (explosion) objects and store it's attributes */
 class Crater {
 	constructor(point) {
 		let explosion = this._generateExplosion(point, h/40, h/20);
@@ -11,6 +12,8 @@ class Crater {
 	get center() { return this.crator.center; }
 	get craterObjects() { return Crater.craterArray; }
 	
+	//-----------------------------------------------------------------
+    /* Function to generate explosion */
 	_generateExplosion(point, innerR, outerR) {
 		const xVarOuter = Math.cos(Math.PI/4)*outerR;
 		const yVarOuter = Math.sin(Math.PI/4)*outerR;
