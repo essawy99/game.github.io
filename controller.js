@@ -1,3 +1,4 @@
+
 /* A set of functions called by buttons in the UI 
    to build new levels and move between different
    areas in the UI */
@@ -141,7 +142,6 @@ function survival(diff){
    game_screen();
 
 
-   difficulty = "easy";
    //Start Game
    
    game = new Game("survival",diff); //changed "medium" to variable diff for input difficulty
@@ -248,6 +248,7 @@ function game_screen(){
 
 var mouseLoc = new Point(center);
 
+//------End Game Functions------------------------//
 
 function gameOver() {
 	document.getElementById("endText").innerHTML = "GAME OVER<br>SCORE: "+game.user.score;
@@ -285,7 +286,9 @@ view.onFrame = function(event) { //Actual animation loop
 	if(blah % 10 == 0) {
 			
 	} */
+	var start = performance.now();
 	gameReturn = game.update(mouseLoc);
+	
 
    
    
@@ -297,6 +300,7 @@ view.onFrame = function(event) { //Actual animation loop
 	   else if(gameReturn == 1){
 		   if(game.type == "campaign"){
 				youWin();
+				console.log("KSDFJDLKSJF");
 		   }
 		   else{
 				/* Can't win survival */
@@ -310,7 +314,16 @@ view.onFrame = function(event) { //Actual animation loop
 	   }
    }
    //TODO: DHEVA implement menu
-   
+   var end = performance.now();
+	console.log('time to complete frame' + (end-start));
+	var x = (1/event.delta);
+	if(x > 60) {
+		console.log(60);
+	}
+	else {
+		console.log(x);
+	}
+
  }
 
 

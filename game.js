@@ -1,33 +1,32 @@
 class Game{
     
     constructor(type,difficulty){
-        console.log(difficulty)
         // record game type and difficulty
         this.type = type;
         this.difficulty = difficulty;
         // figure out number of ships to generate
         // based on parameters
-        var numShips;
+        this.numShips;
         if(type == "campaign") {
-            numShips = 2 * difficulty;
+            this.numShips = 2 * difficulty;
         }
         else if(difficulty == "easy"){
-            numShips = 10;
+            this.numShips = 10;
         }
         else if(difficulty == "medium"){
-            numShips = 20;
+            this.numShips = 20;
         }
         else if(difficulty == "hard"){
-            numShips = 30;
+            this.numShips = 30;
         }
         else {
-            numShips = 6;
+            this.numShips = 6;
         }
         
         //Create background
         this.back = new Background(); //Beach
         this.tanks = new Tanks(10); //Friendly tanks
-        this.ships = new EnemyShips(numShips); //A new ship per level
+        this.ships = new EnemyShips(this.numShips); //A new ship per level
         this.planes = new EnemyPlanes();
 
         if(type == "home") {
@@ -43,21 +42,37 @@ class Game{
     }
 
     update(mouseLoc) {	
-        console.log('updating');
-		this.cannonBalls.update(this.user, this.ships, this.planes);
-		this.ships.update(this.planes);
-		this.planes.update(this.health);
-		if(this.type != "home") {
+        var start = performance.now();
+        this.cannonBalls.update(this.user, this.ships, this.planes);
+        var end = performance.now();
+        console.log('cannonBall:' + (start-end));
+        start = performance.now();
+        this.ships.update(this.planes);
+        end = performance.now();
+        console.log('ship:' + (start-end));
+        start = performance.now();
+        this.planes.update(this.health);
+        end = performance.now();
+	    console.log('plane :' + (start-end));
+        start = performance.now();
+        if(this.type != "home") {
 				this.user.update(mouseLoc)
 			}
-        
+        end = performance.now();
+        console.log('plane :' + (start-end));
         //if game is over
         if(this.cannonBalls.ballsDead() || this.health <= 0){
             return -1;
         }
         // if you win
-        if(this.ships.shipsDead() && this.planes.planesDead()){
-            return 1;
+        if(this.ships.shipsDead()){
+            if(this.type == "survival") {
+                this.numShips *= 2;
+                this.ships = new EnemyShips(this.numShips)
+            }
+            else if(this.planes.planesDead()){
+                return 1;
+            }
         }
         return 0; // If game is still continuing 
     }

@@ -77,11 +77,9 @@ class EnemyShips {
     //-----------------------------------------------------------------
     /* Checks if all ships are dead. If true return true otherwise return false */
     shipsDead(){
-        for(var j = 0;j < this.array.length;j++){
-            if(this.array[j] != null){
-                if(this.array[j].hp > 0){
-                    return false;
-                }
+        for(var i = 0; i < this.array.length; i++){
+            if(this.array[i] != null){
+                return false;
             }
         }
         return true;

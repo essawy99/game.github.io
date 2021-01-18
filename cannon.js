@@ -1,3 +1,4 @@
+/* HUNT FOR MEMORY LEAK */
 class CannonBalls {
     constructor(home) {
         this.home = home;
@@ -10,8 +11,14 @@ class CannonBalls {
     collisions and updates location */
     update(user,ships,planes) {
         // iterates through each cannonball
+        var array = [];
         for(var i = 0; i < this.array.length; i++) {
-
+            var cannonBall = this.array[i];
+            if(cannonBall.update(user,ships,planes)) {
+                cannonBall.remove();
+                this.array.splice(i,1);
+            }
+            /* var start = performance.now();
             var cannonBall = this.array[i]
             // make sure a ball exists in that location
             if(cannonBall != null) {
@@ -19,11 +26,12 @@ class CannonBalls {
                 // if the ball is destroyed it will return true
                 // triggering code to nullify that array position
 
-                if(cannonBall.update(user,ships,planes)) {
-                    this.shipArray[i] = null
-                }
+                
             }
+            var end = performance.now();
+            array.push((end-start)); */
         }
+        console.log(this.array);
     }
     //Function to check if any balls are alive
     ballsDead(){
@@ -96,6 +104,12 @@ class CannonBall {
         // update location of ball based on x and y velocity
         this.cannon.position.x += this.x_vel;
         this.cannon.position.y += this.y_vel;
+        if(this.cannon.position.y > 1000*hUnit) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     /* Method bounces the ball off the angle inputted into the function
@@ -140,7 +154,10 @@ class CannonBall {
         }
         //Check for collisions with ships and planes
         // using general CheckEnemyCollisoins fucntion
-        this.checkEnemyCollisions(ships, line, user);
+        
+        if(this.cannon.position.y < 500 * hUnit) {
+            this.checkEnemyCollisions(ships, line, user);
+        }
         this.checkEnemyCollisions(planes, line, user);
 
 
@@ -169,14 +186,6 @@ class CannonBall {
         // if home screen ball bounces off bottom
         if(this.cannon.position.y >= h && this.home) {
 			this.collision(180);
-        }
-        // in this situation we kill the ball
-        else if(this.cannon.position.y >= h){
-            // Remove cannon ball when it hits bottom of screen
-            this.cannon.remove();
-            // Set ball to 'dead'
-            this.alive = false;
-            return false;
         }
     }
 

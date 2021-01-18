@@ -61,18 +61,18 @@ class EnemyPlanes {
     /* dremoves all plane paths from screen*/
     deleteAll(){
         for(var i = 0;i<this.array.length;i++){
-            this.array[i].body.remove();
+            if(this.array[i] != null) {
+                this.array[i].body.remove();
+            }
         }
         this.array = [];
     }
     //-----------------------------------------------------------------
     /* Checks if any planes are alive */
     planesDead(){
-        for(var i = 0;this.array.length;i++){
+        for(var i = 0; i < this.array.length; i++){
             if(this.array[i] != null){
-                if(this.array[i].bombed == false){
-                    return false;
-                }
+                return false;
             }
         }
         return true;
