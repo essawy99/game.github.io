@@ -86,79 +86,72 @@ class User {
     //-----------------------------------------------------------------
     /* Generates electricity between ship and arc */
     generateElectricity(xPos) {
-       this.sp++;
-       if(this.sp % 1 == 0) {
-    
        // lUnit contains 10 different points of the arc
-       var lUnit = this.arc.length /10
+       var lUnit = this.arc.length / 10;
     
        // Create 2 sources of electricity and 2 paths
-       this.sourceLeft = {x : this.shipBody.position.x + 5 * wUnit, y: this.shipBody.position.y + 5 * wUnit};
-       this.sourceRight = {x : this.shipBody.position.x - 5 * wUnit, y: this.shipBody.position.y + 5 * wUnit};
-       this.elecLeft = new Path();
-       //this.elec.add(new Point(this.through.x, this.through.y));
-       this.elecRight = new Path();
-       this.elecLeft.add(new Point(this.sourceLeft.x,this.sourceLeft.y));
-       this.elecRight.add(new Point(this.sourceRight.x,this.sourceRight.y));
-
-       this.elecLeft.strokeColor = 'blue';
-       this.elecRight.strokeColor = 'blue';
-       this.elecLeft.strokeWidth = 1;
-       this.elecRight.strokeWidth = 1;
-       this.sp = 0;
-       this.arc.strokeWidth = 2;
+       this.sourceLeft = {x : this.shipBody.position.x + 20 * wUnit, y: this.shipBody.position.y };
+       this.sourceRight = {x : this.shipBody.position.x - 20 * wUnit, y: this.shipBody.position.y };
+       this.electricity = [];
+       
+       this.arc.strokeWidth = 1;
     
     
-       for(var i = 0; i < 10; i++) {
-           // Get offset of arc based on i value
-           var offset = this.arc.getPointAt(i*lUnit)
+       for(var i = 0; i < 12; i++) {
+           this.electricity.push(new Path());
+           this.electricity[i].strokeColor = 'blue';
+           this.electricity[i].strokeWidth = 1;
+           var point = i;
+           
            // For left elec source
-           if(i > 4){
+           if(i > 5){
             var source = this.sourceLeft;
+            point--;
            }
            else {
             var source = this.sourceRight;
            }
 
+           // Get offset of arc based on i value
+           var offset = this.arc.getPointAt(point*lUnit);
+
             // Divide into 5 points
             var distanceX = (offset.x - source.x)/5;
             var distanceY = (offset.y - source.y)/5;
 
-            //Store previous x and y
-            var originX = source.x;
-            var originY = source.y;
-
-            for(var j = 0;j<5;j++){
+            this.electricity[i].add(new Point(source.x ,source.y));
+            console.log(this.electricity[i])
+            for(var j = 1;j<4;j++) {
                 //Random movement to create lightning effect
                 var random = (Math.random() * 10 * wUnit) - 5 * wUnit;
                 //Calculate current x and y point
-                var pointX = originX + distanceX;
-                var pointY = originY + distanceY;
+                var pointX = source.x + distanceX * j;
+                var pointY = source.y + distanceY * j;
 
                 //Add points to lightning path
-                this.elecLeft.add(new Point(pointX + random,pointY));
+                this.electricity[i].add(new Point(pointX + random,pointY));
 
-                //Set previous points to points just added
-                originX = pointX;
-                originY = pointY;
             }
+            this.electricity[i].add(new Point(offset.x ,offset.y));
            }
            
-        }
+        
     }
-    }
+    
     //-----------------------------------------------------------------
     /* Updates user position (ship,arc, and electricity) */
     update(point) {
        //Store previous move
        this.previousMove = this.arc.position.x - point.x; //Double check!
-       this.elecLeft.remove();
-       this.elecRight.remove();
+       for(var i = 0; i < this.electricity.length; i++) {
+           this.electricity[i].remove()
+       }
+       console.log('hi');
        this.arc.strokeWidth = 0;
-       this.generateElectricity(point.x);
        this.arc.position.x = point.x;
        this.connect.position.x = point.x;
        this.shipBody.position.x = point.x;
+       this.generateElectricity(point.x);
     
     }
     //-----------------------------------------------------------------
