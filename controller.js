@@ -276,23 +276,25 @@ function youWin() {
 var tools = new Tool();
 var game;
 startHome();
-var blah = 0;
+/* var blah = 0; */
 view.onFrame = function(event) { //Actual animation loop
 
-   blah++ 
-   var game_return = 0;
+    
+   var gameReturn = 0;
+   /* blah++
 	if(blah % 10 == 0) {
-		game_return = game.update(mouseLoc);	
-	}
+			
+	} */
+	gameReturn = game.update(mouseLoc);
 
    
    
    // Game over
    if(game.type != "home") {
-		if(game_return == -1){
+		if(gameReturn == -1){
 		   gameOver();
 	   }
-	   else if(game_return == 1){
+	   else if(gameReturn == 1){
 		   if(game.type == "campaign"){
 				youWin();
 		   }
