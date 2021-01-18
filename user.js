@@ -86,35 +86,91 @@ class User {
     
     generateElectricity(xPos) {
        this.sp++;
-       //console.log('made');
        if(this.sp % 2 == 0) {
     
+       // lUnit contains 10 different points of the arc
        var lUnit = this.arc.length /10
-       var l = 0;
     
-    
-       this.elecSource = {x : this.shipBody.position.x - 5 * wUnit, y: this.shipBody.position.y};
-       this.elec = new Path();
-       this.elec.add(new Point(this.through.x, this.through.y));
-       this.elec.strokeColor = 'blue';
-       this.elec.strokeWidth = 2;
+       // Create 2 sources of electricity and 2 paths
+       this.sourceLeft = {x : this.shipBody.position.x + 5 * wUnit, y: this.shipBody.position.y};
+       this.sourceRight = {x : this.shipBody.position.x - 5 * wUnit, y: this.shipBody.position.y};
+       this.elecLeft = new Path();
+       //this.elec.add(new Point(this.through.x, this.through.y));
+       this.elecRight = new Path();
+       this.elecLeft.add(new Point(this.sourceLeft.x,this.sourceLeft.y));
+       this.elecRight.add(new Point(this.sourceRight.x,this.sourceRight.y));
+
+       this.elecLeft.strokeColor = 'blue';
+       this.elecRight.strokeColor = 'blue';
+       this.elecLeft.strokeWidth = 2;
+       this.elecRight.strokeWidth = 2;
        this.sp = 0;
        this.arc.strokeWidth = 2;
     
     
-       for(var i = 0; i < 4; i++) {
-           var random = (Math.random() * 10 * wUnit) - 5 * wUnit;
-           var off = (this.through.y - this.to.y) / 4
-           this.elec.add(new Point(this.through.x + random, this.through.y - off * i));
-       }
-       this.elec.add(this.elecSource.x, this.elecSource.y);
+       for(var i = 0; i < 10; i++) {
+           // Get offset of arc based on i value
+           var offset = this.arc.getPointAt(i*lUnit)
+           // For left elec source
+           if(i > 4){
+
+            // Divide into 5 points
+            var distanceX = (offset.x - this.sourceLeft.x)/5;
+            var distanceY = (offset.y - this.sourceLeft.y)/5;
+
+            //Store previous x and y
+            var previousX = this.sourceLeft.x;
+            var previousY = this.sourceLeft.y;
+
+            for(var j = 0;j<5;j++){
+                //Random movement to create lightning effect
+                var random = (Math.random() * 10 * wUnit) - 5 * wUnit;
+                //Calculate current x and y point
+                var pointX = previousX + distanceX;
+                var pointY = previousY + distanceY;
+
+                //Add points to lightning path
+                this.elecLeft.add(new Point(pointX + random,pointY));
+
+                //Set previous points to points just added
+                previousX = pointX;
+                previousY = pointY;
+            }
+           }
+           // For right elec source
+           else{
+            // Divide into 5 points
+            var distanceX = (offset.x - this.sourceRight.x)/5;
+            var distanceY = (offset.y - this.sourceRight.y)/5;
+
+            //Store previous x and y
+            var previousX = this.sourceRight.x;
+            var previousY = this.sourceRight.y;
+
+            for(var j = 0;j<5;j++){
+                //Random movement to create lightning effect
+                var random = (Math.random() * 10 * wUnit) - 5 * wUnit;
+                //Calculate current x and y point
+                var pointX = previousX + distanceX;
+                var pointY = previousY + distanceY;
+
+                //Add points to lightning path
+                this.elecLeft.add(new Point(pointX + random,pointY));
+
+                //Set previous points to points just added
+                previousX = pointX;
+                previousY = pointY;
+            }
+           }
+        }
     }
     }
     
     update(point) {
        //Store previous move
        this.previousMove = this.arc.position.x - point.x; //Double check!
-       this.elec.remove();
+       this.elecLeft.remove();
+       this.elecRight.remove();
        this.arc.strokeWidth = 0;
        this.generateElectricity(point.x);
        this.arc.position.x = point.x;
@@ -150,7 +206,8 @@ class User {
     this.shipBody.remove();
     this.arc.remove();
     this.connect.remove();
-    this.elec.remove();
+    this.elecLeft.remove();
+    this.elecRight.remove();
     }
     }
     
