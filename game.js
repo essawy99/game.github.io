@@ -12,16 +12,16 @@ class Game{
             this.numShips = 2 * difficulty;
         }
         else if(difficulty == "easy"){
-            this.numShips = 10;
+            this.numShips = 2;
         }
         else if(difficulty == "medium"){
-            this.numShips = 20;
+            this.numShips = 2;
         }
         else if(difficulty == "hard"){
-            this.numShips = 30;
+            this.numShips = 2;
         }
         else {
-            this.numShips = 6;
+            this.numShips = 2;
         }
         
         //Create background

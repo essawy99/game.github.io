@@ -46,7 +46,7 @@ class EnemyPlanes {
         this.array[index].hp -= damage;      
         if(this.array[index].hp <= 0){
             this.array[index].body.remove();
-            this.array[i] = null;
+            this.array[index] = null;
             user.scoreUpdate(400);
         }
     }

@@ -7,15 +7,11 @@ class User {
     
        // y location of user on screen
        this.userYLoc = 814 * hUnit;
-    
-    
+       
        // Previous Move
-    
        this.previousMove;
        // size and speed attributes can be used to change entire User
        this.size = 40 * wUnit;
-    
-       this.speed = 20 * wUnit;
     
        //Can be changed once implementation of collision works
        this.x_vel = 0;
@@ -73,12 +69,8 @@ class User {
        this.shipBody.fillColor = 'grey';
     
        // style the forcefield
-       /* this.arc.fullySelected = true; */
        this.arc.strokeColor = 'blue';
-       /* this.connect.strokeColor = 'blue'; */
        this.arc.strokeWidth = 3;
-       /* this.connect.strokeWidth = 2;
-       this.arc.fillColor = 'cyan'; */
        this.sp = -1;
     
        this.generateElectricity();
@@ -116,11 +108,15 @@ class User {
            var offset = this.arc.getPointAt(point*lUnit);
 
             // Divide into 5 points
+            if(offset == null) {
+                offset = {x :10, y:10};
+            }
+            
             var distanceX = (offset.x - source.x)/5;
             var distanceY = (offset.y - source.y)/5;
+            
 
             this.electricity[i].add(new Point(source.x ,source.y));
-            console.log(this.electricity[i])
             for(var j = 1;j<4;j++) {
                 //Random movement to create lightning effect
                 var random = (Math.random() * 10 * wUnit) - 5 * wUnit;
@@ -146,7 +142,6 @@ class User {
        for(var i = 0; i < this.electricity.length; i++) {
            this.electricity[i].remove()
        }
-       console.log('hi');
        this.arc.strokeWidth = 0;
        this.arc.position.x = point.x;
        this.connect.position.x = point.x;
@@ -190,9 +185,11 @@ class User {
     deleteAll() { 
         this.shipBody.remove();
         this.arc.remove();
-        this.connect.remove();
-        this.elecLeft.remove();
-        this.elecRight.remove();
+        for(var i = 0; i < this.electricity.length; i++) {
+            this.electricity[i].remove()
+        }
+ 
+
     }
 }
     

@@ -104,7 +104,6 @@ function campaign(level){
 	  difficulty = 1;
       game = new Game("campaign",1)
    }
-	runGame();
 }
 //--------------------- Campaign and Survival functions---------------------------------
 /* Function that goes back to previous selection */
@@ -222,7 +221,6 @@ function replay() {
 	document.getElementById("endBlock").style.display = "none";
 	document.getElementById("scoreDisplay").innerHTML = '';
 	document.getElementById("moneyDisplay").innerHTML = '';
-	runGame();
 }
 /* Function that handles moving to the next mission */
 function next() {
@@ -230,7 +228,6 @@ function next() {
 	document.getElementById("endBlock").style.display = "none";
 	document.getElementById("scoreDisplay").innerHTML = '';
 	document.getElementById("moneyDisplay").innerHTML = '';
-	runGame();
 }
 /* Function that returns player to menu */
 function goHome() {
@@ -241,7 +238,6 @@ function goHome() {
 	document.getElementById("start").style.display = 'block'; //Not sure why but these buttons dont display after the first return to menu unless called again for some reason
 	document.getElementById("option").style.display = 'block';
 	document.getElementById("homeMenu").style.display = "block";
-	runGame();
 }
 
 //-----------------------------------------------
@@ -322,14 +318,13 @@ var game;
 startHome();
 /* var blah = 0; */
 view.onFrame = function(event) { //Actual animation loop
-
+	var start = performance.now();
     
    var gameReturn = 0;
    /* blah++
 	if(blah % 10 == 0) {
 			
 	} */
-	var start = performance.now();
 	gameReturn = game.update(mouseLoc);
 	
 
@@ -358,13 +353,16 @@ view.onFrame = function(event) { //Actual animation loop
    }
    //TODO: DHEVA implement menu
    var end = performance.now();
-	console.log('time to complete frame' + (end-start));
-	var x = (1/event.delta);
-	if(x > 60) {
-		console.log(60);
+   var x = (end-start);
+   var fps = (1000/ x);
+   console.log('total:' + x);
+	
+	
+	if(fps > 60) {
+		console.log('fps:' + 60);
 	}
 	else {
-		console.log(x);
+		console.log( 'fps:' + fps);
 	}
 
  }
@@ -396,7 +394,6 @@ tool.onKeyDown = function(event) {
 	
 	if (event.key == "space") {
 		gameStatus = 1;
-		runGame();
 	}
 
 	

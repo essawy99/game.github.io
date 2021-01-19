@@ -19,20 +19,8 @@ class CannonBalls {
                 cannonBall.remove();
                 this.array.splice(i,1);
             }
-            /* var start = performance.now();
-            var cannonBall = this.array[i]
-            // make sure a ball exists in that location
-            if(cannonBall != null) {
-                // update the ball using update function
-                // if the ball is destroyed it will return true
-                // triggering code to nullify that array position
-
-                
-            }
-            var end = performance.now();
-            array.push((end-start)); */
         }
-        console.log(this.array);
+
     }
     //-----------------------------------------------------------------
     /* Function to check if any balls are alive - returns false if there are- else true */
@@ -167,7 +155,7 @@ class CannonBall {
         //Check for collisions with ships and planes
         // using general CheckEnemyCollisoins fucntion
         
-        if(this.cannon.position.y < 500 * hUnit) {
+        if(this.cannon.position.y < 300 * hUnit) {
             this.checkEnemyCollisions(ships, line, user);
         }
         this.checkEnemyCollisions(planes, line, user);

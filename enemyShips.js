@@ -21,8 +21,8 @@ class EnemyShips {
             if(this.array[i] != null) {
                 // Spawn a plane based off of randomness
                 var chance = Math.random();
-                if(chance > .9995 && this.hp > 0) {
-                 enemy.spawnPlane(this.shipX,this.userYLoc);
+                if(chance > .997) {
+                    enemy.spawnPlane(this.array[i].xLoc,this.array[i].yLoc);
             }
            }
         }
@@ -91,7 +91,7 @@ class EnemyShips {
 class EnemyShip {
     constructor(xLoc) {
 
-        this.yLoc = 50 * wUnit; //Starts off screen so ships can move up
+        this.yLoc = 100 * hUnit; //Starts off screen so ships can move up
         this.xLoc = xLoc;
         this.body = new shipBody3(this.xLoc, this.yLoc);
 
