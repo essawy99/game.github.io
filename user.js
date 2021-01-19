@@ -23,11 +23,6 @@ class User {
        this.forcefieldWidth = this.size;
        this.forcefieldHeight = this.forcefieldWidth / 2;
     
-       //ship Body properties in terms of size
-       this.shipTop = this.userYLoc + (this.size /2);
-       this.shipHeight = this.size / 5;
-       this.shipWidth = this.size * (4/5);
-       this.shipCorner = this.size * (3/5);
     
        // points associated with forcefield
        this.from = new paper.Point
@@ -46,7 +41,7 @@ class User {
        // create path associated with the ship
        /* this.shipBody = new paper.Path() */
 
-       this.shipBody = new userShip(center, this.userYLoc);
+       this.shipBody = new userShip(center, this.userYLoc-2*wUnit);
     
        /* Ship points written in terms of properties */
        /* //left bound
@@ -86,8 +81,8 @@ class User {
        var lUnit = this.arc.length / 10;
     
        // Create 2 sources of electricity and 2 paths
-       this.sourceLeft = {x : xPos + 20 * wUnit, y: this.userYLoc };
-       this.sourceRight = {x : xPos - 20 * wUnit, y: this.userYLoc};
+       this.sourceLeft = {x : xPos + 18 * wUnit, y: this.userYLoc };
+       this.sourceRight = {x : xPos - 17 * wUnit, y: this.userYLoc};
        this.electricity = [];
        
        this.arc.strokeWidth = 1;

@@ -21,14 +21,22 @@ class Tanks { //TODO(Dheva): REPLACE WITH NEW DESIGN
 		
 		const tankSpacing = w / (this._numTanks + 1);
 		const tankUnit = (2 * h / 64);
-		for(let i = 1; tankSpacing * i < w; i++) {
-			Tanks.tankArray.push(new TankDraft((tankSpacing*i)-(tankUnit/2), (59*h/64), tankUnit)); //Pushes to static array
+		for(var i = 1; tankSpacing * i < w; i++) {
+			/* Tanks.tankArray.push(new TankDraft((tankSpacing*i)-(tankUnit/2), (59*h/64), tankUnit)); */
+			if(i%2 == 0) {
+				Tanks.tankArray.push(new tank3((tankSpacing*i)-(tankUnit/2), (59*h/64), tankUnit));
+			}
+			else{
+				Tanks.tankArray.push(new tent((tankSpacing*i)-(tankUnit/2), (59*h/64), tankUnit));
+			}
+			
 		}
 	}
 	//-----------------------------------------------------------------
 	/* Function that draws tanks */
 	drawTank (point, unit) { //Draws individual tanks
 		let tank = new Path.Rectangle(point, new Size(unit, 2 * unit));
+		
 		tank.fillColor = new Color("#0b5703");
 		tank.strokeColor = new Color("#074001");
 		return tank
