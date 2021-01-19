@@ -6,44 +6,49 @@
 </head>
 
 <body>
-	<div id="notMobile">
+	<div id="notMobile"> <!-- This holds everything relevant to the game, isn't visible when mobile is detected -->
+	
+		<!-- This holds all of the main menu elements -->
 		<div id="homeMenu" class="textBox" style="left: 30vw; top: 15vh; width: 40vw; height: 60vh; display: block">
-			<button class="button" id="start" type="button" onclick="campaign(1)" style="left: 5vw; top: 2vh; width: 30vw; height: 15vh; font-size: 2.75vh">Begin Mission</button>
-			<button class="button" id="campaign" type="button" onclick= "campaignMenu()" style="top: 22vh">campaign</button>
-			<button class="button" id="survival" type="button" onclick= "survivalMenu()" style="top: 32vh">survival</button>
-			<button class="button" id="option" type="button" onclick="" style="top: 42vh">Options</button>
-			<button class="button" id="helpHome" type="button" onclick="helpGame()" style="top: 52vh; z-index: 10">Help</button>
+			<button id="campaign" class="button" type="button" onclick="campaignMenu()" style="top: 2vh">campaign</button>
+			<button id="survival" class="button" type="button" onclick="survivalMenu()" style="top: 22vh">survival</button>
+			<button id="helpHome" class="button" type="button" onclick="helpGame()" style="top: 42vh; z-index: 10">Help</button>
 		</div>
 		
+		<!-- Elements for the campaign level selector -->
 		<div id="campaignLevelSelector" class="textBox" style="top: 25vh; height: 40vh; display: none;">
-			<p id="lvl" style="font-size: 4vh;">Level 1<br><br>NUM ships</p>
+			<p id="lvl" style="font-size: 4vh;">Level 1<br><br>2 ships</p>
 			
 			<button type="button" onclick="left()" class="arrow"></button>
-			
 			<button type="button" onclick="right()" class="arrow" style="left: calc(29.7vw - 5.9vh); border-right: none; border-left: 5vh dashed #d63d22;"></button>
 			
 			<button id="campaignStart" type="button" class="circ" onclick="campaign('lvlSelect')" style="position: absolute;"></button>
-			<button class="button" id="exit" type="button" onclick="backMenu()" style="left: 5vw; top: 32.5vh;">Back</button>
+			<button class="button" id="exit" type="button" onclick="backMenu()" style="left: 10vw; top: 32.5vh; width: 10vw; height: 5vh">Back</button>
 		</div>
 		
+		
+		<!-- Elements for the survival level selector -->
 		<div id="survivalDifSelector" class="textBox" style="top: 25vh; height: 40vh; display: none; text-align: center;">
 			<p style="font-size: 4vh;">Select Difficulty</p>
 			<p id='dif' style="text-align: center; font-size: 5vh;">easy</p>
 			
 			<button type="button" onclick="leftS()" class="arrow";></button>
-			
 			<button type="button" onclick="rightS()" class="arrow" style="left: calc(29.7vw - 5.7vh); border-right: none; border-left: 5vh dashed #d63d22;"></button>
 			
 			<button type="button" class="circ" onclick="survival(document.getElementById('dif'))" style="position: absolute;"></button>
-			<button class="button" id="exit" type="button" onclick="backMenu()" style="left: 5vw; top: 32.5vh;">Back</button>
+			<button class="button" id="exit" type="button" onclick="backMenu()" style="left: 10vw; top: 32.5vh; width: 10vw; height: 5vh">Back</button>
 		</div>
 		
+		
+		<!-- Buttons for the side menu in the game -->
 		<div>
 			<button class="button2" id="help" type="button" onclick="helpGame()" style="top: 0vh">Help</button>
 			<button class="button2" id="pause" type="button" onclick="pauseGame()" style="top: 6.5vh">Pause</button>
 			<button class="button2" id="buy" type="button" onclick="buyCannon(game.user,game.cannonBalls)" style="top: 13vh; font-size: 0.7vw; color: grey; border-color: grey;">Buy Cannon (400)</button>
 		</div>
 		
+		
+		<!-- Contains elements relevant for the help pannels -->
 		<div id="helpText" class="textBox" style="top: 25vh; height: 40vh; display: none;">
 			<p id="help1" style="padding: 1vw; padding-top: 1vh; display: block">Fight off enemy ships to win! After entering the game, press 'spacebar' once you're ready for the game to start.</p>
 			<p id="help2" style="padding: 1vw; padding-top: 1vh; display: none">Aircraft carriers send planes that launch air strikes on your home base, decreasing your base's "health".</p>
@@ -53,26 +58,31 @@
 			<p id="help6" style="padding: 1vw; padding-top: 1vh; display: none">Once all enemy ships are sunk, you Win! However, if there are no cannonballs in play, or your base runs out of health you Lose.<br>Good Luck!</p>
 			
 			<button type="button" onclick="helpLeft()" class="arrow";></button>
-			
 			<button type="button" onclick="helpRight()" class="arrow" style="left: calc(29.7vw - 5.7vh); border-right: none; border-left: 5vh dashed #d63d22;"></button>
 			
 			<button class="button" id="closeHelp" type="button" onclick="helpGame()" style="left: 10vw; width: 10vw; top: 32.5vh;">Back</button>
 		</div>
 		
+		
+		<!-- Elements for the end game menu -->
 		<div id="endBlock" class="textBox" style="top: 25vh; height: 40vh; display: none;">
 			<p id="endText" style="text-align: center; font-size: 3vh">GAME OVER<br>SCORE: NaN</p>
 			
-			<button class="button" id="reDo" type="button" onclick="replay()" style="left: 10vw; width: 10vw; top: 12.5vh;">Replay</button>
-			<button class="button" id="cont" type="button" onclick="next()" style="left: 10vw; width: 10vw; top: 22.5vh;">Next Mission</button>
-			<button class="button" id="menuFromGame" type="button" onclick="goHome()" style="left: 10vw; width: 10vw; top: 32.5vh;">Menu</button>
+			<button class="button" id="reDo" type="button" onclick="replay()" style="left: 10vw; width: 10vw; height: 5vh; top: 14.5vh;">Replay</button>
+			<button class="button" id="cont" type="button" onclick="next()" style="font-size: 3vh; left: 10vw; width: 10vw; height: 5vh; top: 24.5vh;">Next</button>
+			<button class="button" id="menuFromGame" type="button" onclick="goHome()" style="left: 10vw; width: 10vw; height: 5vh; top: 34.5vh;">Menu</button>
 		</div>
 		
 		<h2 id="scoreDisplay" class="textDisplay" style="left: 15vw; top: 0; display: none;">Score:</h2>
 		<h2 id="moneyDisplay" class="textDisplay" style="left: 65vw; top: 0; display: none">Money:</h2>	
 		
 		<canvas id = "myCanvas" style="left: 0px; top: 0px; position: absolute; z-index: 1"></canvas>
+		
+		<!-- This is the background for the side menu (defined after canvas so that canvas could cover any overlap) -->
 		<div class="rect" style="left: 93vw; top: 0; width: 7vw; height: 100vh; position: absolute; z-index: 0; background-color: #e7c9a9;"></div>
 	</div>
+	
+	<!-- This is the text displayed when mobile is detected -->
 	<h1 id="isMobile" style="top: calc(50vh - 30vw); font-size: 10vw; display: none; text-align: center; vertical-align: center; position: fixed;">Not currently supported on mobile devices</h1>
 </body>
 

@@ -63,6 +63,7 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
 	let lvlSelect = 1;
 	let unlocked = load_local();
 	if(unlocked == null) { unlocked = 1; } //TEMP FIX- REMOVE LATER
+	console.log("UNLOCKED IS "+unlocked);
 	function campaignMenu() {
 		document.getElementById("homeMenu").style.display = 'none';
 		document.getElementById("campaignLevelSelector").style.display = 'block';
@@ -71,7 +72,7 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
 	/* Function that moves left on campaign selection menu */
 	function left() {
 		if(lvlSelect > 1) {
-			document.getElementById("lvl").innerHTML = 'Level '+(--lvlSelect)+"<br><br>NUM ships";
+			document.getElementById("lvl").innerHTML = 'Level '+(--lvlSelect)+"<br><br>"+lvlSelect*2+" ships";
 			
 			if(lvlSelect <= unlocked && document.getElementById("campaignStart").disabled) {
 				document.getElementById("campaignStart").disabled = false;
@@ -82,7 +83,7 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
 
 	/* Function that moves right on campaign selection menu */
 	function right() {
-		document.getElementById("lvl").innerHTML = 'Level '+(++lvlSelect)+"<br><br>NUM ships";
+		document.getElementById("lvl").innerHTML = 'Level '+(++lvlSelect)+"<br><br>"+lvlSelect*2+" ships";
 		
 		if(lvlSelect > unlocked && !document.getElementById("campaignStart").disabled) {
 			document.getElementById("campaignStart").disabled = true;
@@ -105,7 +106,7 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
 
 	   //Start Game
 	   if(difficulty != undefined){
-		  game = new Game("campaign",difficulty)
+		  game = new Game("campaign",level)
 	   }else{
 		  difficulty = 1;
 		  game = new Game("campaign",1)
@@ -241,8 +242,6 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
 		document.getElementById("scoreDisplay").style.display = 'none';
 		document.getElementById("moneyDisplay").style.display = 'none';
 		startHome();
-		document.getElementById("start").style.display = 'block'; //Not sure why but these buttons dont display after the first return to menu unless called again for some reason
-		document.getElementById("option").style.display = 'block';
 		document.getElementById("homeMenu").style.display = "block";
 	}
 
@@ -250,8 +249,6 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
 
 	// Function that sets up game screen
 	function game_screen(){
-		document.getElementById("start").style.display = 'none';
-		document.getElementById("option").style.display = 'none';
 		document.getElementById("help1").style.display = 'none';
 		
 		document.getElementById("help").style.display = 'block';
@@ -299,8 +296,6 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
 
 	/* Function that sets up game screen */
 	function game_screen(){
-		document.getElementById("start").style.display = 'none';
-		document.getElementById("option").style.display = 'none';
 		document.getElementById("help1").style.display = 'none';
 		
 		document.getElementById("help").style.display = 'block';
