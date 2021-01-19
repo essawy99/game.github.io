@@ -702,3 +702,101 @@ class TankDraft {
 }
 
 
+/* Code: {-s-rgb(13,28,14)-rgb(13,28,14)-true-p-84.72222222222223-248.61111
+111111111-p-111.11111111111111-288.8888888888889-p-300-288.8888888888889-p-
+322.9166666666667-248.61111111111111-p-300-209.02777777777777-p-111.1111111
+1111111-209.02777777777777-false-s-rgb(0,0,0)-rgb(0,0,0)-true-p-111.1111111
+1111111-244.44444444444446-p-118.75-244.44444444444446-p-118.75-252.7777777
+777778-p-111.80555555555556-252.7777777777778-true-s-rgb(0,0,0)-rgb(0,0,0)-
+true-p-300-244.44444444444446-p-300-252.7777777777778-p-292.36111111111114-
+252.7777777777778-p-292.36111111111114-244.44444444444446-true-s-rgb(17,20,
+17)-rgb(17,20,17)-true-p-193.75-272.9166666666667-p-221.5277777777778-272.9
+166666666667-p-229.16666666666669-265.27777777777777-p-229.16666666666669-2
+33.33333333333334-p-221.5277777777778-225.69444444444446-p-193.75-225.69444
+444444446-p-185.41666666666669-233.33333333333334-p-185.41666666666669-265.
+27777777777777-false-s-rgb(17,20,17)-rgb(17,20,17)-false-p-203.472222222222
+23-225.69444444444446-p-203.47222222222223-214.58333333333334-p-206.25-213.
+88888888888889-p-206.25-182.63888888888889-p-210.41666666666669-182.6388888
+8888889-p-210.41666666666669-214.58333333333334-p-212.5-214.58333333333334-
+p-212.5-225.69444444444446-false}*/
+class userShip {
+	constructor(x,y) {
+		this.xLoc = x;
+		this.yLoc = y;
+		this.size = .2;
+		this.path0= new Path();
+		this.path0.strokeColor = { red: 0.05098, green: 0.1098, blue: 0.0549 };
+		this.path0.fillColor = { red: 0.05098, green: 0.1098, blue: 0.0549 };
+		this.path0.closed = true;
+		this.path0.add( new Point(-119.09722222222223* wUnit * this.size + this.xLoc, 12.847222222222223 * wUnit * this.size + this.yLoc));
+		this.path0.add( new Point(-92.70833333333334* wUnit * this.size + this.xLoc, 53.125 * wUnit * this.size + this.yLoc));
+		this.path0.add( new Point(96.18055555555556* wUnit * this.size + this.xLoc, 53.125 * wUnit * this.size + this.yLoc));
+		this.path0.add( new Point(119.09722222222223* wUnit * this.size + this.xLoc, 12.847222222222223 * wUnit * this.size + this.yLoc));
+		this.path0.add( new Point(96.18055555555556* wUnit * this.size + this.xLoc, -26.73611111111111 * wUnit * this.size + this.yLoc));
+		this.path0.add( new Point(-92.70833333333334* wUnit * this.size + this.xLoc, -26.73611111111111 * wUnit * this.size + this.yLoc));
+		this.path1= new Path();
+		this.path1.strokeColor = { red: 0, green: 0, blue: 0 };
+		this.path1.fillColor = { red: 0, green: 0, blue: 0 };
+		this.path1.closed = true;
+		this.path1.add( new Point(-92.70833333333334* wUnit * this.size + this.xLoc, 8.680555555555555 * wUnit * this.size + this.yLoc));
+		this.path1.add( new Point(-85.06944444444444* wUnit * this.size + this.xLoc, 8.680555555555555 * wUnit * this.size + this.yLoc));
+		this.path1.add( new Point(-85.06944444444444* wUnit * this.size + this.xLoc, 17.01388888888889 * wUnit * this.size + this.yLoc));
+		this.path1.add( new Point(-92.01388888888889* wUnit * this.size + this.xLoc, 17.01388888888889 * wUnit * this.size + this.yLoc));
+		this.path1.smooth();
+		this.path2= new Path();
+		this.path2.strokeColor = { red: 0, green: 0, blue: 0 };
+		this.path2.fillColor = { red: 0, green: 0, blue: 0 };
+		this.path2.closed = true;
+		this.path2.add( new Point(96.18055555555556* wUnit * this.size + this.xLoc, 8.680555555555555 * wUnit * this.size + this.yLoc));
+		this.path2.add( new Point(96.18055555555556* wUnit * this.size + this.xLoc, 17.01388888888889 * wUnit * this.size + this.yLoc));
+		this.path2.add( new Point(88.54166666666667* wUnit * this.size + this.xLoc, 17.01388888888889 * wUnit * this.size + this.yLoc));
+		this.path2.add( new Point(88.54166666666667* wUnit * this.size + this.xLoc, 8.680555555555555 * wUnit * this.size + this.yLoc));
+		this.path2.smooth();
+		this.path3= new Path();
+		this.path3.strokeColor = { red: 0.06667, green: 0.07843, blue: 0.06667 };
+		this.path3.fillColor = { red: 0.06667, green: 0.07843, blue: 0.06667 };
+		this.path3.closed = true;
+		this.path3.add( new Point(-10.069444444444445* wUnit * this.size + this.xLoc, 37.15277777777778 * wUnit * this.size + this.yLoc));
+		this.path3.add( new Point(17.708333333333336* wUnit * this.size + this.xLoc, 37.15277777777778 * wUnit * this.size + this.yLoc));
+		this.path3.add( new Point(25.34722222222222* wUnit * this.size + this.xLoc, 29.51388888888889 * wUnit * this.size + this.yLoc));
+		this.path3.add( new Point(25.34722222222222* wUnit * this.size + this.xLoc, -2.430555555555556 * wUnit * this.size + this.yLoc));
+		this.path3.add( new Point(17.708333333333336* wUnit * this.size + this.xLoc, -10.069444444444445 * wUnit * this.size + this.yLoc));
+		this.path3.add( new Point(-10.069444444444445* wUnit * this.size + this.xLoc, -10.069444444444445 * wUnit * this.size + this.yLoc));
+		this.path3.add( new Point(-18.40277777777778* wUnit * this.size + this.xLoc, -2.430555555555556 * wUnit * this.size + this.yLoc));
+		this.path3.add( new Point(-18.40277777777778* wUnit * this.size + this.xLoc, 29.51388888888889 * wUnit * this.size + this.yLoc));
+		this.path4= new Path();
+		this.path4.strokeColor = { red: 0.06667, green: 0.07843, blue: 0.06667 };
+		this.path4.fillColor = { red: 0.06667, green: 0.07843, blue: 0.06667 };
+		this.path4.closed = false;
+		this.path4.add( new Point(-0.3472222222222222* wUnit * this.size + this.xLoc, -10.069444444444445 * wUnit * this.size + this.yLoc));
+		this.path4.add( new Point(-0.3472222222222222* wUnit * this.size + this.xLoc, -21.180555555555557 * wUnit * this.size + this.yLoc));
+		this.path4.add( new Point(2.430555555555556* wUnit * this.size + this.xLoc, -21.875 * wUnit * this.size + this.yLoc));
+		this.path4.add( new Point(2.430555555555556* wUnit * this.size + this.xLoc, -53.125 * wUnit * this.size + this.yLoc));
+		this.path4.add( new Point(6.597222222222222* wUnit * this.size + this.xLoc, -53.125 * wUnit * this.size + this.yLoc));
+		this.path4.add( new Point(6.597222222222222* wUnit * this.size + this.xLoc, -21.180555555555557 * wUnit * this.size + this.yLoc));
+		this.path4.add( new Point(8.680555555555555* wUnit * this.size + this.xLoc, -21.180555555555557 * wUnit * this.size + this.yLoc));
+		this.path4.add( new Point(8.680555555555555* wUnit * this.size + this.xLoc, -10.069444444444445 * wUnit * this.size + this.yLoc));
+	}
+
+	update(xIncr, yIncr){
+		this.path0.position.x += xIncr
+		this.path0.position.y += yIncr
+		this.path1.position.x += xIncr
+		this.path1.position.y += yIncr
+		this.path2.position.x += xIncr
+		this.path2.position.y += yIncr
+		this.path3.position.x += xIncr
+		this.path3.position.y += yIncr
+		this.path4.position.x += xIncr
+		this.path4.position.y += yIncr
+	}
+
+	remove(){
+		this.path0.remove()
+		this.path1.remove()
+		this.path2.remove()
+		this.path3.remove()
+		this.path4.remove()
+	}
+}
+

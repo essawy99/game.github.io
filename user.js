@@ -4,7 +4,9 @@ class User {
        //Initialize user score and coins
        this.score = 0;
        this.coins = 0;
-    
+        
+
+
        // y location of user on screen
        this.userYLoc = 814 * hUnit;
        
@@ -42,10 +44,12 @@ class User {
        this.connect.add(this.to);
     
        // create path associated with the ship
-       this.shipBody = new paper.Path()
+       /* this.shipBody = new paper.Path() */
+
+       this.shipBody = new userShip(center, this.userYLoc);
     
        /* Ship points written in terms of properties */
-       //left bound
+       /* //left bound
        this.shipBody.add(new paper.Point
            (center - this.shipWidth, this.shipTop));
        //top left corner
@@ -67,7 +71,7 @@ class User {
        // style the ship body
        this.shipBody.closed = true;
        this.shipBody.fillColor = 'grey';
-    
+     */
        // style the forcefield
        this.arc.strokeColor = 'blue';
        this.arc.strokeWidth = 3;
@@ -82,8 +86,8 @@ class User {
        var lUnit = this.arc.length / 10;
     
        // Create 2 sources of electricity and 2 paths
-       this.sourceLeft = {x : this.shipBody.position.x + 20 * wUnit, y: this.shipBody.position.y };
-       this.sourceRight = {x : this.shipBody.position.x - 20 * wUnit, y: this.shipBody.position.y };
+       this.sourceLeft = {x : xPos + 20 * wUnit, y: this.userYLoc };
+       this.sourceRight = {x : xPos - 20 * wUnit, y: this.userYLoc};
        this.electricity = [];
        
        this.arc.strokeWidth = 1;
@@ -109,7 +113,7 @@ class User {
 
             // Divide into 5 points
             if(offset == null) {
-                offset = {x :10, y:10};
+                offset = this.arc.getPointAt((point-1)*lUnit)
             }
             
             var distanceX = (offset.x - source.x)/5;
@@ -145,7 +149,7 @@ class User {
        this.arc.strokeWidth = 0;
        this.arc.position.x = point.x;
        this.connect.position.x = point.x;
-       this.shipBody.position.x = point.x;
+       this.shipBody.update(-this.previousMove, 0);
        this.generateElectricity(point.x);
     
     }

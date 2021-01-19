@@ -6,6 +6,8 @@ class Background { //TODO(Dheva): Implement wave animation on shore
 		
 		this.beach = new Path.Rectangle(new Point(0, 7 * h / 8), new Size(w, h)); // Beach/Sand portion
 		this.beach.fillColor = new Color("#ebd8a0");
+
+
 	}
 }
 

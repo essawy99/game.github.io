@@ -318,13 +318,11 @@ var game;
 startHome();
 /* var blah = 0; */
 view.onFrame = function(event) { //Actual animation loop
+	console.log('hi');
 	var start = performance.now();
     
    var gameReturn = 0;
-   /* blah++
-	if(blah % 10 == 0) {
-			
-	} */
+   
 	gameReturn = game.update(mouseLoc);
 	
 
@@ -341,13 +339,7 @@ view.onFrame = function(event) { //Actual animation loop
 				console.log("KSDFJDLKSJF");
 		   }
 		   else{
-				/* Can't win survival */
-			/* 	document.getElementById("endText").innerHTML = "You Survived!<br>SCORE: "+game.user.score;
-				document.getElementById("cont").style.display = "none";
-				document.getElementById("cont").style.display = "none";
-				document.getElementById("reDo").style.top = "17.5vh";
-				document.getElementById("menuFromGame").style.top = "27.5vh";
-				document.getElementById("endBlock").style.display = "block"; */
+			
 		   }
 	   }
    }
@@ -364,9 +356,9 @@ view.onFrame = function(event) { //Actual animation loop
 	else {
 		console.log( 'fps:' + fps);
 	}
+	console.log('hi2');
 
  }
-
 
 
 

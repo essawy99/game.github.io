@@ -3,8 +3,9 @@ class CannonBalls {
     constructor(home) {
         this.home = home;
         this.array = [];
-        this.array.push(new CannonBall(500 *wUnit,500 *hUnit, this.home));
+        this.array.push(new CannonBall(center,800*hUnit, this.home));
         this.timeAlive = 0;
+
     }
     //-----------------------------------------------------------------
     /* Function to update cannonballs */
@@ -51,7 +52,7 @@ class CannonBalls {
                 return;
             }
         }
-        this.array.push(new CannonBall(user.arc.position.x, user.arc.position.y - 100, this.home));
+        this.array.push(new CannonBall(user.arc.position.x, user.arc.position.y, this.home));
     }
 
     //-----------------------------------------------------------------
@@ -73,11 +74,13 @@ class CannonBall {
         this.velocity = 4 * hUnit;
         //If ball is above beach
         this.alive = true;
-        this.cannon = new Path.Circle({
-            center: new paper.Point(xLoc, yLoc),
-            radius: 3 * hUnit,
-            fillColor: 'black'
-        });
+        this.cannon = new Path();
+        this.cannon.add(new Point(xLoc,yLoc));
+        this.cannon.add(new Point(xLoc+2,yLoc));
+        this.cannon.add(new Point(xLoc,yLoc+2));
+        this.cannon.add(new Point(xLoc+2,yLoc+2));
+        this.cannon.stokeWidth = 1;
+        this.cannon.strokeColor = 'blue';
         this.x_vel = 0 * hUnit;
         this.y_vel = -4 * hUnit;
         this.timeAlive = 0;
