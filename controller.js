@@ -1,132 +1,108 @@
-
-/* A set of functions called by buttons in the UI 
-   to build new levels and move between different
-   areas in the UI */
+/* A small script to throw error if the game is accessed by a mobile phone */
 
 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-	document.getElementById("notMobile").style.display = "none";
+	document.getElementById("noError").style.display = "none";
 	document.getElementById("isMobile").style.display = "block";
-} else {
+} 
+
+/* If not incompatible begin running the game */
+
+/* This file containes a set of funtions that controll the start and
+   end of the game, the User Interface, and updating of the game 
+   screen. The rest of the files contribute classes that are used
+   by the contoller. */
+
+else {
 	
-
-
 	//-----------------------------------------------------------------
 	// set of functions required to set up paper.js
 	paper.install(window);
 	var canvas = document.getElementById('myCanvas');
 	paper.setup(canvas);
 
-	//---------------Save game functions----------------// 
-
-	// A function that stores game data in local storage
-	function store(lvl){
-	   // Delete most recent level to update it to new one
-	   localStorage.removeItem('recent_lvl');
-	   // Store latest level
-	   localStorage.setItem('recent_lvl',lvl);
-	}
-	// A function that loads and returns game's local storage
-	function load_local(){
-	   // Load local storage
-	   var storage = localStorage.getItem('recent_lvl'); 
-	   return storage;
-	}
-
-	// A function that deletes all game data
-	function delete_all(){
-	   localStorage.clear();
-	}
-
-	//-------------------- Functions to handle creation and deletion of screen items --------------------------// 
-
+	//------------------- Functions to handle creation and deletion of home Screen items -------------------// 
 
 	/* Function that creates home page */
 	function startHome(){
-	  game = new Game("home", 6);
+		document.getElementById("toolHeader").style.display = 'none';
+		document.getElementById("pause").style.display = 'none';
+		document.getElementById("buy").style.display = 'none';
+		game = new Game("home", 6);
+	    view.play();
 	  
 	}
 
 	/* Function that ends the home screen to prepare for in-game */
 	function endHome() {
 
-	  game.endGame();
-	  document.getElementById("homeMenu").style.display = "none";
-	  document.getElementById("campaignLevelSelector").style.display = "none";
-	  document.getElementById("survivalDifSelector").style.display = "none";
-	  document.getElementById('scoreDisplay').innerHTML = "Score: ";
-	  document.getElementById('moneyDisplay').textContent = "Money: ";
+		game.endGame();
+		document.getElementById("homeMenu").style.display = "none";
+		document.getElementById("campaignLevelSelector").style.display = "none";
+		document.getElementById("survivalDifSelector").style.display = "none";
+		document.getElementById('scoreDisplay').innerHTML = "Score: ";
+		document.getElementById('moneyDisplay').textContent = "Money: ";
+
+		document.getElementById("help1").style.display = 'none';
+			
+		document.getElementById("toolHeader").style.display = 'block';
+		document.getElementById("pause").style.display = 'block';
+		document.getElementById("buy").style.display = 'block';
+		
+		document.getElementById("scoreDisplay").style.display = 'block';
+		document.getElementById("moneyDisplay").style.display = 'block';
 	}	
 
 
-	//---------------------------------------------------------------------------------------------------------
-	//---------------Campaign functions----------------//
-	let lvlSelect = 1;
-	let unlocked = load_local();
-	if(unlocked == null) { unlocked = 1; } //TEMP FIX- REMOVE LATER
-	console.log("UNLOCKED IS "+unlocked);
+	//-------------------------------------Campaign functions------------------------------------------//
+
+	// a number of global variables that determine the campaign evel
+	var lvlSelect = 1;
+	var campaignShips = 1;
+	
+	// sarts the campaign menu
 	function campaignMenu() {
 		document.getElementById("homeMenu").style.display = 'none';
 		document.getElementById("campaignLevelSelector").style.display = 'block';
+		document.getElementById("lvl").innerHTML = 'Level '+ lvlSelect +"<br><br>" + campaignShips +" ships";
 	}
 
-	/* Function that moves left on campaign selection menu */
+	// moves campaign menu left
 	function left() {
 		if(lvlSelect > 1) {
-			document.getElementById("lvl").innerHTML = 'Level '+(--lvlSelect)+"<br><br>"+lvlSelect*2+" ships";
+			lvlSelect--; 
+			campaignShips -= 2;
+			document.getElementById("lvl").innerHTML = 'Level '+ lvlSelect +"<br><br>" + campaignShips +" ships";
 			
-			if(lvlSelect <= unlocked && document.getElementById("campaignStart").disabled) {
-				document.getElementById("campaignStart").disabled = false;
-				document.getElementById("campaignStart").style.backgroundColor = "#d63d22";
-			}
 		}
 	}
 
-	/* Function that moves right on campaign selection menu */
+	// moves campaign menu right
 	function right() {
-		document.getElementById("lvl").innerHTML = 'Level '+(++lvlSelect)+"<br><br>"+lvlSelect*2+" ships";
-		
-		if(lvlSelect > unlocked && !document.getElementById("campaignStart").disabled) {
-			document.getElementById("campaignStart").disabled = true;
-			document.getElementById("campaignStart").style.backgroundColor = "grey";
+		if(lvlSelect < 7) {
+			lvlSelect++; 
+			campaignShips += 2;
+			document.getElementById("lvl").innerHTML = 'Level '+ lvlSelect +"<br><br>" + campaignShips +" ships";
 		}
+		
 	}
 
-	/* Function that handles creating campaign game object */
+	// function creates campaign game
 	function campaign(level){
 	   // Remove home first
 	   endHome();
-
-	   console.log('made it');
-
-	   //Setup game screen
-	   game_screen();
-
-	   var difficulty = load_local();
-	   console.log(load_local())
-
-	   //Start Game
-	   if(difficulty != undefined){
-		  game = new Game("campaign",level)
-	   }else{
-		  difficulty = 1;
-		  game = new Game("campaign",1)
-	   }
+	   game = new Game("campaign", lvlSelect);
+	   view.play();
 	}
-	//--------------------- Campaign and Survival functions---------------------------------
-	/* Function that goes back to previous selection */
-	function backMenu() { 
-		document.getElementById("campaignLevelSelector").style.display = 'none';
-		document.getElementById("survivalDifSelector").style.display = 'none';
-		document.getElementById("homeMenu").style.display = 'block';
-	}
-	//---------------Survival functions----------------// 
-	/* Function that creates survival menu */
+	//--------------------- Survival functions---------------------------------
+	
+	
+	// creates survival menu
 	function survivalMenu() {
 		document.getElementById("homeMenu").style.display = 'none';
 		document.getElementById("survivalDifSelector").style.display = 'block';
 	}
 
-	/* Function that moves left on survival selection menu */
+	// Function that moves left on survival selection menu 
 	function leftS() {
 		let txt = document.getElementById("dif").innerHTML;
 		console.log(txt);
@@ -140,7 +116,7 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
 		dif = document.getElementById("dif").innerHTML;
 	}
 
-	/* Function that moves right on survival selection menu */
+	// Function that moves right on survival selection menu 
 	function rightS() {
 		let txt = document.getElementById("dif").innerHTML;
 		if(txt == 'easy') {
@@ -153,50 +129,37 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
 	}
 
 
-	/* Function that handles creating survival game object */
-	function survival(diff){
+	// function creates survival game
+	function survival(){
 	   // Remove home first
-		endHome();
-	   
-	   //Setup game screen
-	   game_screen();
-
-
-	   //Start Game
-	   
-	   game = new Game("survival",diff); //changed "medium" to variable diff for input difficulty
+	   endHome();
+	   game = new Game("survival",document.getElementById('dif').innerHTML); 
+	   view.play();
 	}
-	//------------------------------------------------------
+	//------------------Back button-------------------//
+
+	function backMenu() { 
+		document.getElementById("campaignLevelSelector").style.display = 'none';
+		document.getElementById("survivalDifSelector").style.display = 'none';
+		document.getElementById("survivalDifSelector").style.display = 'none';
+		document.getElementById("help1").style.display = "none";
+		document.getElementById("helpText").style.display = "none";
+		document.getElementById("homeMenu").style.display = 'block';
+
+	}
 
 	//---------------Help functions----------------//
-	/* Function that handles displaying of help menu */
+	
+	// displays help menu
 	function helpGame() {
-		if (instructions.style.display == "none") {
-			gameStatus = 0;
 			document.getElementById("help1").style.display = "block";
 			document.getElementById("homeMenu").style.display = "none";
-			instructions.style.display = "block";
-			document.getElementById("help").innerHTML = "Back";
+			document.getElementById("helpText").style.display = "block";
 			return;
-		} else {
-			instructions.style.display = "none";
-			document.getElementById("help").innerHTML = "Help";
-			if(document.getElementById("scoreDisplay").style.display == 'none') {
-				document.getElementById("homeMenu").style.display = "block";
-			} else {
-				gameStatus = 1;
-			}
-			
-			for (let i = 6; i > 1; i--) {
-				if(document.getElementById("help"+i).style.display == "block") {
-					document.getElementById("help"+i).style.display = "none";
-				}
-			}
-			return;
-		}
+		
 	}
 
-	/* Function that handles moving right on help menu */
+	// moves help menu left
 	function helpRight() {
 		let flag = 0;
 		for (let i = 1; i < 6; i++) {
@@ -208,7 +171,7 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
 		}
 	}
 
-	/* Function that handles moving left on help menu */
+	// moves help menu right
 	function helpLeft() {
 		let flag = 0;
 		for (let i = 6; i > 1; i--) {
@@ -219,25 +182,29 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
 			}
 		}
 	}
-	//-----------------------------------------------
 
 	//---------------End of Game Menu/Screen Functions----------------//
-	/* Function that handles replaying the current mission */
+	// replays current mission
 	function replay() {
+		game.endGame();
 		game = new Game(game.type,game.difficulty);
+		view.play();
 		document.getElementById("endBlock").style.display = "none";
-		document.getElementById("scoreDisplay").innerHTML = '';
-		document.getElementById("moneyDisplay").innerHTML = '';
+		document.getElementById("scoreDisplay").innerHTML = 'Score:';
+		document.getElementById("moneyDisplay").innerHTML = 'Money:';
 	}
-	/* Function that handles moving to the next mission */
+	// moves to the next mission 
 	function next() {
+		game.endGame();
 		game = new Game(game.type,game.difficulty+1);
+		view.play();
 		document.getElementById("endBlock").style.display = "none";
-		document.getElementById("scoreDisplay").innerHTML = '';
-		document.getElementById("moneyDisplay").innerHTML = '';
+		document.getElementById("scoreDisplay").innerHTML = 'Score:';
+		document.getElementById("moneyDisplay").innerHTML = 'Money:';
 	}
-	/* Function that returns player to menu */
+	// returns player to menu */
 	function goHome() {
+		game.endGame();
 		document.getElementById("endBlock").style.display = "none";
 		document.getElementById("scoreDisplay").style.display = 'none';
 		document.getElementById("moneyDisplay").style.display = 'none';
@@ -245,43 +212,21 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
 		document.getElementById("homeMenu").style.display = "block";
 	}
 
-	//-----------------------------------------------
-
-	// Function that sets up game screen
-	function game_screen(){
-		document.getElementById("help1").style.display = 'none';
-		
-		document.getElementById("help").style.display = 'block';
-		document.getElementById("pause").style.display = 'block';
-		document.getElementById("buy").style.display = 'block';
-		
-		document.getElementById("scoreDisplay").style.display = 'block';
-		document.getElementById("moneyDisplay").style.display = 'block';
-	}
-
-
-
-	// function starts up entire program
-
-
-
-	var mouseLoc = new Point(center);
-
 	//------End Game Functions------------------------//
 
+	// brings up gameOver menu
 	function gameOver() {
+		view.pause();
 		document.getElementById("endText").innerHTML = "GAME OVER<br>SCORE: "+game.user.score;
-			   document.getElementById("cont").style.display = "none";
-			   document.getElementById("reDo").style.top = "17.5vh";
-			   document.getElementById("menuFromGame").style.top = "27.5vh";
-			   document.getElementById("endBlock").style.display = "block";
-			   game.endGame();
+		document.getElementById("cont").style.display = "none";
+		document.getElementById("reDo").style.top = "17.5vh";
+		document.getElementById("menuFromGame").style.top = "27.5vh";
+		document.getElementById("endBlock").style.display = "block";
 	}
 
+	// brings up you win menu
 	function youWin() {
-		store(game.difficulty + 1);
-		console.log("winner, CAMPAIGN");
-		view.onFrame = null;
+		view.pause();
 	   
 		document.getElementById("endText").innerHTML = "Campaign Mission Completed!<br>SCORE: "+game.user.score;
 		document.getElementById("reDo").style.top = "12.5vh";
@@ -289,86 +234,49 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
 		document.getElementById("cont").style.display = "display";
 		document.getElementById("menuFromGame").style.top = "32.5vh";
 		document.getElementById("endBlock").style.display = "block";
-		game.endGame()
 	}
-
-	//------------------- Game Screen Setup Functions ----------------------------
-
-	/* Function that sets up game screen */
-	function game_screen(){
-		document.getElementById("help1").style.display = 'none';
-		
-		document.getElementById("help").style.display = 'block';
-		document.getElementById("pause").style.display = 'block';
-		document.getElementById("buy").style.display = 'block';
-		
-		document.getElementById("scoreDisplay").style.display = 'block';
-		document.getElementById("moneyDisplay").style.display = 'block';
-	}
-
-
 
 
 	//------------------- In Game Processes ----------------------------
+	
+	function pauseGame() {
+		if(gamePaused) {
+			gamePaused = false;
+			view.play()
+		}
+		else {
+			gamePaused = true;
+			view.pause()
+		}
+	}
+	
+	
 	// Variable that sets user cursor to center of game screen
 	var mouseLoc = new Point(center);
 
 	// required for mouse/keyboard interaction
 	var tools = new Tool();
 	var game;
+	var gamePaused = false;
+	
+	// single function call that jumpstarts program
 	startHome();
-	/* var blah = 0; */
-	view.onFrame = function(event) { //Actual animation loop
-		var start = performance.now();
-		
-	   var gameReturn = 0;
-	   /* blah++
-		if(blah % 10 == 0) {
-				
-		} */
-		gameReturn = game.update(mouseLoc);
-		
 
-	   
-	   
-	   // Game over
-	   if(game.type != "home") {
-			if(gameReturn == -1){
-			   gameOver();
-		   }
-		   else if(gameReturn == 1){
-			   if(game.type == "campaign"){
-					youWin();
-					console.log("KSDFJDLKSJF");
-			   }
-			   else{
-					/* Can't win survival */
-				/* 	document.getElementById("endText").innerHTML = "You Survived!<br>SCORE: "+game.user.score;
-					document.getElementById("cont").style.display = "none";
-					document.getElementById("cont").style.display = "none";
-					document.getElementById("reDo").style.top = "17.5vh";
-					document.getElementById("menuFromGame").style.top = "27.5vh";
-					document.getElementById("endBlock").style.display = "block"; */
-			   }
-		   }
-	   }
-	   //TODO: DHEVA implement menu
-	   var end = performance.now();
-	   var x = (end-start);
-	   var fps = (1000/ x);
-	   console.log('total:' + x);
+	//Actual animation loop
+	view.onFrame = function(event) { 
+
+		var gameReturn = game.update(mouseLoc);
+
+	    // Game over
 		
-		
-		if(fps > 60) {
-			console.log('fps:' + 60);
+		if(gameReturn == -1){
+			gameOver();
 		}
-		else {
-			console.log( 'fps:' + fps);
-		}
-
-	 }
-
-
+		else if(gameReturn == 1){
+			youWin();
+		} 
+	
+	}
 
 
 	// Add mouse for control of user
@@ -376,24 +284,16 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
 		mouseLoc = event.point    
 	}
 
+	// key bindings
 	tool.onKeyDown = function(event) {
 		if (event.key == 'p') {
 			pauseGame();
 		}
-		if (event.key == 'h') {
-			helpGame();
-		}
-		if (event.key == 'f') { //Create new cannon ball on f
-			game.buyCannon(game.user,game.cannonBalls);
-		}
-		//Give coins
-		if (event.key == "c"){
-			game.user.coins += 1000;
-		}
-
-		
-		if (event.key == "space") {
-			gameStatus = 1;
+		//Create new cannon ball on f
+		if (event.key == 'f') { 
+			if(game.user.coins >= 400) {
+				game.buyCannon(game.user,game.cannonBalls);
+			}
 		}
 
 		

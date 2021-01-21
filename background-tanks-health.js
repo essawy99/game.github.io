@@ -1,48 +1,56 @@
 /* Object that stores background and its attributes */
-class Background { //TODO(Dheva): Implement wave animation on shore
+class Background { 
 	constructor() {
-		this.water = new Path.Rectangle(new Point(0, 0), new Size(w, h)); // Water portion
+		// Water portion
+		this.water = new Path.Rectangle(new Point(0, 0), new Size(w, h)); 
 		this.water.fillColor = new Color("#42adf5");
 		
-		this.beach = new Path.Rectangle(new Point(0, 7 * h / 8), new Size(w, h)); // Beach/Sand portion
+		// Beach/Sand portion
+		this.beach = new Path.Rectangle(new Point(0, 7 * h / 8), new Size(w, h)); 
 		this.beach.fillColor = new Color("#ebd8a0");
 
+		//Friendly forces
+		this.tankTents = new TanksTents(10); 
 
+	}
+
+	deleteAll() {
+		this.water.remove();
+		this.beach.remove();
+		this.tankTents.deleteAll()
 	}
 }
 
 //-----------------------------------------------------------------
 /* Object that stores tanks and their attributes */
-class Tanks { //TODO(Dheva): REPLACE WITH NEW DESIGN
-	static tankArray = []; //Static array holding all generated tank objects
+class TanksTents { //TODO(Dheva): REPLACE WITH NEW DESIGN
+	
 	
 	constructor(amount) { //Calculates spacing and generates scaled tanks 
+		this.tankArray = [];
 		this._numTanks = amount;
+		
+		
 		
 		const tankSpacing = w / (this._numTanks + 1);
 		const tankUnit = (2 * h / 64);
+
+		this.tankArray.push(new tank3(0 + 30*wUnit, (15 * h / 16)));
+		this.tankArray.push(new tank3(center, (15 * h / 16)));
+		this.tankArray.push(new tank3(w - 30*wUnit, (15 * h / 16)));
+
 		for(var i = 1; tankSpacing * i < w; i++) {
-			/* Tanks.tankArray.push(new TankDraft((tankSpacing*i)-(tankUnit/2), (59*h/64), tankUnit)); */
-			if(i%2 == 0) {
-				Tanks.tankArray.push(new tank3((tankSpacing*i)-(tankUnit/2), (59*h/64), tankUnit));
-			}
-			else{
-				Tanks.tankArray.push(new tent((tankSpacing*i)-(tankUnit/2), (59*h/64), tankUnit));
-			}
+			this.tankArray.push(new tent((tankSpacing*i)-(tankUnit/2) + 10 * wUnit, (15 * h / 16)));
+
 			
 		}
 	}
-	//-----------------------------------------------------------------
-	/* Function that draws tanks */
-	drawTank (point, unit) { //Draws individual tanks
-		let tank = new Path.Rectangle(point, new Size(unit, 2 * unit));
-		
-		tank.fillColor = new Color("#0b5703");
-		tank.strokeColor = new Color("#074001");
-		return tank
+
+	deleteAll() {
+		for(var i = 0; i < this.tankArray.length; i++) {
+			this.tankArray[i].remove();
+		}
 	}
-	
-	get numTanks() { return this._numTanks; }
 }
 
 //-----------------------------------------------------------------

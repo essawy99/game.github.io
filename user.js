@@ -150,8 +150,16 @@ class User {
     }
     //-----------------------------------------------------------------
     /* Function to update coins upon spending */
-    spend_coins(cost){ // decrease coins upon spending
+    spendCoins(cost){ // decrease coins upon spending
        this.coins -= cost;
+       document.getElementById("moneyDisplay").innerHTML = "Money: " + this.coins;
+       if(this.coins >= 400) {
+        document.getElementById("buy").style.color = "#d63d22";
+        document.getElementById("buy").style.borderColor = "#d63d22";
+        } else if(this.coins < 400) {
+        document.getElementById("buy").style.borderColor = "grey";
+        document.getElementById("buy").style.color = "grey";
+        }
     }
     //-----------------------------------------------------------------
     /* Function to update score */

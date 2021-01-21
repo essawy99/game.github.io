@@ -1,11 +1,10 @@
-/* var win = window,
-doc = document,
-docElem = doc.documentElement,
-body = doc.getElementsByTagName('body')[0],
-w = win.innerWidth || docElem.clientWidth || body.clientWidth,
-h = win.innerHeight|| docElem.clientHeight|| body.clientHeight; */
-
- var w = 0;var h = 0;
+ /* This file finds width and height of the screen and sets the canvas
+ size accordingly. It then sets a number of units including w, h, wUnit, 
+ hUnit, center that are used to design all objects in the program. */
+ 
+ 
+ var w = 0;
+ var h = 0;
         //IE
         if(!window.innerWidth){
             if(!(document.documentElement.clientWidth == 0)){
@@ -30,5 +29,3 @@ var center =  w/2;
 
 document.getElementById("myCanvas").width = w;
 document.getElementById("myCanvas").height = h;
-
-let gameStatus = 0;

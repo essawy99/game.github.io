@@ -1,112 +1,5 @@
-/* This file will contain all the classes created by creator */
+/* This file will contain all the classes and save codes created by creator */
 
-/* Code: {-s-rgb(128,128,128)-rgb(128,128,128)-true-p-70.83333333333334-250
-.69444444444446-p-176.38888888888889-361.80555555555554-p-743.0555555555555
--361.80555555555554-p-831.9444444444445-250.69444444444446-p-743.0555555555
-555-145.83333333333334-p-175.69444444444446-145.83333333333334-false-s-rgb(
-0,0,0)-rgb(0,0,0)-true-p-180.55555555555557-234.0277777777778-p-212.5-234.0
-277777777778-p-212.5-265.97222222222223-p-180.55555555555557-265.9722222222
-2223-true-s-rgb(0,0,0)-rgb(0,0,0)-true-p-707.6388888888889-234.027777777777
-8-p-740.2777777777778-234.0277777777778-p-739.5833333333334-267.36111111111
-114-p-706.9444444444445-267.36111111111114-true-s-rgb(0,0,0)-null-false-p-1
-51.38888888888889-211.80555555555557-p-111.80555555555556-250.6944444444444
-6-p-151.38888888888889-294.44444444444446-false-s-rgb(0,0,0)-null-false-p-7
-61.1111111111111-211.80555555555557-p-795.1388888888889-250.69444444444446-
-p-756.25-294.44444444444446-false-s-rgb(0,0,0)-rgb(0,0,0)-true-p-387.5-227.
-7777777777778-p-387.5-277.77777777777777-p-401.3888888888889-304.1666666666
-667-p-520.8333333333334-304.1666666666667-p-540.2777777777778-277.777777777
-77777-p-540.2777777777778-227.7777777777778-p-521.5277777777778-200-p-403.4
-7222222222223-200-false-s-rgb(0,0,0)-rgb(0,0,0)-true-p-451.3888888888889-82
-.63888888888889-p-478.47222222222223-82.63888888888889-p-478.47222222222223
--200-p-451.3888888888889-200-false}*/
-class shipBody {
-	constructor(x,y) {
-		this.xLoc = x;
-		this.yLoc = y;
-		this.size = .09;
-		this.path0= new Path();
-		this.path0.strokeColor = { red: 0.50196, green: 0.50196, blue: 0.50196 };
-		this.path0.fillColor = { red: 0.50196, green: 0.50196, blue: 0.50196 };
-		this.path0.closed = true;
-		this.path0.add( new Point(-380.55555555555554* wUnit * this.size + this.xLoc, 28.472222222222225 * wUnit * this.size + this.yLoc));
-		this.path0.add( new Point(-275* wUnit * this.size + this.xLoc, 139.58333333333334 * wUnit * this.size + this.yLoc));
-		this.path0.add( new Point(291.6666666666667* wUnit * this.size + this.xLoc, 139.58333333333334 * wUnit * this.size + this.yLoc));
-		this.path0.add( new Point(380.55555555555554* wUnit * this.size + this.xLoc, 28.472222222222225 * wUnit * this.size + this.yLoc));
-		this.path0.add( new Point(291.6666666666667* wUnit * this.size + this.xLoc, -76.38888888888889 * wUnit * this.size + this.yLoc));
-		this.path0.add( new Point(-275.69444444444446* wUnit * this.size + this.xLoc, -76.38888888888889 * wUnit * this.size + this.yLoc));
-		this.path1= new Path();
-		this.path1.strokeColor = { red: 0, green: 0, blue: 0 };
-		this.path1.fillColor = { red: 0, green: 0, blue: 0 };
-		this.path1.closed = true;
-		this.path1.add( new Point(-270.83333333333337* wUnit * this.size + this.xLoc, 11.805555555555555 * wUnit * this.size + this.yLoc));
-		this.path1.add( new Point(-238.88888888888889* wUnit * this.size + this.xLoc, 11.805555555555555 * wUnit * this.size + this.yLoc));
-		this.path1.add( new Point(-238.88888888888889* wUnit * this.size + this.xLoc, 43.75 * wUnit * this.size + this.yLoc));
-		this.path1.add( new Point(-270.83333333333337* wUnit * this.size + this.xLoc, 43.75 * wUnit * this.size + this.yLoc));
-		this.path1.smooth();
-		this.path2= new Path();
-		this.path2.strokeColor = { red: 0, green: 0, blue: 0 };
-		this.path2.fillColor = { red: 0, green: 0, blue: 0 };
-		this.path2.closed = true;
-		this.path2.add( new Point(256.25* wUnit * this.size + this.xLoc, 11.805555555555555 * wUnit * this.size + this.yLoc));
-		this.path2.add( new Point(288.8888888888889* wUnit * this.size + this.xLoc, 11.805555555555555 * wUnit * this.size + this.yLoc));
-		this.path2.add( new Point(288.19444444444446* wUnit * this.size + this.xLoc, 45.13888888888889 * wUnit * this.size + this.yLoc));
-		this.path2.add( new Point(255.55555555555557* wUnit * this.size + this.xLoc, 45.13888888888889 * wUnit * this.size + this.yLoc));
-		this.path2.smooth();
-		this.path3= new Path();
-		this.path3.strokeColor = { red: 0, green: 0, blue: 0 };
-		this.path3.fillColor = null;
-		this.path3.closed = false;
-		this.path3.add( new Point(-300* wUnit * this.size + this.xLoc, -10.416666666666668 * wUnit * this.size + this.yLoc));
-		this.path3.add( new Point(-339.58333333333337* wUnit * this.size + this.xLoc, 28.472222222222225 * wUnit * this.size + this.yLoc));
-		this.path3.add( new Point(-300* wUnit * this.size + this.xLoc, 72.22222222222223 * wUnit * this.size + this.yLoc));
-		this.path4= new Path();
-		this.path4.strokeColor = { red: 0, green: 0, blue: 0 };
-		this.path4.fillColor = null;
-		this.path4.closed = false;
-		this.path4.add( new Point(309.72222222222223* wUnit * this.size + this.xLoc, -10.416666666666668 * wUnit * this.size + this.yLoc));
-		this.path4.add( new Point(343.75* wUnit * this.size + this.xLoc, 28.472222222222225 * wUnit * this.size + this.yLoc));
-		this.path4.add( new Point(304.86111111111114* wUnit * this.size + this.xLoc, 72.22222222222223 * wUnit * this.size + this.yLoc));
-		this.path5= new Path();
-		this.path5.strokeColor = { red: 0, green: 0, blue: 0 };
-		this.path5.fillColor = { red: 0, green: 0, blue: 0 };
-		this.path5.closed = true;
-		this.path5.add( new Point(-63.88888888888889* wUnit * this.size + this.xLoc, 5.555555555555555 * wUnit * this.size + this.yLoc));
-		this.path5.add( new Point(-63.88888888888889* wUnit * this.size + this.xLoc, 55.55555555555556 * wUnit * this.size + this.yLoc));
-		this.path5.add( new Point(-50* wUnit * this.size + this.xLoc, 81.94444444444444 * wUnit * this.size + this.yLoc));
-		this.path5.add( new Point(69.44444444444444* wUnit * this.size + this.xLoc, 81.94444444444444 * wUnit * this.size + this.yLoc));
-		this.path5.add( new Point(88.88888888888889* wUnit * this.size + this.xLoc, 55.55555555555556 * wUnit * this.size + this.yLoc));
-		this.path5.add( new Point(88.88888888888889* wUnit * this.size + this.xLoc, 5.555555555555555 * wUnit * this.size + this.yLoc));
-		this.path5.add( new Point(70.13888888888889* wUnit * this.size + this.xLoc, -22.22222222222222 * wUnit * this.size + this.yLoc));
-		this.path5.add( new Point(-47.91666666666667* wUnit * this.size + this.xLoc, -22.22222222222222 * wUnit * this.size + this.yLoc));
-		this.path6= new Path();
-		this.path6.strokeColor = { red: 0, green: 0, blue: 0 };
-		this.path6.fillColor = { red: 0, green: 0, blue: 0 };
-		this.path6.closed = true;
-		this.path6.add( new Point(0* wUnit * this.size + this.xLoc, -139.58333333333334 * wUnit * this.size + this.yLoc));
-		this.path6.add( new Point(27.083333333333336* wUnit * this.size + this.xLoc, -139.58333333333334 * wUnit * this.size + this.yLoc));
-		this.path6.add( new Point(27.083333333333336* wUnit * this.size + this.xLoc, -22.22222222222222 * wUnit * this.size + this.yLoc));
-		this.path6.add( new Point(0* wUnit * this.size + this.xLoc, -22.22222222222222 * wUnit * this.size + this.yLoc));
-	}
-
-	update(xIncr, yIncr){
-		this.path0.position.x += xIncr
-		this.path0.position.y += yIncr
-		this.path1.position.x += xIncr
-		this.path1.position.y += yIncr
-		this.path2.position.x += xIncr
-		this.path2.position.y += yIncr
-		this.path3.position.x += xIncr
-		this.path3.position.y += yIncr
-		this.path4.position.x += xIncr
-		this.path4.position.y += yIncr
-		this.path5.position.x += xIncr
-		this.path5.position.y += yIncr
-		this.path6.position.x += xIncr
-		this.path6.position.y += yIncr	
-	}
-}
-
-undefined
 /* Code: {-s-rgb(128,128,128)-rgb(128,128,128)-true-p-301.3888888888889-31.
 944444444444446-p-422.9166666666667-31.25-p-441.6666666666667-124.305555555
 55556-p-499.3055555555556-138.88888888888889-p-484.02777777777777-325-p-418
@@ -304,122 +197,119 @@ class enemyShip {
 }
 
 
-/* Code: {-s-rgb(0,0,0)-rgb(0,0,0)-true-p-602.3706896551723-44.181034482758
-62-p-598.0603448275862-59.26724137931034-p-589.4396551724137-59.26724137931
-034-p-582.9741379310344-94.82758620689654-p-582.9741379310344-130.387931034
-48276-p-365.301724137931-130.38793103448276-p-365.301724137931-169.18103448
-27586-p-582.9741379310344-187.5-p-589.4396551724137-311.42241379310343-p-53
-7.7155172413793-321.1206896551724-p-536.6379310344827-354.5258620689655-p-5
-96.9827586206897-355.60344827586204-p-602.3706896551723-367.4568965517241-p
--607.7586206896551-355.60344827586204-p-671.3362068965517-354.5258620689655
--p-670.2586206896551-321.1206896551724-p-615.301724137931-312.5-p-622.84482
-75862069-187.5-p-872.8448275862069-169.1810344827586-p-872.8448275862069-13
-1.4655172413793-p-622.8448275862069-130.38793103448276-p-622.8448275862069-
-94.82758620689654-p-617.4568965517241-58.189655172413794-p-606.681034482758
-6-58.189655172413794-false-s-rgb(92,24,24)-null-false-p-567.8879310344827-1
-76.72413793103448-p-373.92241379310343-160.5603448275862-p-373.922413793103
-43-140.08620689655172-p-568.9655172413793-140.08620689655172-false-s-rgb(92
-,24,24)-null-false-p-602.3706896551723-106.68103448275862-p-602.37068965517
-23-292.0258620689655-false-s-rgb(92,24,24)-null-false-p-633.6206896551723-1
-40.08620689655172-p-865.301724137931-140.08620689655172-p-865.301724137931-
-160.5603448275862-p-632.5431034482758-176.72413793103448-false-s-rgb(92,24,
-24)-rgb(92,24,24)-true-p-548.4913793103448-340.51724137931035-p-549.5689655
-172414-329.7413793103448-p-575.4310344827586-323.2758620689655-p-633.620689
-6551723-323.2758620689655-p-658.405172413793-329.7413793103448-p-658.405172
-413793-340.51724137931035-false}*/
+/* Code: {-s-rgb(0,0,0)-null-false-false-s-rgb(0,0,0)-rgb(0,0,0)-true-p-455
+.75704853675944-278.372591006424-p-461.1103675945753-256.9593147751606-p-46
+8.24812633832977-278.372591006424-p-568.1767487508922-278.372591006424-p-56
+8.1767487508922-322.98358315488935-p-477.17032476802285-335.4746609564597-p
+-491.4458422555318-547.8229835831548-p-851.902658815132-578.1584582441113-p
+-851.902658815132-635.260528194147-p-491.4458422555318-635.260528194147-p-4
+91.4458422555318-699.5003568879372-p-480.73920413990004-758.3868665239115-p
+-468.24812633832977-758.3868665239115-p-461.1103675945753-776.2312633832977
+-p-455.75704853675944-758.3868665239115-p-443.26597073518917-758.3868665239
+115-p-432.55933261955744-699.5003568879372-p-432.55933261955744-635.2605281
+94147-p-77.45583511777302-635.260528194147-p-77.45583511777302-578.15845824
+41113-p-432.55933261955744-547.8229835831548-p-446.83485010706636-335.47466
+09564597-p-361.18174518201283-322.98358315488935-p-361.18174518201283-278.3
+72591006424-p-409.36161670235543-278.372591006424-false-s-rgb(70,11,11)-rgb
+(70,11,11)-true-p-555.6856709493219-292.6481084939329-p-555.6856709493219-3
+08.7080656673804-p-477.17032476802285-319.4147037830121-p-446.8348501070663
+6-319.4147037830121-p-375.45726266952175-308.7080656673804-p-375.4572626695
+2175-292.6481084939329-false-s-rgb(70,11,11)-null-false-p-420.0682548179871
+7-569.2362598144183-p-97.08467166309778-596.0028551034975-p-97.084671663097
+78-617.4161313347608-p-420.06825481798717-617.4161313347608-false-s-rgb(70,
+11,11)-null-false-p-512.8591184867952-569.2362598144183-p-834.0582619557459
+-596.0028551034975-p-834.0582619557459-617.4161313347608-p-512.859118486795
+2-617.4161313347608-false-s-rgb(70,11,11)-null-false-p-461.1103675945753-68
+7.0092790863669-p-461.1103675945753-374.7323340471092-false}*/
 class plane {
 	constructor(x,y) {
 		this.xLoc = x;
 		this.yLoc = y;
-		this.size = .2;
+		this.size = .12;
 		this.path0= new Path();
 		this.path0.strokeColor = { red: 0, green: 0, blue: 0 };
 		this.path0.fillColor = { red: 0, green: 0, blue: 0 };
 		this.path0.closed = true;
-		this.path0.add( new Point(-16.70258620689655* wUnit * this.size + this.xLoc, -161.63793103448276 * wUnit * this.size + this.yLoc));
-		this.path0.add( new Point(-21.012931034482758* wUnit * this.size + this.xLoc, -146.55172413793102 * wUnit * this.size + this.yLoc));
-		this.path0.add( new Point(-29.63362068965517* wUnit * this.size + this.xLoc, -146.55172413793102 * wUnit * this.size + this.yLoc));
-		this.path0.add( new Point(-36.099137931034484* wUnit * this.size + this.xLoc, -110.99137931034483 * wUnit * this.size + this.yLoc));
-		this.path0.add( new Point(-36.099137931034484* wUnit * this.size + this.xLoc, -75.43103448275862 * wUnit * this.size + this.yLoc));
-		this.path0.add( new Point(-253.7715517241379* wUnit * this.size + this.xLoc, -75.43103448275862 * wUnit * this.size + this.yLoc));
-		this.path0.add( new Point(-253.7715517241379* wUnit * this.size + this.xLoc, -36.637931034482754 * wUnit * this.size + this.yLoc));
-		this.path0.add( new Point(-36.099137931034484* wUnit * this.size + this.xLoc, -18.318965517241377 * wUnit * this.size + this.yLoc));
-		this.path0.add( new Point(-29.63362068965517* wUnit * this.size + this.xLoc, 105.60344827586206 * wUnit * this.size + this.yLoc));
-		this.path0.add( new Point(-81.35775862068965* wUnit * this.size + this.xLoc, 115.30172413793103 * wUnit * this.size + this.yLoc));
-		this.path0.add( new Point(-82.4353448275862* wUnit * this.size + this.xLoc, 148.70689655172413 * wUnit * this.size + this.yLoc));
-		this.path0.add( new Point(-22.09051724137931* wUnit * this.size + this.xLoc, 149.78448275862067 * wUnit * this.size + this.yLoc));
-		this.path0.add( new Point(-16.70258620689655* wUnit * this.size + this.xLoc, 161.63793103448276 * wUnit * this.size + this.yLoc));
-		this.path0.add( new Point(-11.314655172413792* wUnit * this.size + this.xLoc, 149.78448275862067 * wUnit * this.size + this.yLoc));
-		this.path0.add( new Point(52.262931034482754* wUnit * this.size + this.xLoc, 148.70689655172413 * wUnit * this.size + this.yLoc));
-		this.path0.add( new Point(51.185344827586206* wUnit * this.size + this.xLoc, 115.30172413793103 * wUnit * this.size + this.yLoc));
-		this.path0.add( new Point(-3.771551724137931* wUnit * this.size + this.xLoc, 106.68103448275862 * wUnit * this.size + this.yLoc));
-		this.path0.add( new Point(3.771551724137931* wUnit * this.size + this.xLoc, -18.318965517241377 * wUnit * this.size + this.yLoc));
-		this.path0.add( new Point(253.7715517241379* wUnit * this.size + this.xLoc, -36.637931034482754 * wUnit * this.size + this.yLoc));
-		this.path0.add( new Point(253.7715517241379* wUnit * this.size + this.xLoc, -74.35344827586206 * wUnit * this.size + this.yLoc));
-		this.path0.add( new Point(3.771551724137931* wUnit * this.size + this.xLoc, -75.43103448275862 * wUnit * this.size + this.yLoc));
-		this.path0.add( new Point(3.771551724137931* wUnit * this.size + this.xLoc, -110.99137931034483 * wUnit * this.size + this.yLoc));
-		this.path0.add( new Point(-1.6163793103448274* wUnit * this.size + this.xLoc, -147.6293103448276 * wUnit * this.size + this.yLoc));
-		this.path0.add( new Point(-12.392241379310343* wUnit * this.size + this.xLoc, -147.6293103448276 * wUnit * this.size + this.yLoc));
-		this.path1= new Path();
-		this.path1.strokeColor = { red: 0.36078, green: 0.09412, blue: 0.09412 };
-		this.path1.fillColor = null;
-		this.path1.closed = false;
-		this.path1.add( new Point(-51.185344827586206* wUnit * this.size + this.xLoc, -29.094827586206897 * wUnit * this.size + this.yLoc));
-		this.path1.add( new Point(-245.1508620689655* wUnit * this.size + this.xLoc, -45.25862068965517 * wUnit * this.size + this.yLoc));
-		this.path1.add( new Point(-245.1508620689655* wUnit * this.size + this.xLoc, -65.73275862068965 * wUnit * this.size + this.yLoc));
-		this.path1.add( new Point(-50.10775862068965* wUnit * this.size + this.xLoc, -65.73275862068965 * wUnit * this.size + this.yLoc));
+		this.path0.add( new Point(-8.922198429693076* wUnit * this.size + this.xLoc, -238.22269807280514 * wUnit * this.size + this.yLoc));
+		this.path0.add( new Point(-3.5688793718772307* wUnit * this.size + this.xLoc, -259.6359743040685 * wUnit * this.size + this.yLoc));
+		this.path0.add( new Point(3.5688793718772307* wUnit * this.size + this.xLoc, -238.22269807280514 * wUnit * this.size + this.yLoc));
+		this.path0.add( new Point(103.49750178443968* wUnit * this.size + this.xLoc, -238.22269807280514 * wUnit * this.size + this.yLoc));
+		this.path0.add( new Point(103.49750178443968* wUnit * this.size + this.xLoc, -193.61170592433976 * wUnit * this.size + this.yLoc));
+		this.path0.add( new Point(12.491077801570306* wUnit * this.size + this.xLoc, -181.12062812276946 * wUnit * this.size + this.yLoc));
+		this.path0.add( new Point(26.766595289079227* wUnit * this.size + this.xLoc, 31.22769450392577 * wUnit * this.size + this.yLoc));
+		this.path0.add( new Point(387.2234118486795* wUnit * this.size + this.xLoc, 61.563169164882225 * wUnit * this.size + this.yLoc));
+		this.path0.add( new Point(387.2234118486795* wUnit * this.size + this.xLoc, 118.66523911491791 * wUnit * this.size + this.yLoc));
+		this.path0.add( new Point(26.766595289079227* wUnit * this.size + this.xLoc, 118.66523911491791 * wUnit * this.size + this.yLoc));
+		this.path0.add( new Point(26.766595289079227* wUnit * this.size + this.xLoc, 182.90506780870805 * wUnit * this.size + this.yLoc));
+		this.path0.add( new Point(16.059957173447536* wUnit * this.size + this.xLoc, 241.79157744468236 * wUnit * this.size + this.yLoc));
+		this.path0.add( new Point(3.5688793718772307* wUnit * this.size + this.xLoc, 241.79157744468236 * wUnit * this.size + this.yLoc));
+		this.path0.add( new Point(-3.5688793718772307* wUnit * this.size + this.xLoc, 259.6359743040686 * wUnit * this.size + this.yLoc));
+		this.path0.add( new Point(-8.922198429693076* wUnit * this.size + this.xLoc, 241.79157744468236 * wUnit * this.size + this.yLoc));
+		this.path0.add( new Point(-21.413276231263332* wUnit * this.size + this.xLoc, 241.79157744468236 * wUnit * this.size + this.yLoc));
+		this.path0.add( new Point(-32.11991434689507* wUnit * this.size + this.xLoc, 182.90506780870805 * wUnit * this.size + this.yLoc));
+		this.path0.add( new Point(-32.11991434689507* wUnit * this.size + this.xLoc, 118.66523911491791 * wUnit * this.size + this.yLoc));
+		this.path0.add( new Point(-387.2234118486795* wUnit * this.size + this.xLoc, 118.66523911491791 * wUnit * this.size + this.yLoc));
+		this.path0.add( new Point(-387.2234118486795* wUnit * this.size + this.xLoc, 61.563169164882225 * wUnit * this.size + this.yLoc));
+		this.path0.add( new Point(-32.11991434689507* wUnit * this.size + this.xLoc, 31.22769450392577 * wUnit * this.size + this.yLoc));
+		this.path0.add( new Point(-17.84439685938615* wUnit * this.size + this.xLoc, -181.12062812276946 * wUnit * this.size + this.yLoc));
+		this.path0.add( new Point(-103.49750178443968* wUnit * this.size + this.xLoc, -193.61170592433976 * wUnit * this.size + this.yLoc));
+		this.path0.add( new Point(-103.49750178443968* wUnit * this.size + this.xLoc, -238.22269807280514 * wUnit * this.size + this.yLoc));
+		this.path0.add( new Point(-55.317630264097076* wUnit * this.size + this.xLoc, -238.22269807280514 * wUnit * this.size + this.yLoc));
 		this.path2= new Path();
-		this.path2.strokeColor = { red: 0.36078, green: 0.09412, blue: 0.09412 };
-		this.path2.fillColor = null;
-		this.path2.closed = false;
-		this.path2.add( new Point(-16.70258620689655* wUnit * this.size + this.xLoc, -99.13793103448275 * wUnit * this.size + this.yLoc));
-		this.path2.add( new Point(-16.70258620689655* wUnit * this.size + this.xLoc, 86.20689655172413 * wUnit * this.size + this.yLoc));
+		this.path2.strokeColor = { red: 0.27451, green: 0.04314, blue: 0.04314 };
+		this.path2.fillColor = { red: 0.27451, green: 0.04314, blue: 0.04314 };
+		this.path2.closed = true;
+		this.path2.add( new Point(91.00642398286938* wUnit * this.size + this.xLoc, -223.94718058529622 * wUnit * this.size + this.yLoc));
+		this.path2.add( new Point(91.00642398286938* wUnit * this.size + this.xLoc, -207.88722341184868 * wUnit * this.size + this.yLoc));
+		this.path2.add( new Point(12.491077801570306* wUnit * this.size + this.xLoc, -197.18058529621698 * wUnit * this.size + this.yLoc));
+		this.path2.add( new Point(-17.84439685938615* wUnit * this.size + this.xLoc, -197.18058529621698 * wUnit * this.size + this.yLoc));
+		this.path2.add( new Point(-89.22198429693076* wUnit * this.size + this.xLoc, -207.88722341184868 * wUnit * this.size + this.yLoc));
+		this.path2.add( new Point(-89.22198429693076* wUnit * this.size + this.xLoc, -223.94718058529622 * wUnit * this.size + this.yLoc));
 		this.path3= new Path();
-		this.path3.strokeColor = { red: 0.36078, green: 0.09412, blue: 0.09412 };
+		this.path3.strokeColor = { red: 0.27451, green: 0.04314, blue: 0.04314 };
 		this.path3.fillColor = null;
 		this.path3.closed = false;
-		this.path3.add( new Point(14.547413793103448* wUnit * this.size + this.xLoc, -65.73275862068965 * wUnit * this.size + this.yLoc));
-		this.path3.add( new Point(246.22844827586206* wUnit * this.size + this.xLoc, -65.73275862068965 * wUnit * this.size + this.yLoc));
-		this.path3.add( new Point(246.22844827586206* wUnit * this.size + this.xLoc, -45.25862068965517 * wUnit * this.size + this.yLoc));
-		this.path3.add( new Point(13.469827586206895* wUnit * this.size + this.xLoc, -29.094827586206897 * wUnit * this.size + this.yLoc));
+		this.path3.add( new Point(-44.61099214846538* wUnit * this.size + this.xLoc, 52.64097073518915 * wUnit * this.size + this.yLoc));
+		this.path3.add( new Point(-367.59457530335476* wUnit * this.size + this.xLoc, 79.40756602426838 * wUnit * this.size + this.yLoc));
+		this.path3.add( new Point(-367.59457530335476* wUnit * this.size + this.xLoc, 100.82084225553176 * wUnit * this.size + this.yLoc));
+		this.path3.add( new Point(-44.61099214846538* wUnit * this.size + this.xLoc, 100.82084225553176 * wUnit * this.size + this.yLoc));
 		this.path4= new Path();
-		this.path4.strokeColor = { red: 0.36078, green: 0.09412, blue: 0.09412 };
-		this.path4.fillColor = { red: 0.36078, green: 0.09412, blue: 0.09412 };
-		this.path4.closed = true;
-		this.path4.add( new Point(-70.58189655172413* wUnit * this.size + this.xLoc, 134.69827586206895 * wUnit * this.size + this.yLoc));
-		this.path4.add( new Point(-69.50431034482759* wUnit * this.size + this.xLoc, 123.92241379310344 * wUnit * this.size + this.yLoc));
-		this.path4.add( new Point(-43.64224137931034* wUnit * this.size + this.xLoc, 117.45689655172413 * wUnit * this.size + this.yLoc));
-		this.path4.add( new Point(14.547413793103448* wUnit * this.size + this.xLoc, 117.45689655172413 * wUnit * this.size + this.yLoc));
-		this.path4.add( new Point(39.331896551724135* wUnit * this.size + this.xLoc, 123.92241379310344 * wUnit * this.size + this.yLoc));
-		this.path4.add( new Point(39.331896551724135* wUnit * this.size + this.xLoc, 134.69827586206895 * wUnit * this.size + this.yLoc));
-		console.log(this.path0);
-		
+		this.path4.strokeColor = { red: 0.27451, green: 0.04314, blue: 0.04314 };
+		this.path4.fillColor = null;
+		this.path4.closed = false;
+		this.path4.add( new Point(48.17987152034261* wUnit * this.size + this.xLoc, 52.64097073518915 * wUnit * this.size + this.yLoc));
+		this.path4.add( new Point(369.37901498929335* wUnit * this.size + this.xLoc, 79.40756602426838 * wUnit * this.size + this.yLoc));
+		this.path4.add( new Point(369.37901498929335* wUnit * this.size + this.xLoc, 100.82084225553176 * wUnit * this.size + this.yLoc));
+		this.path4.add( new Point(48.17987152034261* wUnit * this.size + this.xLoc, 100.82084225553176 * wUnit * this.size + this.yLoc));
+		this.path5= new Path();
+		this.path5.strokeColor = { red: 0.27451, green: 0.04314, blue: 0.04314 };
+		this.path5.fillColor = null;
+		this.path5.closed = false;
+		this.path5.add( new Point(-3.5688793718772307* wUnit * this.size + this.xLoc, 170.41399000713776 * wUnit * this.size + this.yLoc));
+		this.path5.add( new Point(-3.5688793718772307* wUnit * this.size + this.xLoc, -141.8629550321199 * wUnit * this.size + this.yLoc));
 	}
 
 	update(xIncr, yIncr){
 		this.path0.position.x += xIncr
 		this.path0.position.y += yIncr
-		this.path1.position.x += xIncr
-		this.path1.position.y += yIncr
 		this.path2.position.x += xIncr
 		this.path2.position.y += yIncr
 		this.path3.position.x += xIncr
 		this.path3.position.y += yIncr
 		this.path4.position.x += xIncr
 		this.path4.position.y += yIncr
+		this.path5.position.x += xIncr
+		this.path5.position.y += yIncr
 	}
 
 	remove(){
 		this.path0.remove()
-		this.path1.remove()
 		this.path2.remove()
 		this.path3.remove()
 		this.path4.remove()
+		this.path5.remove()
 	}
 }
-
-undefined
-undefined
 /* Code: {-s-rgb(33,27,27)-rgb(45,41,41)-true-p-271.52777777777777-375.6944
 4444444446-p-336.11111111111114-499.3055555555556-p-477.77777777777777-499.
 3055555555556-p-545.8333333333334-375.69444444444446-p-627.0833333333334-34
@@ -632,72 +522,6 @@ class shipBody3 {
 		this.path15.remove()
 		this.path16.remove()
 		this.path17.remove()
-	}
-}
-
-undefined
-/* Code: {-s-rgb(2,59,7)-rgb(8,89,15)-true-p-385.8784893267652-145.04652435
-686918-p-517.7887246852764-145.04652435686918-p-530.3776683087028-164.20361
-247947454-p-530.3776683087028-381.49972632731254-p-516.6940339354132-400.65
-681444991793-p-385.8784893267652-400.65681444991793-p-373.28954570333883-38
-1.49972632731254-p-373.28954570333883-164.20361247947454-false-s-rgb(1,64,7
-)-rgb(8,102,17)-true-p-444.99178981937604-40.503557744937055-p-461.41215106
-732346-40.503557744937055-p-461.41215106732346-97.42747673782156-p-457.5807
-334428024-97.42747673782156-p-459.22276956759714-178.98193760262726-p-474.5
-4844006568146-178.98193760262726-p-517.7887246852764-255.06294471811714-p-4
-74.54844006568146-358.5112205801861-p-434.592227695676-358.5112205801861-p-
-385.8784893267652-255.06294471811714-p-434.592227695676-178.98193760262726-
-p-449.91789819376027-178.98193760262726-p-448.2758620689655-97.427476737821
-56-p-444.99178981937604-97.42747673782156-p-444.99178981937604-74.438970990
-69513-false}*/
-class TankDraft {
-	constructor(x,y) {
-		this.xLoc = x;
-		this.yLoc = y;
-		this.size = 0.3;
-		this.path0= new Path();
-		this.path0.strokeColor = { red: 0.00784, green: 0.23137, blue: 0.02745 };
-		this.path0.fillColor = { red: 0.03137, green: 0.34902, blue: 0.05882 };
-		this.path0.closed = true;
-		this.path0.add( new Point(-65.95511767925561* wUnit * this.size + this.xLoc, -75.53366174055829 * wUnit * this.size + this.yLoc));
-		this.path0.add( new Point(65.95511767925561* wUnit * this.size + this.xLoc, -75.53366174055829 * wUnit * this.size + this.yLoc));
-		this.path0.add( new Point(78.544061302682* wUnit * this.size + this.xLoc, -56.37657361795293 * wUnit * this.size + this.yLoc));
-		this.path0.add( new Point(78.544061302682* wUnit * this.size + this.xLoc, 160.91954022988506 * wUnit * this.size + this.yLoc));
-		this.path0.add( new Point(64.86042692939245* wUnit * this.size + this.xLoc, 180.07662835249042 * wUnit * this.size + this.yLoc));
-		this.path0.add( new Point(-65.95511767925561* wUnit * this.size + this.xLoc, 180.07662835249042 * wUnit * this.size + this.yLoc));
-		this.path0.add( new Point(-78.544061302682* wUnit * this.size + this.xLoc, 160.91954022988506 * wUnit * this.size + this.yLoc));
-		this.path0.add( new Point(-78.544061302682* wUnit * this.size + this.xLoc, -56.37657361795293 * wUnit * this.size + this.yLoc));
-		this.path1= new Path();
-		this.path1.strokeColor = { red: 0.00392, green: 0.25098, blue: 0.02745 };
-		this.path1.fillColor = { red: 0.03137, green: 0.4, blue: 0.06667 };
-		this.path1.closed = true;
-		this.path1.add( new Point(-6.841817186644773* wUnit * this.size + this.xLoc, -180.07662835249042 * wUnit * this.size + this.yLoc));
-		this.path1.add( new Point(9.578544061302683* wUnit * this.size + this.xLoc, -180.07662835249042 * wUnit * this.size + this.yLoc));
-		this.path1.add( new Point(9.578544061302683* wUnit * this.size + this.xLoc, -123.15270935960591 * wUnit * this.size + this.yLoc));
-		this.path1.add( new Point(5.74712643678161* wUnit * this.size + this.xLoc, -123.15270935960591 * wUnit * this.size + this.yLoc));
-		this.path1.add( new Point(7.389162561576355* wUnit * this.size + this.xLoc, -41.59824849480022 * wUnit * this.size + this.yLoc));
-		this.path1.add( new Point(22.714833059660645* wUnit * this.size + this.xLoc, -41.59824849480022 * wUnit * this.size + this.yLoc));
-		this.path1.add( new Point(65.95511767925561* wUnit * this.size + this.xLoc, 34.48275862068966 * wUnit * this.size + this.yLoc));
-		this.path1.add( new Point(22.714833059660645* wUnit * this.size + this.xLoc, 137.93103448275863 * wUnit * this.size + this.yLoc));
-		this.path1.add( new Point(-17.24137931034483* wUnit * this.size + this.xLoc, 137.93103448275863 * wUnit * this.size + this.yLoc));
-		this.path1.add( new Point(-65.95511767925561* wUnit * this.size + this.xLoc, 34.48275862068966 * wUnit * this.size + this.yLoc));
-		this.path1.add( new Point(-17.24137931034483* wUnit * this.size + this.xLoc, -41.59824849480022 * wUnit * this.size + this.yLoc));
-		this.path1.add( new Point(-1.9157088122605364* wUnit * this.size + this.xLoc, -41.59824849480022 * wUnit * this.size + this.yLoc));
-		this.path1.add( new Point(-3.557744937055282* wUnit * this.size + this.xLoc, -123.15270935960591 * wUnit * this.size + this.yLoc));
-		this.path1.add( new Point(-6.841817186644773* wUnit * this.size + this.xLoc, -123.15270935960591 * wUnit * this.size + this.yLoc));
-		this.path1.add( new Point(-6.841817186644773* wUnit * this.size + this.xLoc, -146.14121510673235 * wUnit * this.size + this.yLoc));
-	}
-
-	update(xIncr, yIncr){
-		this.path0.position.x += xIncr
-		this.path0.position.y += yIncr
-		this.path1.position.x += xIncr
-		this.path1.position.y += yIncr
-	}
-
-	remove(){
-		this.path0.remove()
-		this.path1.remove()
 	}
 }
 
@@ -1217,7 +1041,6 @@ class tank3 {
 	}
 }
 
-undefined
 /* Code: {-s-rgb(0,0,0)-rgb(115,75,18)-true-p-230.55555555555557-343.055555
 55555554-p-281.25-292.36111111111114-p-329.1666666666667-343.05555555555554
 -false-s-rgb(0,0,0)-rgb(101,64,18)-true-p-328.47222222222223-343.0555555555

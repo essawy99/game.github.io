@@ -9,24 +9,23 @@ class Game{
         // based on parameters
         this.numShips;
         if(type == "campaign") {
-            this.numShips = 2 * difficulty;
+            this.numShips = difficulty -1;
         }
         else if(difficulty == "easy"){
-            this.numShips = 2;
+            this.numShips = 1;
         }
         else if(difficulty == "medium"){
             this.numShips = 2;
         }
         else if(difficulty == "hard"){
-            this.numShips = 2;
+            this.numShips = 3;
         }
         else {
-            this.numShips = 2;
+            this.numShips = 3;
         }
         
         //Create background
         this.back = new Background(); //Beach
-        this.tanks = new Tanks(10); //Friendly tanks
         this.ships = new EnemyShips(this.numShips); //A new ship per level
         this.planes = new EnemyPlanes();
 
@@ -44,24 +43,19 @@ class Game{
     //-----------------------------------------------------------------
     /* Update game state */
     update(mouseLoc) {	
-        var start = performance.now();
+        
         this.cannonBalls.update(this.user, this.ships, this.planes);
-        var end = performance.now();
-        console.log('cannonBall:' + (start-end));
-        start = performance.now();
+        
+        
         this.ships.update(this.planes);
-        end = performance.now();
-        console.log('ship:' + (start-end));
-        start = performance.now();
+       
         this.planes.update(this.health);
-        end = performance.now();
-	    console.log('plane :' + (start-end));
-        start = performance.now();
-        if(this.type != "home") {
-				this.user.update(mouseLoc)
-			}
-        end = performance.now();
-        console.log('plane :' + (start-end));
+        
+        if(this.type == "home") {
+			return 0;
+		}
+       
+        this.user.update(mouseLoc)
         //if game is over
         if(this.cannonBalls.ballsDead() || this.health <= 0){
             return -1;
@@ -82,8 +76,8 @@ class Game{
     //-----------------------------------------------------------------
     /* Purchase cannon function */
     buyCannon() {
-        this.user.coins -= 400;
         this.cannonBalls.addBall(this.user);
+        this.user.spendCoins(400);
     }
     //-----------------------------------------------------------------
     /* Removes all objects on screen when called */

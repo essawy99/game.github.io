@@ -1,4 +1,3 @@
-/* HUNT FOR MEMORY LEAK */
 class CannonBalls {
     constructor(home) {
         this.home = home;
@@ -74,13 +73,9 @@ class CannonBall {
         this.velocity = 4 * hUnit;
         //If ball is above beach
         this.alive = true;
-        this.cannon = new Path();
-        this.cannon.add(new Point(xLoc,yLoc));
-        this.cannon.add(new Point(xLoc+2,yLoc));
-        this.cannon.add(new Point(xLoc,yLoc+2));
-        this.cannon.add(new Point(xLoc+2,yLoc+2));
-        this.cannon.stokeWidth = 1;
-        this.cannon.strokeColor = 'blue';
+        this.cannon = new Shape.Circle(new Point(xLoc,yLoc-10*wUnit), 2*wUnit)
+        this.cannon.fillColor = 'black';
+        
         this.x_vel = 0 * hUnit;
         this.y_vel = -4 * hUnit;
         this.timeAlive = 0;
