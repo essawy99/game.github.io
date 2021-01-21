@@ -2,8 +2,8 @@
 
 Contributers:
 
-Mo Essawy
-Osman
+Mo Essawy,
+Osman,
 Dheva
 
 This codeBase contains a lot of comments in order to make it easier
