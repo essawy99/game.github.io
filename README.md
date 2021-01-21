@@ -29,4 +29,6 @@ the program simultaneously and minimize the amount of code needed to run the pro
 Multiple iterations of code reductions allowed us to cut down file sizes from 30-70%
 by removing redundencies.
 
+Game can be played at https://essawy99.github.io/game.github.io/
+
 Any questions on how the code works can be sent to essaw007@umn.edu.
