@@ -70,14 +70,14 @@ class CannonBalls {
 class CannonBall {
     constructor(xLoc, yLoc, home) {
 		this.home = home; // Used for home screen
-        this.velocity = 4 * hUnit;
+        this.velocity = 10 * hUnit;
         //If ball is above beach
         this.alive = true;
         this.cannon = new Shape.Circle(new Point(xLoc,yLoc-10*wUnit), 2*wUnit)
         this.cannon.fillColor = 'black';
         
         this.x_vel = 0 * hUnit;
-        this.y_vel = -4 * hUnit;
+        this.y_vel = -10 * hUnit;
         this.timeAlive = 0;
     }
 

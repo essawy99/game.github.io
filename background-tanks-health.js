@@ -66,13 +66,10 @@ class Health {
 	/* Function that applies damage to health */
 	takeDamage(damagePercent) {
 		this._health -= damagePercent;
-		this._healthBar.tween({ //Tween animation to reduce the size of the healthbar based on damage taken
-		'segments[3].point': ['-=', {x: damagePercent*w/100, y: 0}],
-			'segments[2].point': ['-=', {x: damagePercent*w/100, y: 0}]
-		}, 500);
+		this._healthBar.remove();
+		this._healthBar = new Path.Rectangle(new Point (0, 63*h/64), new Size(((w/100)*this._health), h/64));
+		this._healthBar.fillColor = new Color("#db2316");
 	}
-	
-	get health() { return this._health; }
 
 	//-----------------------------------------------------------------
 	/* Function that removes healthbar off of screen */

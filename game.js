@@ -25,7 +25,7 @@ class Game{
         }
         
         //Create background
-        this.back = new Background(); //Beach
+        this.background = new Background(); //Beach
         this.ships = new EnemyShips(this.numShips); //A new ship per level
         this.planes = new EnemyPlanes();
 
@@ -57,7 +57,7 @@ class Game{
        
         this.user.update(mouseLoc)
         //if game is over
-        if(this.cannonBalls.ballsDead() || this.health <= 0){
+        if(this.cannonBalls.ballsDead() || this.health._health <= 0){
             return -1;
         }
         // if you win
@@ -89,6 +89,7 @@ class Game{
         this.cannonBalls.deleteAll();
         this.ships.deleteAll();
         this.planes.deleteAll();
+        this.background.deleteAll();
     }
 
 }
